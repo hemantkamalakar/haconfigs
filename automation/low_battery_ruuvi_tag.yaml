@@ -1,0 +1,14 @@
+  - alias: "Low Battery Ruuvi Tag"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.Ruuvi_Battery
+        below: 2.7
+      - platform: numeric_state
+        entity_id: sensor.Ruuvi_Battery
+        below: 2.5
+    action:
+      service: notify.slack
+      data:
+        title: "Ruuvi Tag Battery is low, change the battery!"
+        message: "Ruuvi Tag battery is getting low and should be changed"
+

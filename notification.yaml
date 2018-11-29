@@ -1,0 +1,32 @@
+
+#https://home-assistant.io/components/notify/
+
+####################################################
+#                                                  #
+#                NOTIFICATIONS                     #
+#                                                  #
+####################################################
+
+# #https://home-assistant.io/components/notify.smtp/
+
+  # - name: Home_Assistant
+    # platform: smtp
+    # server: smtp.gmail.com
+    # port: 587
+    # sender: !secret notification_sender
+    # starttls: true
+    # username: !secret notification_username
+    # password: !secret notification_password
+    # recipient: !secret notification_recipient
+    
+
+  - name: slack
+    platform: slack
+    api_key: !secret slack_api_key
+    default_channel: '#smarthome'
+
+####################################################
+#                                                  #
+#           END OF CONFIGURATION FILE              #
+#                                                  #
+####################################################

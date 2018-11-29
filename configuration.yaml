@@ -1,0 +1,223 @@
+####################################################
+#                                                  #
+#                 HOME ASSISTANT                   #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/docs/configuration/basic/
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 560
+  unit_system: metric
+  time_zone: !secret time_zone
+  customize: !include customize.yaml
+  whitelist_external_dirs:
+    - /config
+
+####################################################
+#                                                  #
+#                     GENERAL                      #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/config/
+config:
+
+#https://www.home-assistant.io/components/frontend/
+#frontend: !include frontend.yaml
+frontend:
+  javascript_version: latest
+  themes: !include themes.yaml
+
+#https://home-assistant.io/components/history/
+history:
+
+#https://home-assistant.io/components/http/
+http:
+  #base_url: !secret domain_name
+  server_port: 80
+
+
+#https://home-assistant.io/components/logger/
+logger:
+  default: error
+
+#https://www.home-assistant.io/components/map/
+map:
+
+#https://home-assistant.io/components/sun/
+sun:
+discovery:
+
+
+####################################################
+#                                                  #
+#      LINKS TO INDIVUAL CONFIGURATION FILES       #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/docs/configuration/splitting_configuration/
+automation: !include_dir_merge_list automation/
+binary_sensor: !include binary_sensor.yaml
+input_boolean: !include input_boolean.yaml
+#input_select: !include input_select.yaml
+light: !include lights.yaml
+notify: !include notification.yaml
+recorder: !include recorder.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensors/
+switch: !include switches.yaml
+zone: !include zones.yaml
+
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.0/24
+    home_interval: 10
+
+camera:
+  - platform: generic
+    still_image_url: http://192.168.1.115:8765/picture/1/current/
+    
+
+panel_iframe:
+  cctv:
+    title: 'CCTV'
+    url: 'http://192.168.1.115:8765'    
+    
+####################################################
+#                                                  #
+#                     GROUP                        #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/group
+group:
+  Switches:
+    - switch.LivingRoom
+    - switch.Kitchen
+    - switch.MasterBedRoom
+    - switch.BedRoom
+    - switch.TV
+  TV:
+    - switch.TV
+    - sensor.voltage
+    - sensor.current
+    - sensor.energy
+    - sensor.power
+    - sensor.power_factor
+    - sensor.yesterday
+    - sensor.total
+  Living room sensors:
+    - sensor.ruuvi_temperature
+    - sensor.ruuvi_humidity
+    - sensor.ruuvi_pressure
+    - sensor.ruuvi_battery
+    - sensor.ruuvi_rssi
+    
+  Air quality sensors:
+    - sensor.Sonoff_sc_Temperature
+    - sensor.Sonoff_sc_Humidity
+    - sensor.Sonoff_sc_Noise
+    - sensor.Sonoff_sc_Light
+    - sensor.Sonoff_sc_Air_quality
+  Internet speed:
+    - sensor.speedtest_ping
+    - sensor.speedtest_upload
+    - sensor.speedtest_download
+    - sensor.external_ip   
+  
+  Birthdays:
+    - sensor.hemant_birthday_days2go
+    - sensor.kavita_birthday_days2go
+    - sensor.pranav_birthday_days2go
+    - sensor.parth_birthday_days2go
+
+  Work:
+    - binary_sensor.workday_sensor
+  Sun:
+    - sun.sun  
+    - sensor.sunrise_time
+    - sensor.sunset_time
+
+  System Monitor:
+    - sensor.ha_installed_version
+    - sensor.ha_current_version
+    - sensor.ha_last_restart
+    - sensor.rpi_power_status
+    - sensor.processor_use
+    - sensor.memory_free
+    - sensor.memory_use_percent
+    - sensor.disk_free_   
+    - sensor.disk_use_
+    - sensor.disk_use_percent_
+    - sensor.ipv4_address_wlan0
+    - sensor.last_boot
+    - sensor.since_last_boot
+    - sensor.cpu_temperature
+    - sensor.load_1m
+    - sensor.load_5m
+    - sensor.load_15m    
+    - sensor.lets_encrypt_expiration
+    
+  Devices:
+    - device_tracker.4c3488dd367d
+    - device_tracker.4ca56db0bdc3
+    - device_tracker.74234435ba7d
+    - device_tracker.b827ebeb16e1
+    - device_tracker.c8e7d86fb438
+    - device_tracker.cce1d5150194
+    - device_tracker.d463c675d89b
+    - device_tracker.f4f5d8c0547a
+    - device_tracker.5ccf7fe8a631
+    - device_tracker.f4f5d878d74a
+
+  # Weather:
+    # - sensor.dark_sky_summary
+    # - sensor.dark_sky_daytime_high_temperature
+    # - sensor.dark_sky_overnight_low_temperature
+    # - sensor.dark_sky_precip_probability
+    # - sensor.forecast_0
+    
+####################################################
+#                                                  #
+#                     MQTT                         #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/docs/mqtt/broker/#run-your-own
+mqtt:
+  broker: localhost
+  port: 1883
+  client_id: smarthome
+  keepalive: 60
+  protocol: 3.1
+  birth_message:
+    topic: "tele/smarthome/LWT"
+    payload: "Online"
+    qos: 1
+    retain: true
+  will_message:
+    topic: "tele/smarthome/LWT"
+    payload: "Offline"
+    qos: 1
+    retain: true
+
+# duckdns:
+  # domain: !secret domain_name
+  # access_token: !secret domain_access_token    
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky
+    latitude: !secret latitude
+    longitude: !secret longitude
+    mode: hourly
+
+    
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

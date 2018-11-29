@@ -1,0 +1,90 @@
+
+# #https://home-assistant.io/components/script/
+
+# ####################################################
+# #                                                  #
+# #                 NORMAL LIGHT                     #
+# #                                                  #
+# ####################################################
+
+  # normallight:
+    # sequence:
+      # - service: light.turn_on
+        # entity_id: light.yeelightrgb2
+        # data:
+          # brightness: 254
+          # color_temp: 336.02150537634407
+
+# ####################################################
+# #                                                  #
+# #             RECEIVER VOLUME UP                   #
+# #                                                  #
+# ####################################################
+
+  # volumeup:
+    # alias: Volume Up
+    # sequence:
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervolup
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervolup
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervolup
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervolup
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervolup
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervolup
+
+# ####################################################
+# #                                                  #
+# #             RECEIVER VOLUME DOWN                 #
+# #                                                  #
+# ####################################################
+
+  # volumedown:
+    # alias: Volume Down
+    # sequence:
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervoldwn
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervoldwn
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervoldwn
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervoldwn
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervoldwn
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervoldwn
+
+# ####################################################
+# #                                                  #
+# #                Turn On Music                     #
+# #                                                  #
+# ####################################################
+
+  # music:
+    # sequence:
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervideo1
+
+# ####################################################
+# #                                                  #
+# #                   Turn On TV                     #
+# #                                                  #
+# ####################################################
+
+  # tv:
+    # sequence:
+      # - service: homeassistant.turn_on
+        # entity_id: switch.receivervideo2
+      # - service: switch.turn_on
+        # entity_id: switch.htpc_switch
+
+# ####################################################
+# #                                                  #
+# #           END OF CONFIGURATION FILE              #
+# #                                                  #
+# ####################################################

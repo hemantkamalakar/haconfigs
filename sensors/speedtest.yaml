@@ -1,0 +1,29 @@
+
+#https://home-assistant.io/components/sensor/
+
+####################################################
+#                                                  #
+#                   SPEETEST                       #
+#                                                  #
+####################################################
+
+#https://www.home-assistant.io/components/sensor.speedtest/
+  - platform: speedtest
+    minute: 
+      - 0
+      - 30
+    hour:
+      - 0
+      - 6
+      - 12
+      - 18
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

@@ -1,0 +1,48 @@
+
+#https://home-assistant.io/components/binary_sensor/
+
+  purge_interval: 1
+  purge_keep_days: 3
+  db_url: !secret db_url
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+      - group
+      - light
+      - script
+      - switch
+      - zone
+    entities:
+      - sun.sun
+      - sensor.date
+      - input_boolean.vacation
+  include:
+    entities:
+      - sensor.ruuvi_temperature
+      - sensor.ruuvi_humidity
+      - sensor.ruuvi_pressure
+      - sensor.ruuvi_battery
+      - sensor.since_last_boot
+      - sensor.speedtest_ping
+      - sensor.speedtest_upload
+      - sensor.speedtest_download
+      - sensor.external_ip   
+      - sensor.voltage
+      - sensor.current
+      - sensor.energy
+      - sensor.power
+      - sensor.power_factor
+      - sensor.yesterday
+
+    domains:
+      - sensor
+
+
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

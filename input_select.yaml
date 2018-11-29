@@ -1,0 +1,30 @@
+
+#https://home-assistant.io/components/input_select/
+
+####################################################
+#                                                  #
+#             NOTIFICATION BULB 2 COLOR            #
+#                                                  #
+####################################################
+
+  # notification_bulb2_color:
+    # options:
+      # - "Normal"
+      # - "White"
+      # - "Red"
+      # - "Orange"
+      # - "Yellow"
+      # - "Green"
+      # - "Blue"
+      # - "Indigo"
+      # - "Violet"
+      # - "Purple"
+    # icon: mdi:lightbulb
+    # initial: White
+
+
+####################################################
+#                                                  #
+#           END OF CONFIGURATION FILE              #
+#                                                  #
+####################################################

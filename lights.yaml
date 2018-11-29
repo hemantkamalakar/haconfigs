@@ -1,0 +1,11 @@
+
+#https://home-assistant.io/components/light/
+
+  platform: flux_led
+  automatic_add: True
+
+#########################################################
+#                                                       #
+#            END OF CONFIGURATION FILE                  #
+#                                                       #
+#########################################################

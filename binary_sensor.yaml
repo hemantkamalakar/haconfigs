@@ -1,0 +1,23 @@
+
+#https://home-assistant.io/components/binary_sensor/
+
+
+####################################################
+#                                                  #
+#                  PING                            #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/binary_sensor.ping/
+
+  # - platform: ping
+    # host: 192.168.1.1
+    # name: Router
+  - platform: workday
+    country: US
+
+####################################################
+#                                                  #
+#          END OF CONFIGURATION FILE               #
+#                                                  #
+####################################################

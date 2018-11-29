@@ -1,0 +1,30 @@
+  - platform: mqtt
+    name: "Sonoff_sc_Temperature"
+    state_topic: "tele/sonoff-sc/SENSOR"
+    value_template: "{{ value_json.Temperature }}"
+    unit_of_measurement: "°C"
+    
+  - platform: mqtt
+    name: "Sonoff_sc_Humidity"
+    state_topic: "tele/sonoff-sc/SENSOR"
+    value_template: "{{ value_json.Humidity }}"
+    unit_of_measurement: "%Rh"
+
+  - platform: mqtt
+    name: "Sonoff_sc_Noise"
+    state_topic: "tele/sonoff-sc/SENSOR"
+    value_template: "{{ value_json.Noise }}"
+    unit_of_measurement: "%"
+    
+  - platform: mqtt
+    name: "Sonoff_sc_Light"
+    state_topic: "tele/sonoff-sc/SENSOR"
+    value_template: "{{ value_json.Light }}"
+    unit_of_measurement: "%"
+    
+  - platform: mqtt
+    name: "Sonoff_sc_Air_quality"
+    state_topic: "tele/sonoff-sc/SENSOR"
+    value_template: "{{ value_json.AirQuality }}"
+    unit_of_measurement: "%"
+

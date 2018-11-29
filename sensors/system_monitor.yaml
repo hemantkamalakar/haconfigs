@@ -1,0 +1,78 @@
+
+#https://home-assistant.io/components/sensor/
+
+####################################################
+#                                                  #
+#                 SYSTEM MONITOR                   #
+#                                                  #
+####################################################
+
+#https://home-assistant.io/components/sensor.systemmonitor/
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: disk_use
+        arg: /
+      - type: disk_free
+        arg: /
+      - type: ipv4_address
+        arg: wlan0
+      - type: memory_free  
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+      - type: since_last_boot
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+
+  - platform: rpi_power     
+  
+  - platform: rest
+    resource: http://ip.jsontest.com
+    name: external_ip
+    value_template: '{{ value_json.ip }}'
+
+  - platform: command_line
+    name: CPU Temperature
+    command: cat /sys/class/thermal/thermal_zone0/temp
+    unit_of_measurement: '°C'
+    value_template: '{{ value | multiply(0.001) }}'
+
+  - platform: speedtest
+    minute: 
+      - 0
+      - 30
+    hour:
+      - 0
+      - 6
+      - 12
+      - 18
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+  - platform: rest
+    resource: https://pypi.python.org/pypi/homeassistant/json
+    name: HA Current Version
+    value_template: '{{ value_json.info.version }}'
+    scan_interval: 86400
+
+  - platform: file
+    name: HA Installed Version
+    file_path: /config/.HA_VERSION
+
+
+  - platform: template
+    sensors:
+      ha_last_restart:
+        value_template: '{{ as_timestamp(states.automation.startup_notification.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
+        friendly_name: HA Last Restart
+      
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

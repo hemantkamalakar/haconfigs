@@ -1,0 +1,24 @@
+
+#https://home-assistant.io/components/zone/
+
+####################################################
+#                                                  #
+#                    ZONES                         #
+#                                                  #
+####################################################
+
+  - name: Work
+    latitude: !secret work_latitude
+    longitude: !secret work_longitude
+    radius: 100
+
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 100
+    
+####################################################
+#                                                  #
+#            END OF CONFIGURATION FILE             #
+#                                                  #
+####################################################

@@ -1,0 +1,106 @@
+  - platform: template
+    sensors:
+      hemant_birthday:
+        unit_of_measurement: (mm-dd)
+        value_template: !secret hemant_birthday
+  - platform: template
+    sensors:
+      kavita_birthday:
+        unit_of_measurement: (mm-dd)
+        value_template: !secret kavita_birthday
+
+  - platform: template
+    sensors:
+      pranav_birthday:
+        value_template: !secret pranav_birthday
+        unit_of_measurement: (mm-dd)
+
+  - platform: template
+    sensors:
+      parth_birthday:
+        value_template: !secret parth_birthday
+        unit_of_measurement: (mm-dd)
+
+  - platform: mqtt
+    state_topic: "/home/today"
+    name: "hemant_birthday_days2go"
+    unit_of_measurement: "days to go"
+    value_template: >-
+      {% set month = value.split('-')[0] %}
+      {% set date = value.split('-')[1] %}
+      {% set year = value.split('-')[2] %}
+      {% if states('sensor.hemant_birthday') != "unknown" %}
+        {%- set bDayMonth = states.sensor.hemant_birthday.state.split('-')[0] -%}
+        {%- set bDayDate = states.sensor.hemant_birthday.state.split('-')[1] -%}
+        {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+        {%- if numOfDays < 0 -%}
+          {{ numOfDays + 365 }}
+        {%- else -%}
+          {{ numOfDays }}
+        {%- endif -%}
+      {% else %}
+        -
+      {% endif %}        
+        
+  - platform: mqtt
+    state_topic: "/home/today"
+    name: "kavita_birthday_days2go"
+    unit_of_measurement: "days to go"
+    value_template: >-
+      {% set month = value.split('-')[0] %}
+      {% set date = value.split('-')[1] %}
+      {% set year = value.split('-')[2] %}
+      {% if states('sensor.kavita_birthday') != "unknown" %}
+        {%- set bDayMonth = states.sensor.kavita_birthday.state.split('-')[0] -%}
+        {%- set bDayDate = states.sensor.kavita_birthday.state.split('-')[1] -%}
+        {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+        {%- if numOfDays < 0 -%}
+          {{ numOfDays + 365 }}
+        {%- else -%}
+          {{ numOfDays }}
+        {%- endif -%}
+      {% else %}
+        -
+      {% endif %}
+
+  - platform: mqtt
+    state_topic: "/home/today"
+    name: "pranav_birthday_days2go"
+    unit_of_measurement: "days to go"
+    value_template: >-
+      {% set month = value.split('-')[0] %}
+      {% set date = value.split('-')[1] %}
+      {% set year = value.split('-')[2] %}
+      {% if states('sensor.pranav_birthday') != "unknown" %}
+        {%- set bDayMonth = states.sensor.pranav_birthday.state.split('-')[0] -%}
+        {%- set bDayDate = states.sensor.pranav_birthday.state.split('-')[1] -%}
+        {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+        {%- if numOfDays < 0 -%}
+          {{ numOfDays + 365 }}
+        {%- else -%}
+          {{ numOfDays }}
+        {%- endif -%}
+      {% else %}
+        -
+      {% endif %}      
+
+  - platform: mqtt
+    state_topic: "/home/today"
+    name: "parth_birthday_days2go"
+    unit_of_measurement: "days to go"
+    value_template: >-
+      {% set month = value.split('-')[0] %}
+      {% set date = value.split('-')[1] %}
+      {% set year = value.split('-')[2] %}
+      {% if states('sensor.parth_birthday') != "unknown" %}
+        {%- set bDayMonth = states.sensor.parth_birthday.state.split('-')[0] -%}
+        {%- set bDayDate = states.sensor.parth_birthday.state.split('-')[1] -%}
+        {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+        {%- if numOfDays < 0 -%}
+          {{ numOfDays + 365 }}
+        {%- else -%}
+          {{ numOfDays }}
+        {%- endif -%}
+      {% else %}
+        -
+      {% endif %}
