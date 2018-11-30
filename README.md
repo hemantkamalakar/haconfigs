@@ -1,6 +1,3 @@
-# My Home Assistant Configuration
-Home-Assistant configuration files
-
 ## About
 This is my personal Home Assistant configuration, running my home automations.
 
