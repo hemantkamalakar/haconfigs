@@ -1,0 +1,5 @@
+secrets.yaml
+.google_maps_location_sharing.cookies
+home-assistant.log
+.storage/
+.google_fit.token

@@ -3,6 +3,16 @@
 
   platform: flux_led
   automatic_add: True
+  
+  # platform: mqtt
+  # name: "TV"
+  # state_topic: "stat/sonoff-pow-tv/POWER"
+  # command_topic: "cmnd/sonoff-pow-tv/POWER"
+  # payload_on: "ON"
+  # payload_off: "OFF"
+  # qos: 1
+  # retain: true
+  # optimistic: false  
 
 #########################################################
 #                                                       #

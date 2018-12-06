@@ -78,3 +78,20 @@ f4f5d878d74a:
   name: Google Chromecast
   picture:
   track: true
+
+
+1c56feffdce1:
+  hide_if_away: false
+  icon:
+  mac: 1C:56:FE:FF:DC:E1
+  name: 1c56feffdce1
+  picture:
+  track: true
+
+6001949956ff:
+  hide_if_away: false
+  icon:
+  mac: 60:01:94:99:56:FF
+  name: 6001949956ff
+  picture:
+  track: true

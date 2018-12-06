@@ -76,6 +76,10 @@ device_tracker:
     hosts: 192.168.1.0/24
     home_interval: 10
 
+# device_tracker:
+  # - platform: googlehome
+    # host: 192.168.1.101
+    
 camera:
   - platform: generic
     still_image_url: http://192.168.1.115:8765/picture/1/current/
