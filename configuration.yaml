@@ -98,6 +98,12 @@ panel_iframe:
 
 #https://home-assistant.io/components/group
 group:
+  Google_Fit:
+    - sensor.steps
+    - sensor.distance
+    - sensor.time
+    - sensor.weight
+
   Switches:
     - switch.LivingRoom
     - switch.Kitchen

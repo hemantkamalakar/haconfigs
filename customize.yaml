@@ -80,3 +80,14 @@ sensor.sunset_time:
   friendly_name: Sunset
   icon: mdi:weather-sunset-down
   unit_of_measurement: PM
+group.google_fit:
+  friendly_name: Google Fit
+sensor.steps:
+  icon: mdi:walk
+sensor.distance:
+  icon: mdi:map-marker-distance
+sensor.time:
+  icon: mdi:clock-outline
+sensor.weight:
+  icon: mdi:weight-kilogram
+  last_updated: 1544011369

@@ -92,16 +92,22 @@ NOTIFICATION_TITLE = 'Google Fit Setup'
 API_VERSION = 'v1'
 API_USER_ID = 'me'
 WEIGHT ='weight'
+DISTANCE = 'distance'
 STEPS = 'steps'
+TIME = 'time'
+CALORIES = 'calories'
+
 # Endpoint scopes required for the sensor.
 # Read more: https://developers.google.com/fit/rest/v1/authorization
 # API_SCOPE_WEIGHT = 'https://www.googleapis.com/auth/fitness.body.read'
 
 SCOPES = ['https://www.googleapis.com/auth/fitness.body.read',
-          'https://www.googleapis.com/auth/fitness.activity.read']
+          'https://www.googleapis.com/auth/fitness.activity.read',
+          'https://www.googleapis.com/auth/fitness.location.read']
 
 STEPS_DATA_SOURCE = "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
-
+MOVE_TIME_DATA_SOURCE = "derived:com.google.active_minutes:com.google.android.gms:merge_active_minutes"
+DISTANCE_DATA_SOURCE = "derived:com.google.distance.delta:com.google.android.gms:merge_distance_delta"
 
 def setup(hass, config):
     """Set up the Google Fit platform."""
@@ -174,9 +180,10 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     setup(hass, config)
 
     token_file = hass.config.path(TOKEN_FILE)
-    name = config.get(const.CONF_NAME)
     add_devices([GoogleFitSensor(token_file, 'Weight', 'Kg', WEIGHT),
-                 GoogleFitSensor(token_file, 'Steps', 'Steps', STEPS)], True)
+                 GoogleFitSensor(token_file, 'Steps', 'Steps', STEPS),
+                 GoogleFitSensor(token_file, 'Time', 'min', TIME),
+                 GoogleFitSensor(token_file, 'Distance', 'km', DISTANCE)], True)
 
 
 class GoogleFitSensor(entity.Entity):
@@ -280,6 +287,10 @@ class GoogleFitSensor(entity.Entity):
             self._update_weight_data()
         if self.type == 'steps':
             self._update_steps_data()
+        if self.type == 'time':
+            self._update_move_time_data()
+        if self.type == 'distance':
+            self._update_distance_data()
 
     def _get_datasources(self, data_type_name):
         """Gets data sources information for weight data.
@@ -357,9 +368,55 @@ class GoogleFitSensor(entity.Entity):
                 starts.append(int(point["startTimeNanos"]))
                 ends.append(int(point["endTimeNanos"]))
                 values.append(point['value'][0]['intVal'])
-            print("From: ", self.nanoseconds(min(starts)))
-            print("To: ", self.nanoseconds(max(ends)))
-            print("Steps: %d" % sum(values))
-            # self._last_updated = round(last_time_update / 1000)
+            # print("From: ", self.nanoseconds(min(starts)))
+            # print("To: ", self.nanoseconds(max(ends)))
+            # print("Steps: %d" % sum(values))
         self._state = sum(values)
         self._steps = sum(values)
+        print("Steps:", sum(values))
+
+    def _update_move_time_data(self):
+        """Extracts the relevant data points for the sensor from the Fitness API."""
+
+        TODAY = datetime.today().date()
+        NOW = datetime.today()
+        START = int(time.mktime(TODAY.timetuple()) * 1000000000)
+        END = int(time.mktime(NOW.timetuple()) * 1000000000)
+        DATA_SET = "%s-%s" % (START, END)
+
+        move_time_dataset = self._client.users().dataSources(). \
+            datasets(). \
+            get(userId='me', dataSourceId=MOVE_TIME_DATA_SOURCE, datasetId=DATA_SET). \
+            execute()
+        starts = []
+        ends = []
+        values = []
+        for point in move_time_dataset["point"]:
+            if int(point["startTimeNanos"]) > START:
+                starts.append(int(point["startTimeNanos"]))
+                ends.append(int(point["endTimeNanos"]))
+                values.append(point['value'][0]['intVal'])
+        self._state = sum(values)
+        print("Move time: ", self._state)
+
+    def _update_distance_data(self):
+            TODAY = datetime.today().date()
+            NOW = datetime.today()
+            START = int(time.mktime(TODAY.timetuple()) * 1000000000)
+            END = int(time.mktime(NOW.timetuple()) * 1000000000)
+            DATA_SET = "%s-%s" % (START, END)
+
+            distance_dataset = self._client.users().dataSources(). \
+                datasets(). \
+                get(userId='me', dataSourceId=DISTANCE_DATA_SOURCE, datasetId=DATA_SET). \
+                execute()
+            starts = []
+            ends = []
+            values = []
+            for point in distance_dataset["point"]:
+                if int(point["startTimeNanos"]) > START:
+                    starts.append(int(point["startTimeNanos"]))
+                    ends.append(int(point["endTimeNanos"]))
+                    values.append(point['value'][0]['fpVal'])
+            self._state = round(sum(values)/1000,2)
+            print("Distance: ", sum(values)/1000)
