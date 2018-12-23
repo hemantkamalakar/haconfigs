@@ -71,10 +71,10 @@ sensor: !include_dir_merge_list sensors/
 switch: !include switches.yaml
 zone: !include zones.yaml
 
-device_tracker:
-  - platform: nmap_tracker
-    hosts: 192.168.1.0/24
-    home_interval: 10
+# device_tracker:
+  # - platform: nmap_tracker
+    # hosts: 192.168.1.0/24
+    # home_interval: 10
 
 # device_tracker:
   # - platform: googlehome
@@ -171,17 +171,17 @@ group:
     - sensor.load_15m    
     - sensor.lets_encrypt_expiration
     
-  Devices:
-    - device_tracker.4c3488dd367d
-    - device_tracker.4ca56db0bdc3
-    - device_tracker.74234435ba7d
-    - device_tracker.b827ebeb16e1
-    - device_tracker.c8e7d86fb438
-    - device_tracker.cce1d5150194
-    - device_tracker.d463c675d89b
-    - device_tracker.f4f5d8c0547a
-    - device_tracker.5ccf7fe8a631
-    - device_tracker.f4f5d878d74a
+  # Devices:
+    # - device_tracker.4c3488dd367d
+    # - device_tracker.4ca56db0bdc3
+    # - device_tracker.74234435ba7d
+    # - device_tracker.b827ebeb16e1
+    # - device_tracker.c8e7d86fb438
+    # - device_tracker.cce1d5150194
+    # - device_tracker.d463c675d89b
+    # - device_tracker.f4f5d8c0547a
+    # - device_tracker.5ccf7fe8a631
+    # - device_tracker.f4f5d878d74a
 
   # Weather:
     # - sensor.dark_sky_summary

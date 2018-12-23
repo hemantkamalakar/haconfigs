@@ -99,7 +99,6 @@ CALORIES = 'calories'
 
 # Endpoint scopes required for the sensor.
 # Read more: https://developers.google.com/fit/rest/v1/authorization
-# API_SCOPE_WEIGHT = 'https://www.googleapis.com/auth/fitness.body.read'
 
 SCOPES = ['https://www.googleapis.com/auth/fitness.body.read',
           'https://www.googleapis.com/auth/fitness.activity.read',
