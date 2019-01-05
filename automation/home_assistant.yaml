@@ -1,20 +1,7 @@
-- id: '12345612'
-  alias: Power Problem Notification
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.rpi_power_status
-    above: 0
-    for:
-      minutes: 1
-  condition:
-  action:
-    service: persistent_notification.create
-    data:
-      message: "Charger reported {{ states.sensor.rpi_power_status.state }}"
-      title: "RPI Power Issue"        
+    
         
 - alias: TV time
-  id: '100100'
+  id: '1545644325111'
   trigger:
     platform: state
     entity_id: switch.tv
@@ -29,7 +16,7 @@
         states.media_player.google_chromecast.attributes.media_title}}'
 
 - alias: Notify Of New External IP
-  id: '100001'
+  id: '1545644322222'
   trigger:
     platform: state
     entity_id: sensor.external_ip
@@ -39,19 +26,22 @@
       message: 'Your External IP :  {{ states.sensor.external_ip.state }} '
 
       
-- alias: startup notification
-  id: '100002'
+
+
+- id: '1545644325295'
+  alias: Home Assistant startup notification
   trigger:
+  - event: start
     platform: homeassistant
-    event: start
   action:
-  - service: notify.slack
+  - service: notify.slack      
     data_template:
       message: Home assistant restarted successfully!
       title: Hass restart notification 
-
+      
+      
 - alias: Birthday Countdown 30 Days
-  id: '100004'
+  id: '154564433333'
   hide_entity: true
   trigger:
     platform: state
@@ -70,27 +60,8 @@
       message: '{{ trigger.entity_id.split(''.'')[1].split(''_'')[0] | title }}''s
         Birthday is only {{ trigger.to_state.state }} days to go!'
       
-# - alias: Today is the Birthday
-  # id: '100005'
-  # hide_entity: true
-  # trigger:
-    # platform: state
-    # entity_id:
-    # - sensor.hemant_birthday_days2go
-    # - sensor.kavita_birthday_days2go
-    # - sensor.pranav_birthday_days2go
-    # - sensor.parth_birthday_days2go
-  # condition:
-  # - condition: template
-    # value_template: '{{ trigger.to_state.state | int == 0 }}'
-  # action:
-  # - service: notify.slack
-    # data_template:
-      # value1: Hurray! Today is {{ trigger.entity_id.split('.')[1].split('_')[0] |
-        # title }}'s Birthday!
-      # value2: ''
 - alias: Today is the Birthday
-  id: '100005'
+  id: '1545644344444'
   hide_entity: true
   trigger:
     platform: state
@@ -110,7 +81,7 @@
     
       
 - alias: Update Current Date In MQTT
-  id: '100007'
+  id: '1545644355555'
   hide_entity: true
   trigger:
     platform: time
@@ -123,8 +94,9 @@
       topic: /home/today
       retain: true
       payload: '{{ as_timestamp(now() ) | timestamp_custom("%m-%d-%Y", true) }}'
+      
 - alias: Update Current Date On Startup
-  id: '100008'
+  id: '1545644377777'
   hide_entity: true
   trigger:
     platform: homeassistant

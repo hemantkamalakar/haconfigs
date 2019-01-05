@@ -26,7 +26,6 @@
       - type: load_5m
       - type: load_15m
 
-  - platform: rpi_power     
   
   - platform: rest
     resource: http://ip.jsontest.com

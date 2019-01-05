@@ -29,10 +29,17 @@ config:
 #frontend: !include frontend.yaml
 frontend:
   javascript_version: latest
-  themes: !include themes.yaml
 
 #https://home-assistant.io/components/history/
 history:
+
+logbook:
+  include:
+    domains:
+      - sensor
+      - switch
+      - media_player
+
 
 #https://home-assistant.io/components/http/
 http:
@@ -71,24 +78,14 @@ sensor: !include_dir_merge_list sensors/
 switch: !include switches.yaml
 zone: !include zones.yaml
 
-# device_tracker:
-  # - platform: nmap_tracker
-    # hosts: 192.168.1.0/24
-    # home_interval: 10
-
-# device_tracker:
-  # - platform: googlehome
-    # host: 192.168.1.101
-    
-camera:
-  - platform: generic
-    still_image_url: http://192.168.1.115:8765/picture/1/current/
-    
+  
 
 panel_iframe:
   cctv:
     title: 'CCTV'
     url: 'http://192.168.1.115:8765'    
+
+   
     
 ####################################################
 #                                                  #
@@ -102,7 +99,10 @@ group:
     - sensor.steps
     - sensor.distance
     - sensor.time
+    - sensor.calories
     - sensor.weight
+    - sensor.height
+
 
   Switches:
     - switch.LivingRoom
@@ -120,6 +120,7 @@ group:
     - sensor.yesterday
     - sensor.total
   Living room sensors:
+    - sensor.mcp9808_temperature
     - sensor.ruuvi_temperature
     - sensor.ruuvi_humidity
     - sensor.ruuvi_pressure
@@ -155,7 +156,6 @@ group:
     - sensor.ha_installed_version
     - sensor.ha_current_version
     - sensor.ha_last_restart
-    - sensor.rpi_power_status
     - sensor.processor_use
     - sensor.memory_free
     - sensor.memory_use_percent
@@ -171,24 +171,7 @@ group:
     - sensor.load_15m    
     - sensor.lets_encrypt_expiration
     
-  # Devices:
-    # - device_tracker.4c3488dd367d
-    # - device_tracker.4ca56db0bdc3
-    # - device_tracker.74234435ba7d
-    # - device_tracker.b827ebeb16e1
-    # - device_tracker.c8e7d86fb438
-    # - device_tracker.cce1d5150194
-    # - device_tracker.d463c675d89b
-    # - device_tracker.f4f5d8c0547a
-    # - device_tracker.5ccf7fe8a631
-    # - device_tracker.f4f5d878d74a
 
-  # Weather:
-    # - sensor.dark_sky_summary
-    # - sensor.dark_sky_daytime_high_temperature
-    # - sensor.dark_sky_overnight_low_temperature
-    # - sensor.dark_sky_precip_probability
-    # - sensor.forecast_0
     
 ####################################################
 #                                                  #
@@ -225,7 +208,8 @@ weather:
     longitude: !secret longitude
     mode: hourly
 
-    
+
+   
 ####################################################
 #                                                  #
 #            END OF CONFIGURATION FILE             #

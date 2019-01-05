@@ -1,0 +1,5 @@
+  - platform: mqtt
+    name: "mcp9808 Temperature"
+    state_topic: "mcp9808/"
+    value_template: "{{ value_json.temperature }}"
+    unit_of_measurement: "°C"
