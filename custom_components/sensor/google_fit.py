@@ -15,6 +15,7 @@ In order to add this component as is, add a new sensor:
 
 sensor:
   - platform: google_fit
+    name: Google Fit
     client_id: your_client_id
     client_secret: your_client_secret
 
@@ -28,6 +29,7 @@ https://www.home-assistant.io/docs/configuration/secrets/
 
 Example:
   - platform: google_fit
+    name: Bob
     client_id: !secret google_fit_client_id
     client_secret: !secret google_fit_client_secret
 """
@@ -64,12 +66,13 @@ SENSOR = 'google_fit'
 ATTR_LAST_UPDATED = 'last_updated'
 CONF_CLIENT_ID = 'client_id'
 CONF_CLIENT_SECRET = 'client_secret'
-DEFAULT_NAME = 'google_fit'
+DEFAULT_NAME = 'Google Fit'
 DEFAULT_CREDENTIALS_FILE = '.google_fit.credentials.json'
 ICON = 'mdi:heart-pulse'
 MIN_TIME_BETWEEN_SCANS = timedelta(minutes=10)
 MIN_TIME_BETWEEN_UPDATES = timedelta(minutes=10)
 TOKEN_FILE = '.{}.token'.format(SENSOR)
+SENSOR_NAME = '{} {}'
 
 # # Define schema of sensor.
 PLATFORM_SCHEMA = config_validation.PLATFORM_SCHEMA.extend({
@@ -181,12 +184,13 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     setup(hass, config)
 
     token_file = hass.config.path(TOKEN_FILE)
-    add_devices([GoogleFitSensor(token_file, 'Weight', 'Kg', WEIGHT),
-                 GoogleFitSensor(token_file, 'Height', 'cm', HEIGHT),
-                 GoogleFitSensor(token_file, 'Calories', 'calories', CALORIES),
-                 GoogleFitSensor(token_file, 'Steps', 'steps', STEPS),
-                 GoogleFitSensor(token_file, 'Time', 'min', TIME),
-                 GoogleFitSensor(token_file, 'Distance', 'km', DISTANCE)], True)
+    name = config.get(const.CONF_NAME)
+    add_devices([GoogleFitSensor(token_file, SENSOR_NAME.format(name, 'Weight'), 'Kg', WEIGHT),
+                 GoogleFitSensor(token_file, SENSOR_NAME.format(name, 'Height'), 'cm', HEIGHT),
+                 GoogleFitSensor(token_file, SENSOR_NAME.format(name, 'Calories'), 'calories', CALORIES),
+                 GoogleFitSensor(token_file, SENSOR_NAME.format(name, 'Steps'), 'steps', STEPS),
+                 GoogleFitSensor(token_file, SENSOR_NAME.format(name, 'Time'), 'min', TIME),
+                 GoogleFitSensor(token_file, SENSOR_NAME.format(name, 'Distance'), 'km', DISTANCE)], True)
 
 
 class GoogleFitSensor(entity.Entity):
