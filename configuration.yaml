@@ -1,10 +1,3 @@
-####################################################
-#                                                  #
-#                 HOME ASSISTANT                   #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/docs/configuration/basic/
 homeassistant:
   name: Home
   latitude: !secret latitude
@@ -16,32 +9,33 @@ homeassistant:
   whitelist_external_dirs:
     - /config
 
-####################################################
-#                                                  #
-#                     GENERAL                      #
-#                                                  #
-####################################################
+default_config:
+person:
 
-#https://home-assistant.io/components/config/
 config:
 
-#https://www.home-assistant.io/components/frontend/
-#frontend: !include frontend.yaml
 frontend:
   javascript_version: latest
-
-#https://home-assistant.io/components/history/
+  themes: !include_dir_merge_named themes
 history:
+  # include:
+  #   domains:
+  #     - sensor
+  #     - switch
+  #     - media_player
+  #     - device_tracker
 
 logbook:
-  include:
-    domains:
-      - sensor
-      - switch
-      - media_player
+  # include:
+  #   domains:
+  #     - sensor
+  #     - switch
+  #     - media_player
+  #     - device_tracker
 
+# lovelace:
+#   mode: yaml
 
-#https://home-assistant.io/components/http/
 http:
   #base_url: !secret domain_name
   server_port: 80
@@ -58,14 +52,9 @@ map:
 sun:
 discovery:
 
+system_health:
 
-####################################################
-#                                                  #
-#      LINKS TO INDIVUAL CONFIGURATION FILES       #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/docs/configuration/splitting_configuration/
+updater:
 automation: !include_dir_merge_list automation/
 binary_sensor: !include binary_sensor.yaml
 input_boolean: !include input_boolean.yaml
@@ -87,23 +76,15 @@ panel_iframe:
 
    
     
-####################################################
-#                                                  #
-#                     GROUP                        #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/components/group
 group:
   Google_Fit:
-    - sensor.steps
-    - sensor.distance
-    - sensor.time
-    - sensor.calories
-    - sensor.weight
-    - sensor.height
-
-
+    - sensor.google_fit_steps
+    - sensor.google_fit_distance
+    - sensor.google_fit_time
+    - sensor.google_fit_calories
+    - sensor.google_fit_weight
+    - sensor.google_fit_height
+    
   Switches:
     - switch.LivingRoom
     - switch.Kitchen
@@ -120,13 +101,18 @@ group:
     - sensor.yesterday
     - sensor.total
   Living room sensors:
-    - sensor.mcp9808_temperature
-    - sensor.ruuvi_temperature
-    - sensor.ruuvi_humidity
-    - sensor.ruuvi_pressure
-    - sensor.ruuvi_battery
-    - sensor.ruuvi_rssi
-    
+    - sensor.mcp9808
+    - sensor.Living_room_temperature
+    - sensor.Living_room_humidity
+    - sensor.Living_room_pressure
+    - sensor.Living_room_ruuvi_battery
+
+  Bed room sensors:
+    - sensor.bed_room_temperature
+    - sensor.bed_room_humidity
+    - sensor.bed_room_pressure
+    - sensor.bed_room_ruuvi_battery
+
   Air quality sensors:
     - sensor.Sonoff_sc_Temperature
     - sensor.Sonoff_sc_Humidity
@@ -159,9 +145,9 @@ group:
     - sensor.processor_use
     - sensor.memory_free
     - sensor.memory_use_percent
-    - sensor.disk_free_   
-    - sensor.disk_use_
-    - sensor.disk_use_percent_
+    - sensor.disk_free
+    - sensor.disk_use
+    - sensor.disk_use_percent
     - sensor.ipv4_address_wlan0
     - sensor.last_boot
     - sensor.since_last_boot
@@ -209,9 +195,33 @@ weather:
     mode: hourly
 
 
-   
-####################################################
-#                                                  #
-#            END OF CONFIGURATION FILE             #
-#                                                  #
-####################################################
+device_tracker:
+  - platform: google_maps
+    username: !secret device_tracker_google_account
+    password: !secret device_tracker_google_account_password
+    interval_seconds: 60
+    consider_home: 60
+
+camera:
+  - platform: generic
+    name: CCTV
+    still_image_url: http://192.168.1.115:8081/
+    verify_ssl: false   
+
+tts:
+  - platform: google
+    base_url: http://192.168.1.100    
+
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+# googlehome:
+#   devices:
+#     - host: 192.168.1.101
+#       track_alarms: true   

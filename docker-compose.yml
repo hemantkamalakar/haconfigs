@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  hass:
+    image: homeassistant/raspberrypi3-homeassistant:latest
+    container_name: home-assistant
+    restart: unless-stopped
+    depends_on:
+      - database
+    network_mode: host
+    cap_add:
+      - NET_ADMIN  # Required for adding new routes
+    # extra_hosts:
+      # - "hass-db:172.92.92.92"
+    volumes:
+      - ./certs:/certs:ro
+      - ./home-assistant/config:/config
+      - ./data/log:/log
+      - ./scripts:/scripts:ro
+      - /etc/localtime:/etc/localtime:ro
+  #    - /home/pschmitt/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+    healthcheck:
+      test: "curl -Lf http://localhost:8123"
+      start_period: 6m
+      timeout: 15s
+      interval: 30s
+      retries: 3
+
+  database:
+    image: arm32v7/postgres
+    container_name: postgres
+    restart: unless-stopped
+#    networks:
+#      backend:
+#        ipv4_address: 172.92.92.92
+    env_file:
+      - postgres.env
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    healthcheck:
+      test: "su postgres -c pg_isready"
+
+  mqtt:
+    image: hemantkamalakar/aedes-mqtt-broker
+    container_name: mqtt
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+    volumes:
+      - ./config/stunnel:/config:ro
+
+ 
+  autoheal:
+    restart: unless-stopped
+    image: willfarrell/autoheal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+

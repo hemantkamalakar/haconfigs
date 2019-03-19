@@ -5,10 +5,11 @@
 ####################################################
 
 resources:
-  #https://github.com/thomasloven/lovelace-slider-entity-row
-  - url: /www/custom_ui/slider-entity-row.js
+  - url: /local/mini-graph-card-bundle.js?v=0.3.0
     type: js
-
+  - url: /local/entity-attributes-card.js
+    type: js
+    
 ####################################################
 #                                                  #
 #                       HOME                       #
@@ -193,14 +194,14 @@ views:
 
   - title: Environment
     cards:
-      - type: glance
-        title: RuuviTag
-        entities:
-          - sensor.ruuvi_temperature
-          - sensor.ruuvi_humidity
-          - sensor.ruuvi_pressure
-          - sensor.ruuvi_battery
-          - sensor.ruuvi_rssi
+      # - type: glance
+      #   title: RuuviTag
+      #   entities:
+      #     - sensor.ruuvi_temperature
+      #     - sensor.ruuvi_humidity
+      #     - sensor.ruuvi_pressure
+      #     - sensor.ruuvi_battery
+      #     - sensor.ruuvi_rssi
       - type: glance
         title: Air quality sensors
         entities:

@@ -1,8 +1,6 @@
 
-#https://home-assistant.io/components/binary_sensor/
-
   purge_interval: 1
-  purge_keep_days: 3
+  purge_keep_days: 30
   db_url: !secret db_url
   exclude:
     domains:
@@ -14,16 +12,45 @@
       - script
       - switch
       - zone
+      - weather
     entities:
       - sun.sun
       - sensor.date
       - input_boolean.vacation
+      - sensor.ha_installed_version
+      - sensor.ha_current_version 
+      - sensor.processor_use 
+      - sensor.memory_free 
+      - sensor.disk_free
+      - sensor.disk_use 
+      - sensor.disk_use_percent 
+      - sensor.ipv4_address_wlan0 
+      - sensor.load_1m 
+      - sensor.load_5m 
+      - sensor.load_15m 
+      - sensor.lets_encrypt_expiration
+      - sensor.custom_card_tracker
+      - sensor.custom_component_tracker
+      - sensor.hemant_birthday_days2go
+      - sensor.kavita_birthday_days2go
+      - sensor.hemant_birthday
+      - sensor.kavita_birthday
+      - sensor.parth_birthday
+      - sensor.parth_birthday_days2go
+      - sensor.pranav_birthday
+      - sensor.pranav_birthday_days2go
+      - camera.cctv
   include:
     entities:
-      - sensor.ruuvi_temperature
-      - sensor.ruuvi_humidity
-      - sensor.ruuvi_pressure
-      - sensor.ruuvi_battery
+      - sensor.mcp9808
+      - sensor.living_room_temperature
+      - sensor.living_room_humidity
+      - sensor.living_room_pressure
+      - sensor.living_room_ruuvi_battery
+      - sensor.bed_room_temperature
+      - sensor.bed_room_humidity
+      - sensor.bed_room_pressure
+      - sensor.bed_room_ruuvi_battery
       - sensor.since_last_boot
       - sensor.speedtest_ping
       - sensor.speedtest_upload
@@ -35,14 +62,14 @@
       - sensor.power
       - sensor.power_factor
       - sensor.yesterday
-
+      - sensor.processor_use
+      - sensor.ha_last_restart 
+      - sensor.memory_use_percent 
+      - sensor.last_boot
+      - sensor.cpu_temperature
+      - sensor.sunrise_time 
+      - sensor.sunset_time
+      - device_tracker.google_maps_103126718451005809779
+      - device_tracker.google_maps_115135655450274737088
     domains:
       - sensor
-
-
-
-####################################################
-#                                                  #
-#          END OF CONFIGURATION FILE               #
-#                                                  #
-####################################################

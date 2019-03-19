@@ -3,3 +3,4 @@ secrets.yaml
 home-assistant.log
 .storage/
 .google_fit.token
+ruuvi/config.yaml

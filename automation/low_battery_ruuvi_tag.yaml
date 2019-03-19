@@ -1,10 +1,10 @@
   - alias: "Low Battery Ruuvi Tag"
     trigger:
       - platform: numeric_state
-        entity_id: sensor.Ruuvi_Battery
+        entity_id: sensor.Living_room_ruuvi_battery
         below: 2.7
       - platform: numeric_state
-        entity_id: sensor.Ruuvi_Battery
+        entity_id: sensor.Living_room_ruuvi_battery
         below: 2.5
     action:
       service: notify.slack

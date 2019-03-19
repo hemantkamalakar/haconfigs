@@ -25,7 +25,17 @@
     data_template:
       message: 'Your External IP :  {{ states.sensor.external_ip.state }} '
 
-      
+
+- alias: Update notifications
+  id: '918273645'
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+  - service: notify.slack
+    data_template: 
+      title: New Home Assistant Release
+      message: 'Home Assistant  {{ states.updater.updater.state }}  is now available.'      
 
 
 - id: '1545644325295'
@@ -84,10 +94,8 @@
   id: '1545644355555'
   hide_entity: true
   trigger:
-    platform: time
-    hours: /01
-    minutes: 0
-    seconds: 0
+    platform: time_pattern
+    hours: '/1'
   action:
   - service: mqtt.publish
     data_template:

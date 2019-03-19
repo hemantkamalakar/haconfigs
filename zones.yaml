@@ -10,13 +10,39 @@
   - name: Work
     latitude: !secret work_latitude
     longitude: !secret work_longitude
-    radius: 100
+    radius: 150
 
   - name: Home
     latitude: !secret latitude
     longitude: !secret longitude
-    radius: 100
+    radius: 30
+
+  - name: Parth's school
+    latitude: !secret parth_school_latitude
+    longitude: !secret parth_school_longitude
+    radius: 10
+
+  - name: Pranav's school
+    latitude: !secret pranav_school_latitude
+    longitude: !secret pranav_school_longitude
+    radius: 30    
     
+    
+  - name: DC
+    latitude: !secret dc_latitude
+    longitude: !secret dc_longitude
+    radius: 30
+
+  - name: Eco park
+    latitude: !secret nc_eco_park_latitude
+    longitude: !secret nc_eco_park_longitude
+    radius: 20
+
+  - name: Bhadole Home
+    latitude: !secret bhadole_home_latitude
+    longitude: !secret bhadole_home_longitude
+    radius: 50    
+        
 ####################################################
 #                                                  #
 #            END OF CONFIGURATION FILE             #

@@ -18,20 +18,6 @@ sensor.kavita_birthday:
   hidden: true
 sensor.parth_birthday:
   hidden: true
-sensor.ruuvi_temperature:
-  friendly_name: Temperature
-sensor.ruuvi_humidity:
-  friendly_name: Humidity
-  icon: hass:water-percent
-sensor.ruuvi_pressure:
-  friendly_name: Pressure
-  icon: hass:gauge
-sensor.ruuvi_battery:
-  friendly_name: Battery
-  icon: hass:battery
-sensor.ruuvi_rssi:
-  friendly_name: RSSI
-  icon: mdi:signal-variant
 sensor.ha_current_version:
   icon: mdi:home-assistant
 sensor.ha_installed_version:
