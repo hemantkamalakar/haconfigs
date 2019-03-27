@@ -1,4 +1,5 @@
   - platform: google_fit
+    name: Hemant
     client_id: !secret google_client_id
     client_secret: !secret google_client_secret
-    scan_interval: 3600
+    scan_interval: 300
