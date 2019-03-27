@@ -49,39 +49,4 @@
     state_topic: "tele/sonoff-pow-tv/ENERGY"
     value_template: "{{ value_json.Total }}"
     unit_of_measurement: "kWh"
-    
-##################################################### Ruuvi    
-  # - platform: mqtt
-  #   state_topic: "ruuvi/sensor/"
-  #   name: "Ruuvi_Temperature"
-  #   value_template: "{{ value_json.temperature }}"
-  #   unit_of_measurement: "°C"
-    
-  # - platform: mqtt
-  #   name: "Ruuvi_Humidity"
-  #   state_topic: "ruuvi/sensor/"
-  #   value_template: "{{ value_json.humidity }}"
-  #   unit_of_measurement: "%Rh"
 
-  # - platform: mqtt
-  #   name: "Ruuvi_Pressure"
-  #   state_topic: "ruuvi/sensor/"
-  #   value_template: "{{float(value_json.pressure)/100}}"
-  #   unit_of_measurement: "hPa"
-  
-  # - platform: mqtt
-  #   name: "Ruuvi_Battery"
-  #   state_topic: "ruuvi/sensor/"
-  #   value_template: "{{float(value_json.battery)/1000}}"
-  #   unit_of_measurement: "v"
-
-  # - platform: mqtt
-  #   name: "Ruuvi_RSSI"
-  #   state_topic: "ruuvi/sensor/"
-  #   value_template: "{{ value_json.rssi }}"
-  #   unit_of_measurement: "dBm"    
-####################################################
-#                                                  #
-#            END OF CONFIGURATION FILE             #
-#                                                  #
-####################################################
