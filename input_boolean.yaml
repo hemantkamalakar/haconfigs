@@ -1,27 +1,11 @@
 
-#https://home-assistant.io/components/input_boolean/
-
-####################################################
-#                                                  #
-#                 VACATION MODE                    #
-#                                                  #
-####################################################
-
   mode_vacation_mode:
     name: Vacation Mode
     initial: false
     icon: mdi:beach
-    
-
-
     
   mode_do_not_disturb:
     icon: mdi:bell-off
     initial: false
     name: Do Not Disturb    
     
-    ####################################################
-#                                                  #
-#           END OF CONFIGURATION FILE              #
-#                                                  #
-####################################################

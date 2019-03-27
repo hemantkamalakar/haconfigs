@@ -52,7 +52,6 @@
       
 - alias: Birthday Countdown 30 Days
   id: '154564433333'
-  hide_entity: true
   trigger:
     platform: state
     entity_id:
@@ -72,7 +71,6 @@
       
 - alias: Today is the Birthday
   id: '1545644344444'
-  hide_entity: true
   trigger:
     platform: state
     entity_id:
@@ -92,7 +90,6 @@
       
 - alias: Update Current Date In MQTT
   id: '1545644355555'
-  hide_entity: true
   trigger:
     platform: time_pattern
     hours: '/1'
@@ -105,7 +102,6 @@
       
 - alias: Update Current Date On Startup
   id: '1545644377777'
-  hide_entity: true
   trigger:
     platform: homeassistant
     event: start

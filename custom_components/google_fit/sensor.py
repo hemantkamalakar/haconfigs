@@ -380,6 +380,7 @@ class GoogleFitWeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_weight
+            print("Weight: ", last_weight)
             self._attributes = {}
 
 
@@ -437,6 +438,8 @@ class GoogleFitHeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_height
+            print("Height: ", last_height)
+
             self._attributes = {}
 
 
@@ -470,6 +473,7 @@ class GoogleFitStepsSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
+        print("Steps: ", sum(values))
         self._attributes = {}
 
 
@@ -503,6 +507,7 @@ class GoogleFitMoveTimeSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
+        print("Move Time: ", sum(values))
         self._attributes = {}
 
 
@@ -535,6 +540,7 @@ class GoogleFitCaloriesSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = round(sum(values))
+        print("Calories: ", round(sum(values)))
         self._attributes = {}
 
 
@@ -567,6 +573,7 @@ class GoogleFitDistanceSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = round(sum(values) / 1000, 2)
+        print("Distance: ", round(sum(values) / 1000, 2))
         self._attributes = {}
 
 class GoogleFitSleepSensor(GoogleFitSensor):
@@ -595,10 +602,9 @@ class GoogleFitSleepSensor(GoogleFitSensor):
         yesterday = datetime.now().replace(hour=17,minute=0,second=0,microsecond=0)
         yesterday = yesterday - timedelta(days=1)
         starttime = yesterday.isoformat("T") + "Z"
-        print(starttime)
         today = datetime.now().replace(hour=11,minute=0,second=0,microsecond=0)
         endtime = today.isoformat("T") + "Z"
-        print(endtime)
+        print("Starttime: ", starttime , "Endtime: ", endtime)
         sleep_dataset =  self._client.users().sessions().list(userId='me',fields='session',startTime=starttime,endTime=endtime).execute()
         starts = []
         ends = []
@@ -613,12 +619,12 @@ class GoogleFitSleepSensor(GoogleFitSensor):
                 if  point["name"].startswith('Deep'):   
                      deep_sleep_start = datetime.fromtimestamp(int(point["startTimeMillis"]) / 1000)
                      deep_sleep_end = datetime.fromtimestamp(int(point["endTimeMillis"]) / 1000)
-                     print(deep_sleep_start, deep_sleep_end , point["name"], "Total: ", (deep_sleep_end - deep_sleep_start) )
+                     #print(deep_sleep_start, deep_sleep_end , point["name"], "Total: ", (deep_sleep_end - deep_sleep_start) )
                      deep_sleep.append(deep_sleep_end - deep_sleep_start)
                 elif  point["name"].startswith('Light'):        
                      light_sleep_start = datetime.fromtimestamp(int(point["startTimeMillis"]) / 1000)
                      light_sleep_end = datetime.fromtimestamp(int(point["endTimeMillis"]) / 1000)
-                     print(light_sleep_start, light_sleep_end , point["name"], "Total: ", (light_sleep_end - light_sleep_start) )
+                     #print(light_sleep_start, light_sleep_end , point["name"], "Total: ", (light_sleep_end - light_sleep_start) )
                      light_sleep.append(light_sleep_end - light_sleep_start)
         
         bed_time = datetime.fromtimestamp(round(min(starts) / 1000))
@@ -629,11 +635,11 @@ class GoogleFitSleepSensor(GoogleFitSensor):
         state_dict = dict({'bed_time': str(bed_time), 'wake_up_time': str(wake_up_time), 'sleep': str(total_sleep), 'deep_sleep': str(total_deep_sleep), 'light_sleep': str(total_light_sleep)})
         # data = {'bed_time': str(bed_time), 'wake_up_time': str(wake_up_time), 'sleep': str(total_sleep)}
         # json_data = json.dumps(data)
-        print("Bed time: ", bed_time)
-        print("Wake up time: ", wake_up_time)
-        print("Sleep: ", total_sleep)
-        print("Deep sleep: ", total_deep_sleep )
-        print("Light sleep: ", total_light_sleep )
+        # print("Bed time: ", bed_time)
+        # print("Wake up time: ", wake_up_time)
+        # print("Sleep: ", total_sleep)
+        # print("Deep sleep: ", total_deep_sleep )
+        # print("Light sleep: ", total_light_sleep )
         print(state_dict)
      
         self._state = str(total_sleep)

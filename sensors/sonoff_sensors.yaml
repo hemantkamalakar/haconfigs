@@ -1,14 +1,3 @@
-
-#https://home-assistant.io/components/sensor/
-
-####################################################
-#                                                  #
-#                      MQTT                        #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/components/sensor.mqtt/
-
   - platform: mqtt
     name: "Current"
     state_topic: "tele/sonoff-pow-tv/ENERGY"

@@ -1,0 +1,123 @@
+  Google Fit:
+    - sensor.hemant_steps
+    - sensor.hemant_distance
+    - sensor.hemant_move_time
+    - sensor.hemant_calories
+    - sensor.hemant_weight
+    - sensor.hemant_height
+    - sensor.hemant_sleep
+    - sensor.hemant_sleep_bedtime
+    - sensor.hemant_sleep_deep_sleep
+    - sensor.hemant_sleep_light_sleep
+    - sensor.hemant_sleep_wake_up_time
+  Who's where?:
+    - device_tracker.google_maps_115135655450274737088
+    - device_tracker.google_maps_103126718451005809779
+    
+  Switches:
+    - switch.LivingRoom
+    - switch.Kitchen
+    - switch.MasterBedRoom
+    - switch.BedRoom
+    - switch.TV
+  TV:
+    - switch.TV
+    - sensor.voltage
+    - sensor.current
+    - sensor.energy
+    - sensor.power
+    - sensor.power_factor
+    - sensor.yesterday
+    - sensor.total
+  Living room sensors:
+    - sensor.mcp9808
+    - sensor.Living_room_temperature
+    - sensor.Living_room_humidity
+    - sensor.Living_room_pressure
+    - sensor.Living_room_ruuvi_battery
+
+  Bed room sensors:
+    - sensor.bed_room_temperature
+    - sensor.bed_room_humidity
+    - sensor.bed_room_pressure
+    - sensor.bed_room_ruuvi_battery
+
+  Air quality sensors:
+    - sensor.Sonoff_sc_Temperature
+    - sensor.Sonoff_sc_Humidity
+    - sensor.Sonoff_sc_Noise
+    - sensor.Sonoff_sc_Light
+    - sensor.Sonoff_sc_Air_quality
+  Internet speed:
+    - sensor.speedtest_ping
+    - sensor.speedtest_upload
+    - sensor.speedtest_download
+    - sensor.external_ip   
+  
+  Birthdays:
+    - sensor.hemant_birthday_days2go
+    - sensor.kavita_birthday_days2go
+    - sensor.pranav_birthday_days2go
+    - sensor.parth_birthday_days2go
+
+  Work:
+    - binary_sensor.workday_sensor
+  Sun:
+    - sun.sun  
+    - sensor.sunrise_time
+    - sensor.sunset_time
+
+  System Monitor:
+    - sensor.ha_installed_version
+    - sensor.ha_current_version
+    - sensor.ha_last_restart
+    - sensor.processor_use
+    - sensor.memory_free
+    - sensor.memory_use_percent
+    - sensor.disk_free
+    - sensor.disk_use
+    - sensor.disk_use_percent
+    - sensor.ipv4_address_wlan0
+    - sensor.last_boot
+    - sensor.since_last_boot
+    - sensor.cpu_temperature
+    - sensor.load_1m
+    - sensor.load_5m
+    - sensor.load_15m    
+    - sensor.lets_encrypt_expiration
+
+  Mobile phones:
+    - sensor.batterylevel_hemant_android
+    - sensor.batterycharging_hemant_android
+    - sensor.batterylevel_kavita_android
+    - sensor.batterycharging_kavita_android
+
+  Mahadiscom Bhadole:
+    - sensor.mahadiscom_250410062255_billamount
+    - sensor.mahadiscom_250410062255_billdate
+    - sensor.mahadiscom_250410062255_billmonth
+    - sensor.mahadiscom_250410062255_consumptionunits
+    - sensor.mahadiscom_250410062255_duedate
+    - sensor.mahadiscom_250410062255_promptpaymentdate    
+
+  Mahadiscom Nanded City:
+    - sensor.mahadiscom_170850116400_billdate
+    - sensor.mahadiscom_170850116400_billamount
+    - sensor.mahadiscom_170850116400_billmonth
+    - sensor.mahadiscom_170850116400_consumptionunits
+    - sensor.mahadiscom_170850116400_duedate
+    - sensor.mahadiscom_170850116400_promptpaymentdate  
+
+  Mahadiscom Ambegaon:
+    - sensor.mahadiscom_170020034907_billdate
+    - sensor.mahadiscom_170020034907_billamount
+    - sensor.mahadiscom_170020034907_billmonth
+    - sensor.mahadiscom_170020034907_consumptionunits
+    - sensor.mahadiscom_170020034907_duedate
+    - sensor.mahadiscom_170020034907_promptpaymentdate  
+
+  MNGL bill:
+    - sensor.mngl_amount
+    - sensor.mngl_billdate
+    - sensor.mngl_billduedate
+    - sensor.mngl_billno  

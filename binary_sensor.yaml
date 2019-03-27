@@ -1,25 +1,12 @@
-
-#https://home-assistant.io/components/binary_sensor/
-
-
-####################################################
-#                                                  #
-#                  PING                            #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/components/binary_sensor.ping/
-
-  # - platform: ping
-    # host: 192.168.1.1
-    # name: Router
   - platform: workday
     country: US
     
-  - platform: doorbell
-    topic: doorbell/binary_sensor/doorbell/state  
-####################################################
-#                                                  #
-#          END OF CONFIGURATION FILE               #
-#                                                  #
-####################################################
+  # - platform: mqtt
+  #   name: Doorbell
+  #   device_class: motion
+  #   state_topic: doorbell/binary_sensor/doorbell/state
+  #   payload_on: "ON"
+  #   payload_off: "OFF"
+  #   payload_available: "online"
+  #   payload_not_available: "offline"
+  #   qos: 0

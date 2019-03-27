@@ -1,13 +1,4 @@
 
-#https://home-assistant.io/components/sensor/
-
-####################################################
-#                                                  #
-#                 SYSTEM MONITOR                   #
-#                                                  #
-####################################################
-
-#https://home-assistant.io/components/sensor.systemmonitor/
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
@@ -56,11 +47,3 @@
       ha_last_restart:
         value_template: '{{ as_timestamp(states.automation.home_assistant_startup_notification.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
         friendly_name: HA Last Restart
-
-
-      
-####################################################
-#                                                  #
-#            END OF CONFIGURATION FILE             #
-#                                                  #
-####################################################

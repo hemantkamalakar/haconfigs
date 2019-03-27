@@ -1,12 +1,4 @@
 
-#https://home-assistant.io/components/zone/
-
-####################################################
-#                                                  #
-#                    ZONES                         #
-#                                                  #
-####################################################
-
   - name: Work
     latitude: !secret work_latitude
     longitude: !secret work_longitude
@@ -42,9 +34,3 @@
     latitude: !secret bhadole_home_latitude
     longitude: !secret bhadole_home_longitude
     radius: 50    
-        
-####################################################
-#                                                  #
-#            END OF CONFIGURATION FILE             #
-#                                                  #
-####################################################

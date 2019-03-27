@@ -1,23 +1,4 @@
-
-#https://home-assistant.io/components/switch/
-
-####################################################
-#                                                  #
-#                      MQTT                        #
-#                                                  #
-####################################################
-
-  # - platform: mqtt
-    # name: "POW1"
-    # state_topic: "stat/pow1/POWER"
-    # command_topic: "cmnd/pow1/POWER"
-    # availability_topic: "tele/pow1/LWT"
-    # qos: 1
-    # payload_on: "ON"
-    # payload_off: "OFF"
-    # payload_available: "Online"
-    # payload_not_available: "Offline"
-    # retain: true
+    
 
   - platform: mqtt
     name: "LivingRoom"
@@ -71,8 +52,3 @@
     retain: true
     optimistic: false    
 
-####################################################
-#                                                  #
-#           END OF CONFIGURATION FILE              #
-#                                                  #
-####################################################

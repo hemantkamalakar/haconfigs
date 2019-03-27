@@ -71,5 +71,16 @@
       - sensor.sunset_time
       - device_tracker.google_maps_103126718451005809779
       - device_tracker.google_maps_115135655450274737088
+      - sensor.hemant_steps
+      - sensor.hemant_distance
+      - sensor.hemant_move_time
+      - sensor.hemant_calories
+      - sensor.hemant_weight
+      - sensor.hemant_height
+      - sensor.hemant_sleep
+      - sensor.hemant_sleep_bedtime
+      - sensor.hemant_sleep_deep_sleep
+      - sensor.hemant_sleep_light_sleep
+      - sensor.hemant_sleep_wake_up_time
     domains:
       - sensor

@@ -1,311 +1,482 @@
-####################################################
-#                                                  #
-#                      RESOURCE                    #
-#                                                  #
-####################################################
-
-resources:
-  - url: /local/mini-graph-card-bundle.js?v=0.3.0
-    type: js
-  - url: /local/entity-attributes-card.js
-    type: js
-    
-####################################################
-#                                                  #
-#                       HOME                       #
-#                                                  #
-####################################################
-
-title: Sweet Home
 background: center / cover no-repeat url("/www/custom_ui/background2.jpg") fixed
+title: Sweet Home
 views:
-
-  - title: Rooms
-    icon: mdi:home
-    theme: dark-mode
-    cards:
-      - type: glance
-        title: Birthdays
-        entities:
-            - sensor.hemant_birthday_days2go
-            - sensor.kavita_birthday_days2go
-            - sensor.pranav_birthday_days2go
-            - sensor.parth_birthday_days2go
-      - type: entities
-        title: Sonoff Switches
-        show_header_toggle: false
-        entities:
-          - entity: switch.livingroom
-            name: Living room
-            icon: mdi:toggle-switch
-          - entity: switch.kitchen
-            name: Kitchen
-            icon: mdi:toggle-switch
-          - entity: switch.masterbedroom
-            name: Master bedroom
-            icon: mdi:toggle-switch
-          - entity: switch.bedroom
-            name: Bedroom
-            icon: mdi:toggle-switch
-          - entity: switch.tv
-            name: TV
-            icon: mdi:toggle-switch
-      - type: vertical-stack
-        cards:
-          - type: horizontal-stack
-            cards:
-          
-              - type: sensor
-                entity: sensor.voltage
-                name: Voltage
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
-                entity: sensor.current
-                name: Current
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
-                entity: sensor.energy
-                name: Energy
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24  
-          - type: horizontal-stack
-            cards:             
-              - type: sensor
-                entity: sensor.power
-                name: Power
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
-                entity: sensor.power_factor
-                name: Power factor
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
-                entity: sensor.total
-                name: Total
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24 
-
-
-
-####################################################
-#                                                  #
-#                HOME ASSISTANT                    #
-#                                                  #
-####################################################
-
-  - title: HA
-    icon: mdi:home-assistant
-    cards:
-      - type: horizontal-stack
-        cards:
-          - type: gauge
-            title: cpu usage
-            entity: sensor.processor_use
-            unit_of_measurement: '%'      
+  - cards:
+      - cards:
+          - entity: sensor.processor_use
             severity:
               green: 0
+              red: 85
               yellow: 45
-              red: 85
-          - type: gauge
-            title: Disk usage
-            entity: sensor.disk_use_percent_
-            unit_of_measurement: '%'      
+            title: cpu usage
+            type: gauge
+            unit_of_measurement: '%'
+          - entity: sensor.disk_use_percent
             severity:
               green: 0
+              red: 85
               yellow: 65
-              red: 85    
-          - type: gauge
-            title: Memory usage
-            entity: sensor.memory_use_percent
-            unit_of_measurement: '%'      
+            title: Disk usage
+            type: gauge
+            unit_of_measurement: '%'
+          - entity: sensor.memory_use_percent
             severity:
               green: 0
-              yellow: 50
               red: 85
-          - type: gauge
-            title: cpu temperature
-            entity: sensor.cpu_temperature
-            unit_of_measurement: C      
+              yellow: 50
+            title: Memory usage
+            type: gauge
+            unit_of_measurement: '%'
+          - entity: sensor.cpu_temperature
             severity:
               green: 30
+              red: 85
               yellow: 55
-              red: 85     
-
-
- 
-  
-      - type: glance
-        title: Home Assistant Info
-        entities:
-          - entity: sensor.ha_installed_version
-            name: Installed
-            icon: mdi:home-assistant
-          - entity: sensor.ha_current_version
-            name: Latest Release
-            icon: mdi:github-circle
-          - entity: sensor.ha_last_restart
-            name: Last restart
-            icon: mdi:home-assistant
-        columns: 3
-      - type: entities
-        title: Batteries
-        show_header_toggle: true
-        entities:
-          - entity: sensor.ruuvi_battery
-            icon: mdi:battery-50
-            name: RuuviTag Battery
-      - type: horizontal-stack
-        cards:
-          - type: sensor
+            title: cpu temperature
+            type: gauge
+            unit_of_measurement: C
+        type: horizontal-stack
+      - cards:
+          - accuracy: 30
             entity: sensor.speedtest_download
+            hours_to_show: 24
+            line_color: '#03a9f4'
+            line_width: 8
             name: Download
-            line_color: '#03a9f4'
-            line_width: 8
-            accuracy: 30
-            hours_to_show: 24
-          - type: sensor
+            type: sensor
+          - accuracy: 30
             entity: sensor.speedtest_upload
-            name: Upload
+            hours_to_show: 24
             line_color: '#03a9f4'
             line_width: 8
-            accuracy: 30
-            hours_to_show: 24
-
-####################################################
-#                                                  #
-#               Environment                #
-#                                                  #
-####################################################
-
-  - title: Environment
-    cards:
-      # - type: glance
-      #   title: RuuviTag
-      #   entities:
-      #     - sensor.ruuvi_temperature
-      #     - sensor.ruuvi_humidity
-      #     - sensor.ruuvi_pressure
-      #     - sensor.ruuvi_battery
-      #     - sensor.ruuvi_rssi
-      - type: glance
-        title: Air quality sensors
-        entities:
-          - sensor.sonoff_sc_temperature
-          - sensor.sonoff_sc_humidity
-          - sensor.sonoff_sc_noise
-          - sensor.sonoff_sc_light
-          - sensor.sonoff_sc_air_quality
-
-
-
-####################################################
-#                                                  #
-#                   SWITCHES                       #
-#                                                  #
-####################################################
-
-  - title: Switches
-    cards:
-      - type: entities
-        title: Sonoff Switches
+            name: Upload
+            type: sensor
+        type: horizontal-stack
+      - entities:
+          - entity: sensor.ha_installed_version
+          - entity: sensor.ha_current_version
+          - entity: sensor.ha_last_restart
+          - entity: sensor.processor_use
+          - entity: sensor.memory_free
+          - entity: sensor.memory_use_percent
+          - entity: sensor.disk_free
+          - entity: sensor.disk_use
+          - entity: sensor.disk_use_percent
+          - entity: sensor.ipv4_address_wlan0
+          - entity: sensor.last_boot
+          - entity: sensor.cpu_temperature
+          - entity: sensor.load_1m
+          - entity: sensor.load_5m
+          - entity: sensor.load_15m
+        type: entities
+      - entities:
+          - entity: sensor.speedtest_ping
+          - entity: sensor.speedtest_upload
+          - entity: sensor.speedtest_download
+          - entity: sensor.external_ip
         show_header_toggle: false
-        entities:
+        title: Internet speed
+        type: entities
+      - hold_action:
+          action: none
+        image: 'http://192.168.1.115:8765/picture/1/current/'
+        tap_action:
+          action: none
+        type: picture
+    icon: 'mdi:home-assistant'
+    title: HA
+  - cards:
+      - entities:
+          - sensor.hemant_birthday_days2go
+          - sensor.kavita_birthday_days2go
+          - sensor.pranav_birthday_days2go
+          - sensor.parth_birthday_days2go
+        title: Birthdays
+        type: glance
+      - entities:
           - entity: switch.livingroom
+            icon: 'mdi:toggle-switch'
             name: Living room
-            icon: mdi:toggle-switch
           - entity: switch.kitchen
+            icon: 'mdi:toggle-switch'
             name: Kitchen
-            icon: mdi:toggle-switch
           - entity: switch.masterbedroom
+            icon: 'mdi:toggle-switch'
             name: Master bedroom
-            icon: mdi:toggle-switch
           - entity: switch.bedroom
+            icon: 'mdi:toggle-switch'
             name: Bedroom
-            icon: mdi:toggle-switch
           - entity: switch.tv
+            icon: 'mdi:toggle-switch'
             name: TV
-            icon: mdi:toggle-switch
-      - type: vertical-stack
-        cards:
-          - type: horizontal-stack
-            cards:
-          
-              - type: sensor
+        show_header_toggle: false
+        title: Sonoff Switches
+        type: entities
+      - cards:
+          - cards:
+              - accuracy: 30
                 entity: sensor.voltage
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
                 name: Voltage
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
+                type: sensor
+              - accuracy: 30
                 entity: sensor.current
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
                 name: Current
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
+                type: sensor
+              - accuracy: 30
                 entity: sensor.energy
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
                 name: Energy
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24  
-          - type: horizontal-stack
-            cards:             
-              - type: sensor
+                type: sensor
+            type: horizontal-stack
+          - cards:
+              - accuracy: 30
                 entity: sensor.power
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
                 name: Power
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
-                hours_to_show: 24
-              - type: sensor
+                type: sensor
+              - accuracy: 30
                 entity: sensor.power_factor
-                name: Power factor
-                line_color: '#03a9f4'
-                line_width: 8
-                accuracy: 30
                 hours_to_show: 24
-              - type: sensor
-                entity: sensor.total
-                name: Total
                 line_color: '#03a9f4'
                 line_width: 8
-                accuracy: 30
-                hours_to_show: 24 
-
-####################################################
-#                                                  #
-#                     WEATHER                      #
-#                                                  #
-####################################################
-
-  - icon: mdi:weather-cloudy
+                name: Power factor
+                type: sensor
+              - accuracy: 30
+                entity: sensor.total
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Total
+                type: sensor
+            type: horizontal-stack
+        type: vertical-stack
+      - entities:
+          - entity: sensor.hemant_steps
+          - entity: sensor.hemant_distance
+          - entity: sensor.hemant_move_time
+          - entity: sensor.hemant_calories
+          - entity: sensor.hemant_weight
+          - entity: sensor.hemant_height
+          - entity: sensor.hemant_sleep
+          - entity: sensor.hemant_sleep_bedtime
+          - entity: sensor.hemant_sleep_deep_sleep
+          - entity: sensor.hemant_sleep_light_sleep
+          - entity: sensor.hemant_sleep_wake_up_time
+        show_header_toggle: false
+        title: Google Fit
+        type: entities
+      - entities:
+          - entity: sensor.ha_installed_version
+          - entity: sensor.ha_current_version
+          - entity: sensor.ha_last_restart
+          - entity: sensor.processor_use
+          - entity: sensor.memory_free
+          - entity: sensor.memory_use_percent
+          - entity: sensor.disk_free
+          - entity: sensor.disk_use
+          - entity: sensor.disk_use_percent
+          - entity: sensor.ipv4_address_wlan0
+          - entity: sensor.last_boot
+          - entity: sensor.cpu_temperature
+          - entity: sensor.load_1m
+          - entity: sensor.load_5m
+          - entity: sensor.load_15m
+        show_header_toggle: false
+        title: System information
+        type: entities
+      - entities:
+          - entity: sensor.speedtest_ping
+          - entity: sensor.speedtest_upload
+          - entity: sensor.speedtest_download
+          - entity: sensor.external_ip
+        show_header_toggle: false
+        title: Internet speed
+        type: entities
+      - entities:
+          - entity: switch.tv
+          - entity: sensor.voltage
+          - entity: sensor.current
+          - entity: sensor.energy
+          - entity: sensor.power
+          - entity: sensor.power_factor
+          - entity: sensor.yesterday
+          - entity: sensor.total
+        show_header_toggle: true
+        title: TV
+        type: entities
+      - entities:
+          - entity: sensor.mcp9808
+          - entity: sensor.living_room_temperature
+          - entity: sensor.living_room_humidity
+          - entity: sensor.living_room_pressure
+          - entity: sensor.living_room_ruuvi_battery
+        show_header_toggle: false
+        title: Living room sensors
+        type: entities
+      - entities:
+          - entity: sensor.bed_room_temperature
+          - entity: sensor.bed_room_humidity
+          - entity: sensor.bed_room_pressure
+          - entity: sensor.bed_room_ruuvi_battery
+        show_header_toggle: false
+        title: Bed room sensors
+        type: entities
+      - entities:
+          - entity: sensor.sonoff_sc_temperature
+          - entity: sensor.sonoff_sc_humidity
+          - entity: sensor.sonoff_sc_noise
+          - entity: sensor.sonoff_sc_light
+          - entity: sensor.sonoff_sc_air_quality
+        show_header_toggle: false
+        title: Air quality sensors
+        type: entities
+      - entities:
+          - entity: sun.sun
+          - entity: sensor.sunrise_time
+          - entity: sensor.sunset_time
+        show_header_toggle: false
+        title: Sun
+        type: entities
+      - entities:
+          - entity: binary_sensor.workday_sensor
+        show_header_toggle: false
+        title: Work
+        type: entities
+      - entity: weather.dark_sky
+        name: Weather
+        type: weather-forecast
+      - entities:
+          - entity: sensor.mahadiscom_250410062255_billamount
+          - entity: sensor.mahadiscom_250410062255_billdate
+          - entity: sensor.mahadiscom_250410062255_billmonth
+          - entity: sensor.mahadiscom_250410062255_consumptionunits
+          - entity: sensor.mahadiscom_250410062255_duedate
+          - entity: sensor.mahadiscom_250410062255_promptpaymentdate
+        show_header_toggle: false
+        title: Mahadiscom energy bill Bhadole
+        type: entities
+      - entities:
+          - entity: sensor.mahadiscom_170020034907_billdate
+          - entity: sensor.mahadiscom_170020034907_billamount
+          - entity: sensor.mahadiscom_170020034907_billmonth
+          - entity: sensor.mahadiscom_170020034907_consumptionunits
+          - entity: sensor.mahadiscom_170020034907_duedate
+          - entity: sensor.mahadiscom_170020034907_promptpaymentdate
+        show_header_toggle: false
+        title: Mahadiscom energy bill Ambegaon
+        type: entities
+      - entities:
+          - entity: sensor.mahadiscom_170850116400_billdate
+          - entity: sensor.mahadiscom_170850116400_billamount
+          - entity: sensor.mahadiscom_170850116400_billmonth
+          - entity: sensor.mahadiscom_170850116400_consumptionunits
+          - entity: sensor.mahadiscom_170850116400_duedate
+          - entity: sensor.mahadiscom_170850116400_promptpaymentdate
+        show_header_toggle: false
+        title: Mahadiscom energy bill Nanded city
+        type: entities
+      - entities:
+          - entity: sensor.mngl_amount
+          - entity: sensor.mngl_billdate
+          - entity: sensor.mngl_billduedate
+          - entity: sensor.mngl_billno
+        show_header_toggle: false
+        title: MNGL Bill
+        type: entities
+    icon: 'mdi:home'
+    theme: dark-mode
+    title: Rooms
+  - cards:
+      - cards:
+          - entity: sensor.living_room_temperature
+            severity:
+              green: 0
+              red: 35
+              yellow: 25
+            type: gauge
+            unit_of_measurement: C
+          - entity: sensor.living_room_humidity
+            severity:
+              green: 0
+              red: 85
+              yellow: 65
+            type: gauge
+            unit_of_measurement: '%Rh'
+          - entity: sensor.living_room_pressure
+            severity:
+              green: 800
+              red: 1000
+              yellow: 950
+            type: gauge
+            unit_of_measurement: hPa
+        type: horizontal-stack
+      - entity: sensor.bed_room_temperature
+        graph: line
+        name: Bed room temperature
+        type: sensor
+      - cards:
+          - entity: sensor.bed_room_temperature
+            severity:
+              green: 0
+              red: 35
+              yellow: 25
+            type: gauge
+            unit_of_measurement: C
+          - entity: sensor.bed_room_humidity
+            severity:
+              green: 0
+              red: 85
+              yellow: 65
+            type: gauge
+            unit_of_measurement: '%Rh'
+          - entity: sensor.bed_room_pressure
+            severity:
+              green: 800
+              red: 1000
+              yellow: 950
+            type: gauge
+            unit_of_measurement: hPa
+        type: horizontal-stack
+      - entity: sensor.living_room_temperature
+        graph: line
+        name: Living room temperature
+        type: sensor
+      - entity: sensor.living_room_humidity
+        graph: line
+        name: Living room humidity
+        type: sensor
+      - entity: sensor.bed_room_humidity
+        graph: line
+        name: Bed room humidity
+        type: sensor
+      - entity: sensor.living_room_pressure
+        graph: line
+        name: Living room pressure
+        type: sensor
+      - entity: sensor.bed_room_pressure
+        graph: line
+        name: Bed room pressure
+        type: sensor
+      - entity: sensor.living_room_ruuvi_battery
+        graph: line
+        name: Living room ruuvi battery
+        type: sensor
+      - entity: sensor.bed_room_ruuvi_battery
+        graph: line
+        name: Bed room ruuvi battery
+        type: sensor
+      - entities:
+          - sensor.Living_room_temperature
+        hours_to_show: 168
+        name: Living ROOM
+        points_per_hour: 0.25
+        type: 'custom:mini-graph-card'
+      - entities:
+          - sensor.living_room_temperature
+          - sensor.bed_room_temperature
+        title: Temperatures
+        type: history-graph
+    title: Environment
+  - cards:
+      - entities:
+          - entity: switch.livingroom
+            icon: 'mdi:toggle-switch'
+            name: Living room
+          - entity: switch.kitchen
+            icon: 'mdi:toggle-switch'
+            name: Kitchen
+          - entity: switch.masterbedroom
+            icon: 'mdi:toggle-switch'
+            name: Master bedroom
+          - entity: switch.bedroom
+            icon: 'mdi:toggle-switch'
+            name: Bedroom
+          - entity: switch.tv
+            icon: 'mdi:toggle-switch'
+            name: TV
+        show_header_toggle: false
+        title: Sonoff Switches
+        type: entities
+      - cards:
+          - cards:
+              - accuracy: 30
+                entity: sensor.voltage
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Voltage
+                type: sensor
+              - accuracy: 30
+                entity: sensor.current
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Current
+                type: sensor
+              - accuracy: 30
+                entity: sensor.energy
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Energy
+                type: sensor
+            type: horizontal-stack
+          - cards:
+              - accuracy: 30
+                entity: sensor.power
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Power
+                type: sensor
+              - accuracy: 30
+                entity: sensor.power_factor
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Power factor
+                type: sensor
+              - accuracy: 30
+                entity: sensor.total
+                hours_to_show: 24
+                line_color: '#03a9f4'
+                line_width: 8
+                name: Total
+                type: sensor
+            type: horizontal-stack
+        type: vertical-stack
+    title: Switches
+  - cards:
+      - entity: weather.dark_sky
+        type: weather-forecast
+    icon: 'mdi:weather-cloudy'
     id: weather
     title: Weather
+  - badges: []
     cards:
-      - type: weather-forecast
-        entity: weather.dark_sky
-
-
-####################################################
-#                                                  #
-#          END OF CONFIGURATION FILE               #
-#                                                  #
-####################################################
+      - entities:
+          - entity: device_tracker.google_maps_103126718451005809779
+          - entity: device_tracker.google_maps_115135655450274737088
+        type: glance
+      - entities:
+          - entity: device_tracker.google_maps_103126718451005809779
+          - entity: device_tracker.google_maps_115135655450274737088
+        type: map
+      - entities:
+          - device_tracker.google_maps_115135655450274737088
+          - device_tracker.google_maps_103126718451005809779
+        hours_to_show: 1
+        refresh_interval: 10
+        type: history-graph
+    icon: 'mdi:pin'
+    title: Who's where?
