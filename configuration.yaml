@@ -210,12 +210,17 @@ camera:
 
 tts:
   - platform: google
-    base_url: http://192.168.1.100    
+    #base_url: http://192.168.1.100
 
 
 speedtestdotnet:
   scan_interval:
     minutes: 30
+
+cast:
+  media_player:
+    - host: 192.168.1.101
+
   monitored_conditions:
     - ping
     - download
