@@ -15,7 +15,9 @@
     # name: Router
   - platform: workday
     country: US
-
+    
+  - platform: doorbell
+    topic: doorbell/binary_sensor/doorbell/state  
 ####################################################
 #                                                  #
 #          END OF CONFIGURATION FILE               #
