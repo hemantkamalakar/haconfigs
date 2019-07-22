@@ -1,7 +1,7 @@
 ## About
 This is my personal Home Assistant configuration, running my home automations.
 
-<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/ha.png" alt="screenshot">
+<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/screenshot.png" alt="screenshot">
 
 ## License
 
