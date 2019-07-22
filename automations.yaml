@@ -1,0 +1,34 @@
+- alias: Notify Of New External IP
+  id: '1545644322222'
+  trigger:
+    platform: state
+    entity_id: sensor.external_ip
+  action:
+    - service: notify.slack
+      data_template:
+        message: 'Your External IP :  {{ states.sensor.external_ip.state }} '
+
+
+- alias: Update notifications
+  id: '918273645'
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    - service: notify.slack
+      data_template: 
+        title: New Home Assistant Release
+        message: 'Home Assistant  {{ states.updater.updater.state }}  is now available.'      
+
+
+- id: '1545644325295'
+  alias: Home Assistant startup notification
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+    - service: notify.slack      
+      data_template:
+        message: Home assistant restarted successfully!
+        title: Hass restart notification 
+      

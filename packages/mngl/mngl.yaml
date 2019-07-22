@@ -1,0 +1,19 @@
+homeassistant:
+  customize:
+    sensor.mngl_amount:
+      friendly_name: Bill amount
+      icon: mdi:cash
+    sensor.mngl_billdate:
+      friendly_name: Bill date
+      icon: mdi:calendar
+    sensor.mngl_billduedate:
+      friendly_name: Bill due date
+      icon: mdi:calendar
+    sensor.mngl_billno:
+      friendly_name: Bill no.
+      icon: mdi:numeric
+
+sensor:
+  - platform: mngl
+    mngl_dp_id: 50095766
+    scan_interval: 86400

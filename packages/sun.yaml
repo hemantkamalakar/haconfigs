@@ -1,0 +1,29 @@
+
+homeassistant:
+  customize:
+    sensor.sunrise_time:
+      friendly_name: Sunrise time
+    sensor.sunset_time:
+      friendly_name: Sunset time  
+      
+sun:
+
+group:
+  Sun:
+    name: Sun
+    view: no
+    entities:
+      - sun.sun
+      - sensor.sunrise_time
+      - sensor.sunset_time
+
+sensor:
+  - platform: template
+    sensors:
+      sunset_time:
+        value_template: '{{ as_timestamp(states.sun.sun.attributes.next_setting)  | timestamp_custom("%H:%M") }}'
+
+  - platform: template
+    sensors:
+      sunrise_time:
+        value_template: '{{ as_timestamp(states.sun.sun.attributes.next_rising)  | timestamp_custom("%H:%M") }}'

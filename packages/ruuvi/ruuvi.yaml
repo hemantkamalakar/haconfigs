@@ -1,0 +1,97 @@
+homeassistant:
+  customize:
+    sensor.living_room_temperature:
+      friendly_name: Living room temperature
+    sensor.living_room_humidity:
+      friendly_name: Living room humidity
+      icon: mdi:water-percent
+    sensor.living_room_pressure:
+      friendly_name: Living room air pressure
+      icon: mdi:weather-windy 
+    sensor.living_room_ruuvi_battery:
+      friendly_name: Living room ruuvi battery 
+      icon: mdi:battery-bluetooth-variant
+
+    sensor.bed_room_temperature:
+      friendly_name: Bed room temperature
+    sensor.bed_room_humidity:
+      friendly_name: Bed room humidity
+      icon: mdi:water-percent
+    sensor.bed_room_pressure:
+      friendly_name: Bed room air pressure 
+      icon: mdi:weather-windy
+    sensor.bed_room_ruuvi_battery:
+      friendly_name: Bed room ruuvi battery
+      icon: mdi:battery-bluetooth-variant 
+  
+group:
+  living_room:
+    name: Living room
+    view: yes
+    entities:
+      - sensor.living_room_temperature
+      - sensor.living_room_humidity
+      - sensor.living_room_pressure
+      - sensor.living_room_ruuvi_battery
+  bed_room:
+    name: Bed room
+    view: yes
+    entities:
+      - sensor.bed_room_temperature
+      - sensor.bed_room_humidity
+      - sensor.bed_room_pressure
+      - sensor.bed_room_ruuvi_battery
+
+
+
+sensor:
+  - platform: mqtt
+    name: "Living_room_temperature"
+    state_topic: "ruuvi/sensor/F3:4B:FB:D9:F9:45"
+    value_template: "{{ value_json.temperature }}"
+    unit_of_measurement: "°C"
+    
+  - platform: mqtt
+    name: "Living_room_humidity"
+    state_topic: "ruuvi/sensor/F3:4B:FB:D9:F9:45"
+    value_template: "{{float(value_json.humidity)}}"
+    unit_of_measurement: "%Rh"
+
+  - platform: mqtt
+    name: "Living_room_pressure"
+    state_topic: "ruuvi/sensor/F3:4B:FB:D9:F9:45"
+    value_template: "{{float(value_json.pressure)}}"
+    unit_of_measurement: "hPa"
+  
+  - platform: mqtt
+    name: "Living_room_ruuvi_battery"
+    state_topic: "ruuvi/sensor/F3:4B:FB:D9:F9:45"
+    value_template: "{{float(value_json.battery)/1000}}"
+    unit_of_measurement: "v"
+
+
+
+  - platform: mqtt
+    state_topic: "ruuvi/sensor/F6:96:33:93:F5:CB"
+    name: "bed_room_temperature"
+    value_template: "{{ value_json.temperature }}"
+    unit_of_measurement: "°C"
+    
+  - platform: mqtt
+    name: "bed_room_humidity"
+    state_topic: "ruuvi/sensor/F6:96:33:93:F5:CB"
+    value_template: "{{float(value_json.humidity)}}"
+    unit_of_measurement: "%Rh"
+
+  - platform: mqtt
+    name: "bed_room_pressure"
+    state_topic: "ruuvi/sensor/F6:96:33:93:F5:CB"
+    value_template: "{{float(value_json.pressure)}}"
+    unit_of_measurement: "hPa"
+  
+  - platform: mqtt
+    name: "bed_room_ruuvi_battery"
+    state_topic: "ruuvi/sensor/F6:96:33:93:F5:CB"
+    value_template: "{{float(value_json.battery)/1000}}"
+    unit_of_measurement: "v"
+

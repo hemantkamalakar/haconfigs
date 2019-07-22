@@ -146,9 +146,7 @@ def setup(hass, config):
     name = config.get(const.CONF_NAME)
     TOKEN_FILE = '.{}_{}.token'.format(name,SENSOR)
     token_file = hass.config.path(TOKEN_FILE)
-    print("in setup", token_file)
     if not os.path.exists(token_file):
-        print('file found')
         return do_authentication(hass, config)
 
     return True
@@ -206,7 +204,6 @@ def do_authentication(hass, config):
             return
         name = config.get(const.CONF_NAME)
         TOKEN_FILE = '.{}_{}.token'.format(name,SENSOR)
-        print('storing token file', TOKEN_FILE)
         storage = oauth2file.Storage(hass.config.path(TOKEN_FILE))
         storage.put(credentials)
         listener()
@@ -221,7 +218,6 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     setup(hass, config)
     name = config.get(const.CONF_NAME)
     TOKEN_FILE = '.{}_{}.token'.format(name,SENSOR)
-    print('in setup_platform :', TOKEN_FILE)
     token_file = hass.config.path(TOKEN_FILE)
     client = _get_client(token_file)
     
@@ -390,7 +386,7 @@ class GoogleFitWeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_weight
-            print("Weight: ", last_weight)
+            print(self.name,  last_weight)
             self._attributes = {}
 
 
@@ -448,7 +444,7 @@ class GoogleFitHeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_height
-            print("Height: ", last_height)
+            print(self.name, last_height)
 
             self._attributes = {}
 
@@ -483,7 +479,7 @@ class GoogleFitStepsSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
-        print("Steps: ", sum(values))
+        print(self.name, sum(values))
         self._attributes = {}
 
 
@@ -517,7 +513,7 @@ class GoogleFitMoveTimeSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
-        print("Move Time: ", sum(values))
+        print(self.name, sum(values))
         self._attributes = {}
 
 
@@ -550,7 +546,7 @@ class GoogleFitCaloriesSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = round(sum(values))
-        print("Calories: ", round(sum(values)))
+        print(self.name, round(sum(values)))
         self._attributes = {}
 
 
@@ -583,7 +579,7 @@ class GoogleFitDistanceSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = round(sum(values) / 1000, 2)
-        print("Distance: ", round(sum(values) / 1000, 2))
+        print(self.name, round(sum(values) / 1000, 2))
         self._attributes = {}
 
 class GoogleFitSleepSensor(GoogleFitSensor):

@@ -1,0 +1,73 @@
+homeassistant:
+
+group:
+  TV:
+    name: TV
+    view: yes
+    entities:
+      - switch.tv
+      - sensor.current
+      - sensor.energy
+      - sensor.power_factor
+      - sensor.power
+      - sensor.voltage
+      - sensor.yesterday
+      - sensor.total
+
+
+switch:
+  - platform: mqtt
+    name: "TV"
+    state_topic: "stat/sonoff-pow-tv/POWER"
+    command_topic: "cmnd/sonoff-pow-tv/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    state_on: "ON"
+    state_off: "OFF"
+    qos: 1
+    retain: true
+    optimistic: false   
+
+
+sensor:
+  - platform: mqtt
+    name: "Current"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Current }}"
+    unit_of_measurement: "A"
+    
+  - platform: mqtt
+    name: "Energy"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Today }}"
+    unit_of_measurement: "kWh"
+    
+  - platform: mqtt
+    name: "Power_Factor"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Factor }}"
+
+  - platform: mqtt
+    name: "Power"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Power }}"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    name: "Voltage"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Voltage }}"
+    unit_of_measurement: "V"
+    
+  - platform: mqtt
+    name: "Yesterday"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Yesterday }}"
+    unit_of_measurement: "kWh"
+    
+  - platform: mqtt
+    name: "Total"
+    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    value_template: "{{ value_json.ENERGY.Total }}"
+    unit_of_measurement: "kWh"
+

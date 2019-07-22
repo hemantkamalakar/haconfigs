@@ -1,0 +1,112 @@
+homeassistant:
+  customize:
+    sensor.hemant_sleep_bedtime:
+      friendly_name: Bedtime
+      icon: mdi:hotel
+    sensor.hemant_calories:
+      friendly_name: Calories
+    sensor.hemant_sleep_deep_sleep:
+      friendly_name: Deep sleep time
+      icon: mdi:sleep
+    sensor.hemant_sleep_light_sleep:
+      friendly_name: Light sleep
+    sensor.hemant_distance:
+      friendly_name: Distance
+    sensor.hemant_move_time:
+      friendly_name: Move time
+    sensor.hemant_weight:
+      friendly_name: Weight
+    sensor.hemant_height:
+      friendly_name: Height
+    sensor.hemant_sleep:
+      friendly_name: Sleep
+    sensor.hemant_sleep_wake_up_time:
+      friendly_name: Wakeup time
+      icon:  mdi:white-balance-sunny
+    sensor.hemant_steps:
+      friendly_name: Steps  
+
+    sensor.kavita_sleep_bedtime:
+      friendly_name: Bedtime
+      icon: mdi:hotel
+    sensor.kavita_calories:
+      friendly_name: Calories
+    sensor.kavita_sleep_deep_sleep:
+      friendly_name: Deep sleep time
+      icon: mdi:sleep
+    sensor.kavita_sleep_light_sleep:
+      friendly_name: Light sleep
+      icon: mdi:sleep-off
+    sensor.kavita_distance:
+      friendly_name: Distance
+    sensor.kavita_move_time:
+      friendly_name: Move time
+    sensor.kavita_weight:
+      friendly_name: Weight
+    sensor.kavita_height:
+      friendly_name: Height
+    sensor.kavita_sleep:
+      friendly_name: Sleep
+    sensor.kavita_sleep_wake_up_time:
+      friendly_name: Wakeup time
+      icon: mdi:white-balance-sunny
+    sensor.kavita_steps:
+      friendly_name: Steps    
+
+sensor:  
+  - platform: google_fit
+    name: hemant
+    client_id: !secret google_client_id
+    client_secret: !secret google_client_secret
+    scan_interval: 300
+
+  - platform: google_fit
+    name: kavita
+    client_id: !secret kavita_google_client_id
+    client_secret: !secret kavita_google_client_secret
+    scan_interval: 300
+
+
+  - platform: template
+    sensors:
+      hemant_sleep_bedtime:
+        value_template: >-
+            {%- if states.sensor.hemant_sleep.attributes.bed_time %}
+                {{ states.sensor.hemant_sleep.attributes.bed_time }}
+            {% else %}
+                {{ states.sensor.hemant_sleep.attributes.bed_time }}
+            {%- endif %}
+
+
+  - platform: template
+    sensors:
+      hemant_sleep_wake_up_time:
+        value_template: >-
+            {%- if states.sensor.hemant_sleep.attributes.wake_up_time %}
+                {{ states.sensor.hemant_sleep.attributes.wake_up_time }}
+            {% else %}
+                {{ states.sensor.hemant_sleep.attributes.wake_up_time }}
+            {%- endif %}            
+
+
+  - platform: template
+    sensors:
+      hemant_sleep_deep_sleep:
+        value_template: >-
+            {%- if states.sensor.hemant_sleep.attributes.deep_sleep %}
+                {{ states.sensor.hemant_sleep.attributes.deep_sleep }}
+            {% else %}
+                {{ states.sensor.hemant_sleep.attributes.deep_sleep }}
+            {%- endif %}                       
+
+  - platform: template
+    sensors:
+      hemant_sleep_light_sleep:
+        value_template: >-
+            {%- if states.sensor.hemant_sleep.attributes.light_sleep %}
+                {{ states.sensor.hemant_sleep.attributes.light_sleep }}
+            {% else %}
+                {{ states.sensor.hemant_sleep.attributes.light_sleep }}
+            {%- endif %}                   
+
+

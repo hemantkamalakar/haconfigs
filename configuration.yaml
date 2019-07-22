@@ -1,4 +1,11 @@
 homeassistant:
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.1.0/24
+    - type: legacy_api_password
+      api_password: !secret http_password
   name: Home
   latitude: !secret latitude
   longitude: !secret longitude
@@ -9,84 +16,48 @@ homeassistant:
   whitelist_external_dirs:
     - /config
 
+  packages: !include_dir_named packages  
+
+http:
+  server_host: 192.168.1.200
+  server_port: 80
+
 default_config:
+
+media_extractor:
+
 person:
+
+stream:
 
 config:
 
-frontend:
-  javascript_version: latest
-  themes: !include_dir_merge_named themes
-history:
-  # include:
-  #   domains:
-  #     - sensor
-  #     - switch
-  #     - media_player
-  #     - device_tracker
-
-logbook:
-  # include:
-  #   domains:
-  #     - sensor
-  #     - switch
-  #     - media_player
-  #     - device_tracker
-
-# lovelace:
-#   mode: yaml
-
-http:
-  #base_url: !secret domain_name
-  server_port: 80
-
-
-#https://home-assistant.io/components/logger/
-logger:
-  default: error
-
-#https://www.home-assistant.io/components/map/
 map:
 
-#https://home-assistant.io/components/sun/
-sun:
 discovery:
 
 system_health:
 
 updater:
-automation: !include_dir_merge_list automation/
-binary_sensor: !include binary_sensor.yaml
-input_boolean: !include input_boolean.yaml
-#input_select: !include input_select.yaml
-light: !include lights.yaml
-notify: !include notification.yaml
-recorder: !include recorder.yaml
-script: !include scripts.yaml
-sensor: !include_dir_merge_list sensors/
-switch: !include switches.yaml
-zone: !include zones.yaml
-group: !include groups.yaml
 
-  
+mobile_app:
 
-panel_iframe:
-  cctv:
-    title: 'CCTV'
-    url: 'http://192.168.1.115:8765'    
+logger:
+  default: error
 
-   
-    
-####################################################
-#                                                  #
-#                     MQTT                         #
-#                                                  #
-####################################################
+frontend:
+  javascript_version: latest
+  themes: !include_dir_merge_named themes
 
-#https://home-assistant.io/docs/mqtt/broker/#run-your-own
+cast:
+  media_player:
+    - host: 192.168.1.101
+
 mqtt:
-  broker: localhost
+  broker: 192.168.1.200
   port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_password
   client_id: smarthome
   keepalive: 60
   protocol: 3.1
@@ -100,10 +71,24 @@ mqtt:
     payload: "Offline"
     qos: 1
     retain: true
+  discovery: true
+  discovery_prefix: homeassistant
 
-# duckdns:
-  # domain: !secret domain_name
-  # access_token: !secret domain_access_token    
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+recorder: !include recorder.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+notify: !include notification.yaml
+zone: !include zones.yaml
+
+camera:
+  - platform: generic
+    name: doorcamera
+    still_image_url: http://192.168.1.115:8765/picture/1/current/
 
 weather:
   - platform: darksky
@@ -111,40 +96,3 @@ weather:
     latitude: !secret latitude
     longitude: !secret longitude
     mode: hourly
-
-
-device_tracker:
-  - platform: google_maps
-    username: !secret device_tracker_google_account
-    password: !secret device_tracker_google_account_password
-    interval_seconds: 60
-    consider_home: 60
-
-camera:
-  - platform: generic
-    name: CCTV
-    still_image_url: http://192.168.1.115:8081/
-    verify_ssl: false   
-
-tts:
-  - platform: google
-    #base_url: http://192.168.1.100
-
-
-speedtestdotnet:
-  scan_interval:
-    minutes: 30
-
-cast:
-  media_player:
-    - host: 192.168.1.101
-
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-
-# googlehome:
-#   devices:
-#     - host: 192.168.1.101
-#       track_alarms: true   

@@ -1,0 +1,25 @@
+
+sensor:
+  - platform: template
+    sensors:
+      batterycharging_hemant_android:
+        friendly_name: "Hemant's mobile battery charging?"
+        value_template: >-
+              {% if state_attr('device_tracker.google_maps_115135655450274737088', 'battery_charging') == True %}
+                Charging
+              {% else %}
+                Not Charging
+              {% endif %}    
+
+  - platform: template
+    sensors:
+      batterycharging_kavita_android:
+        friendly_name: "Kavita's mobile battery charging?"
+        value_template: >-
+          {% if state_attr('device_tracker.google_maps_103126718451005809779', 'battery_charging') == True %}
+            Charging
+          {% else %}
+            Not Charging
+          {% endif %}    
+      
+

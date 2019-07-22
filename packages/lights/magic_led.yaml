@@ -1,0 +1,16 @@
+homeassistant:
+  customize:
+      light.Bed_lights:
+        friendly_name: Bed lights
+group:
+  lights:
+    name: Lights
+    view: yes
+    entities:
+        - light.Bed_lights
+
+light:
+  - platform: flux_led
+    devices:
+      192.168.1.110:
+        name: Bed_lights

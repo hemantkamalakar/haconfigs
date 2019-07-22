@@ -1,6 +1,0 @@
-  - platform: mcp9808
-    name: MCP9808
-    i2c_address: 0x18
-    i2c_bus: 1
-    scan_interval: 60
-    unit_of_measurement: "°C"
