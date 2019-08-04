@@ -110,3 +110,13 @@ sensor:
             {%- endif %}                   
 
 
+# automation:
+
+# - alias: Notify sleep data
+#   trigger:
+#     platform: state
+#     entity_id: sensor.hemant_sleep
+#   action:
+#   - service: notify.slack
+#     data_template:
+#       message: 'Slept :  {{ states.sensor.hemant_sleep.state }} '

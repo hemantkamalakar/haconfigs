@@ -1,0 +1,15 @@
+homeassistant:
+
+group:
+  Weather:
+    name: Weather
+    view: yes
+    entities:
+      - weather.darksky
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky
+    latitude: !secret latitude
+    longitude: !secret longitude
+    mode: hourly

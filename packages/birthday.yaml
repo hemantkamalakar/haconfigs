@@ -1,0 +1,206 @@
+homeassistant:
+
+input_text:
+  hemant_birthday:
+    initial: !secret hemant_birthday
+  kavita_birthday:
+    initial: !secret kavita_birthday
+  pranav_birthday:
+    initial: !secret pranav_birthday
+  parth_birthday:
+    initial: !secret parth_birthday  
+
+  hemant_birthday_days2go:
+    icon: mdi:cake-variant
+    name: Hemant's Birthday
+  kavita_birthday_days2go:
+    icon: mdi:cake-variant
+    name: Kavita's Birthday
+  pranav_birthday_days2go:
+    icon: mdi:cake-variant
+    name: Pranav's Birthday
+  parth_birthday_days2go:
+    icon: mdi:cake-variant
+    name: Parth's Birthday
+
+automation:
+###############################################################################
+# Build the excitement
+###############################################################################
+  - alias: Birthday Countdown 30 Days
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: 
+        - input_text.hemant_birthday_days2go
+        - input_text.kavita_birthday_days2go
+        - input_text.pranav_birthday_days2go
+        - input_text.parth_birthday_days2go
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: template
+        value_template: "{{ trigger.to_state.state | int > 0 and trigger.to_state.state | int < 30 }}"
+    action:
+      - service: notify.slack
+        data_template:
+          message: "{{ trigger.entity_id.split('.')[1].split('_')[0] | title }}'s Birthday is only {{ trigger.to_state.state }} days to go!"
+
+###############################################################################
+# Celebrate Birthday!!!
+###############################################################################
+  - alias: Today is the Birthday
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: 
+        - input_text.hemant_birthday_days2go
+        - input_text.kavita_birthday_days2go
+        - input_text.pranav_birthday_days2go
+        - input_text.parth_birthday_days2go
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: template
+        value_template: "{{ trigger.to_state.state | int == 0 }}"
+    action:
+      - service: notify.slack
+        data_template:
+          message: "Hurray! Today is {{ trigger.entity_id.split('.')[1].split('_')[0] | title }}'s Birthday!"
+
+###############################################################################
+# Announce Happy Birthday message every hour starting 7 am until 9 PM
+###############################################################################
+  - alias: Random Birthday Wishes
+    initial_state: true
+    trigger:
+      platform: time_pattern
+      hours: '/1'
+      minutes: 3
+      seconds: 00
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: group.all_devices
+          state: 'home'
+        - condition: time
+          after: '07:00:00'
+          before: '21:00:00'
+        - condition: or
+          conditions:
+            - condition: template
+              value_template: "{{ states.input_text.hemant_birthday_days2go.state | int == 0 }}"
+            - condition: template
+              value_template: "{{ states.input_text.kavita_birthday_days2go.state | int == 0 }}"
+            - condition: template
+              value_template: "{{ states.input_text.pranav_birthday_days2go.state | int == 0 }}"
+            - condition: template
+              value_template: "{{ states.input_text.parth_birthday_days2go.state | int == 0 }}"  
+    action:
+      - service: notify.slack
+        data_template:
+          message: !include ../templates/birthday_wishes.yaml
+      - delay:
+          minutes: 1
+      - service: notify.slack
+        data_template:
+          message: "Alexa, Sing Happy Birthday Song."
+          greeting: 'no'
+
+  - alias: Update Birthdays
+    initial_state: true
+    trigger:
+      - platform: time_pattern
+        minutes: '/5'
+        seconds: 00
+      - platform: homeassistant
+        event: start
+    condition:
+      - condition: template
+        value_template: "{{ states.input_text.hemant_birthday.state.split('-') | length  > 0 }}"
+      - condition: template
+        value_template: "{{ states.input_text.kavita_birthday.state.split('-') | length  > 0 }}"
+      - condition: template
+        value_template: "{{ states.input_text.pranav_birthday.state.split('-') | length  > 0 }}"
+      - condition: template
+        value_template: "{{ states.input_text.parth_birthday.state.split('-') | length  > 0 }}"  
+    action:
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.hemant_birthday_days2go
+          value: >
+            {% set year = states.sensor.date.state.split('-')[0] %}
+            {% set month = states.sensor.date.state.split('-')[1] %}
+            {% set date = states.sensor.date.state.split('-')[2] %}
+            {% if states('input_text.hemant_birthday') != "unknown" %}
+              {%- set bDayMonth = states.input_text.hemant_birthday.state.split('-')[0] -%}
+              {%- set bDayDate = states.input_text.hemant_birthday.state.split('-')[1] -%}
+              {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+              {%- if numOfDays < 0 -%}
+                {{ numOfDays + 365 }}
+              {%- else -%}
+                {{ numOfDays }}
+              {%- endif -%}
+            {% else %}
+              -
+            {% endif %}
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.kavita_birthday_days2go
+          value: >
+            {% set year = states.sensor.date.state.split('-')[0] %}
+            {% set month = states.sensor.date.state.split('-')[1] %}
+            {% set date = states.sensor.date.state.split('-')[2] %}
+            {% if states('input_text.kavita_birthday') != "unknown" %}
+              {%- set bDayMonth = states.input_text.kavita_birthday.state.split('-')[0] -%}
+              {%- set bDayDate = states.input_text.kavita_birthday.state.split('-')[1] -%}
+              {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+              {%- if numOfDays < 0 -%}
+                {{ numOfDays + 365 }}
+              {%- else -%}
+                {{ numOfDays }}
+              {%- endif -%}
+            {% else %}
+              -
+            {% endif %}
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.pranav_birthday_days2go
+          value: >
+            {% set year = states.sensor.date.state.split('-')[0] %}
+            {% set month = states.sensor.date.state.split('-')[1] %}
+            {% set date = states.sensor.date.state.split('-')[2] %}
+            {% if states('input_text.pranav_birthday') != "unknown" %}
+              {%- set bDayMonth = states.input_text.pranav_birthday.state.split('-')[0] -%}
+              {%- set bDayDate = states.input_text.pranav_birthday.state.split('-')[1] -%}
+              {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+              {%- if numOfDays < 0 -%}
+                {{ numOfDays + 365 }}
+              {%- else -%}
+                {{ numOfDays }}
+              {%- endif -%}
+            {% else %}
+              -
+            {% endif %}
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.parth_birthday_days2go
+          value: >
+            {% set year = states.sensor.date.state.split('-')[0] %}
+            {% set month = states.sensor.date.state.split('-')[1] %}
+            {% set date = states.sensor.date.state.split('-')[2] %}
+            {% if states('input_text.parth_birthday') != "unknown" %}
+              {%- set bDayMonth = states.input_text.parth_birthday.state.split('-')[0] -%}
+              {%- set bDayDate = states.input_text.parth_birthday.state.split('-')[1] -%}
+              {%- set numOfDays = ((as_timestamp(strptime(year ~ '-' ~ bDayMonth ~ '-' ~ bDayDate , '%Y-%m-%d')) | timestamp_custom('%j', true) | int ) - (as_timestamp(strptime(year ~ '-' ~ month~ '-' ~ date , '%Y-%m-%d')) | timestamp_custom('%j', true) | int)) -%}
+              {%- if numOfDays < 0 -%}
+                {{ numOfDays + 365 }}
+              {%- else -%}
+                {{ numOfDays }}
+              {%- endif -%}
+            {% else %}
+              -
+            {% endif %}            

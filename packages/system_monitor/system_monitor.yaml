@@ -90,5 +90,5 @@ sensor:
         friendly_name: HA Last Restart
 
 
-#automation:
+
  

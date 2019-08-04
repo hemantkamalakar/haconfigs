@@ -40,9 +40,11 @@
       - sensor.pranav_birthday
       - sensor.pranav_birthday_days2go
       - camera.cctv
+      - sensor.time
+      - sensor.date
+      - sensor.mngl_duedate
   include:
     entities:
-      - sensor.mcp9808
       - sensor.living_room_temperature
       - sensor.living_room_humidity
       - sensor.living_room_pressure
@@ -82,5 +84,18 @@
       - sensor.hemant_sleep_deep_sleep
       - sensor.hemant_sleep_light_sleep
       - sensor.hemant_sleep_wake_up_time
+      - sensor.kavita_steps
+      - sensor.kavita_distance
+      - sensor.kavita_move_time
+      - sensor.kavita_calories
+      - sensor.kavita_weight
+      - sensor.kavita_height
+      - sensor.kavita_sleep
+      - sensor.kavita_sleep_bedtime
+      - sensor.kavita_sleep_deep_sleep
+      - sensor.kavita_sleep_light_sleep
+      - sensor.kavita_sleep_wake_up_time
+      - sensor.hemant_battery
+      - sensor.kavita_battery
     domains:
       - sensor

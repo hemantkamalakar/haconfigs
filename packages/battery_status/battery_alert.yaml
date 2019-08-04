@@ -174,7 +174,7 @@
 ##   Changed
 ##   - Handle null attributes gracefully
 ##
-## 1.2.4 (2019-03-02)
+## 1.2.4 (2019-03-02) 
 ##   Added
 ##   - Added support for battery_critical attributes by @Djebouh
 ################################################################

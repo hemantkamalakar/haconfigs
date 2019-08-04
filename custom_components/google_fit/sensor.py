@@ -386,7 +386,7 @@ class GoogleFitWeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_weight
-            print(self.name,  last_weight)
+            #print(self.name,  last_weight)
             self._attributes = {}
 
 
@@ -444,7 +444,7 @@ class GoogleFitHeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_height
-            print(self.name, last_height)
+            #print(self.name, last_height)
 
             self._attributes = {}
 
@@ -479,7 +479,7 @@ class GoogleFitStepsSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
-        print(self.name, sum(values))
+        #print(self.name, sum(values))
         self._attributes = {}
 
 
@@ -513,7 +513,7 @@ class GoogleFitMoveTimeSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
-        print(self.name, sum(values))
+        #print(self.name, sum(values))
         self._attributes = {}
 
 
@@ -546,7 +546,7 @@ class GoogleFitCaloriesSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = round(sum(values))
-        print(self.name, round(sum(values)))
+        #print(self.name, round(sum(values)))
         self._attributes = {}
 
 
@@ -579,7 +579,7 @@ class GoogleFitDistanceSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = round(sum(values) / 1000, 2)
-        print(self.name, round(sum(values) / 1000, 2))
+        #print(self.name, round(sum(values) / 1000, 2))
         self._attributes = {}
 
 class GoogleFitSleepSensor(GoogleFitSensor):
@@ -608,7 +608,7 @@ class GoogleFitSleepSensor(GoogleFitSensor):
         starttime = yesterday.isoformat("T") + "Z"
         today = datetime.now().replace(hour=11,minute=0,second=0,microsecond=0)
         endtime = today.isoformat("T") + "Z"
-        print("Starttime: ", starttime , "Endtime: ", endtime)
+        #print("Starttime: ", starttime , "Endtime: ", endtime)
         sleep_dataset =  self._client.users().sessions().list(userId='me',fields='session',startTime=starttime,endTime=endtime).execute()
         starts = []
         ends = []
@@ -623,12 +623,12 @@ class GoogleFitSleepSensor(GoogleFitSensor):
                 if  point["name"].startswith('Deep'):   
                         deep_sleep_start = datetime.fromtimestamp(int(point["startTimeMillis"]) / 1000)
                         deep_sleep_end = datetime.fromtimestamp(int(point["endTimeMillis"]) / 1000)
-                        print(deep_sleep_start, deep_sleep_end , point["name"], "Total: ", (deep_sleep_end - deep_sleep_start) )
+                        #print(deep_sleep_start, deep_sleep_end , point["name"], "Total: ", (deep_sleep_end - deep_sleep_start) )
                         deep_sleep.append(deep_sleep_end - deep_sleep_start)
                 elif  point["name"].startswith('Light'):        
                         light_sleep_start = datetime.fromtimestamp(int(point["startTimeMillis"]) / 1000)
                         light_sleep_end = datetime.fromtimestamp(int(point["endTimeMillis"]) / 1000)
-                        print(light_sleep_start, light_sleep_end , point["name"], "Total: ", (light_sleep_end - light_sleep_start) )
+                        #print(light_sleep_start, light_sleep_end , point["name"], "Total: ", (light_sleep_end - light_sleep_start) )
                         light_sleep.append(light_sleep_end - light_sleep_start)
         
         #print("starts", starts, "ends", ends)

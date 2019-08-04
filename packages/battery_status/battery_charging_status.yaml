@@ -22,4 +22,29 @@ sensor:
             Not Charging
           {% endif %}    
       
+automation:
+  - id: '1234567890123'
+    alias: Hemant mobile battery full notification
+    trigger:
+      platform: template
+      value_template: "{% if is_state('sensor.batterycharging_hemant_android', 'Charging') %}true{% endif %}"
+    condition:
+      condition: template
+      value_template: "{{ (state_attr('device_tracker.google_maps_115135655450274737088', 'battery_level')|int) > 98 }}"
+    action:
+      service: notify.slack
+      data_template:
+        message: Hemant's mobile battery is almost full. Plaese unplug the charger to save energy.
 
+  - id: '981234764134'
+    alias: Kavita mobile battery full notification
+    trigger:
+      platform: template
+      value_template: "{% if is_state('sensor.batterycharging_kavita_android', 'Charging') %}true{% endif %}"
+    condition:
+      condition: template
+      value_template: "{{ (state_attr('device_tracker.google_maps_103126718451005809779', 'battery_level')|int) > 98 }}"
+    action:
+      service: notify.slack
+      data_template:
+        message: Kavita's mobile battery is almost full. Plaese unplug the charger to save energy.        

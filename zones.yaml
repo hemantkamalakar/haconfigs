@@ -25,12 +25,12 @@
     longitude: !secret dc_longitude
     radius: 30
 
-  - name: Eco park
-    latitude: !secret nc_eco_park_latitude
-    longitude: !secret nc_eco_park_longitude
-    radius: 20
+  # - name: Eco park
+  #   latitude: !secret nc_eco_park_latitude
+  #   longitude: !secret nc_eco_park_longitude
+  #   radius: 20
 
-  - name: Bhadole Home
-    latitude: !secret bhadole_home_latitude
-    longitude: !secret bhadole_home_longitude
-    radius: 50    
+  # - name: Bhadole Home
+  #   latitude: !secret bhadole_home_latitude
+  #   longitude: !secret bhadole_home_longitude
+  #   radius: 50    

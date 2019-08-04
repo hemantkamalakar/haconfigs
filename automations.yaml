@@ -4,31 +4,43 @@
     platform: state
     entity_id: sensor.external_ip
   action:
-    - service: notify.slack
-      data_template:
-        message: 'Your External IP :  {{ states.sensor.external_ip.state }} '
-
-
+  - service: notify.slack
+    data_template:
+      message: 'Your External IP :  {{ states.sensor.external_ip.state }} '
 - alias: Update notifications
   id: '918273645'
   trigger:
     platform: state
     entity_id: updater.updater
   action:
-    - service: notify.slack
-      data_template: 
-        title: New Home Assistant Release
-        message: 'Home Assistant  {{ states.updater.updater.state }}  is now available.'      
-
-
+  - service: notify.slack
+    data_template:
+      title: New Home Assistant Release
+      message: Home Assistant  {{ states.updater.updater.state }}  is now available.
 - id: '1545644325295'
   alias: Home Assistant startup notification
   trigger:
   - event: start
     platform: homeassistant
   action:
-    - service: notify.slack      
-      data_template:
-        message: Home assistant restarted successfully!
-        title: Hass restart notification 
-      
+  - service: notify.slack
+    data_template:
+      message: Home assistant restarted successfully!
+      title: Hass restart notification
+- alias: Ruuvi sensors status check
+  trigger:
+  - platform: state
+    entity_id: sensor.living_room_ruuvi_battery
+  - platform: state
+    entity_id: sensor.time
+  condition:
+    condition: template
+    value_template: '{{ (now() - states.sensor.living_room_ruuvi_battery.last_changed).total_seconds()
+      > 60*30 }}
+
+      '
+  action:
+    service: notify.slack
+    data_template:
+      message: "Looks like RuuviTag sensors are offline. Please restart Ruuvi docker."
+  id: 880b46ef5d7b4133823829f7856ed77e
