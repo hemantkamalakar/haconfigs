@@ -1,6 +1,5 @@
 homeassistant:
 
-
 camera:
   - platform: generic
     name: doorcamera
@@ -23,7 +22,16 @@ sensor:
     sensors:
       facebox_detection:
         friendly_name: 'Facebox Detection'
-        value_template: '{{ states.image_processing.facebox.attributes.faces[0]["name"]}}'
+        value_template: >-
+          {% set faces = state_attr('image_processing.facebox', 'matched_faces') %}
+          {% if None != faces %}
+            {% if faces | list | count == 0 %}
+              Clear
+             {% else %}
+            {%- for face in faces | list %}{%- if loop.first %}{% elif loop.last %} and {% else %}, {% endif -%}{{ face }}{%- endfor %}
+            {% endif %}
+          {% endif %}
+
 
 binary_sensor:
   - platform: mqtt
@@ -38,40 +46,6 @@ binary_sensor:
     device_class: light
     value_template: '{{ value }}'
 
-#automation:
-# - alias: Doorbell ring
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.doorbell_button
-#     to: 'on'
-#   action:
-#     - service: camera.snapshot
-#       data:
-#         entity_id: camera.doorcamera
-#         filename: '/config/www/doorbell.jpg'
-#     - delay: '00:00:01'
-
-#     - service: media_player.play_media 
-#       data_template:                 
-#         entity_id: media_player.google_home            
-#         media_content_id: http://192.168.1.200/local/dingdong.mp3
-#         media_content_type: 'audio/mp3'         
-
-#     - service: image_processing.scan
-#       entity_id: image_processing.facebox
-#     - delay: 00:00:02
-
-#     - service_template: >
-#         '{% if states.sensor.facebox_detection.state != "unknown" %} tts.google_say {% endif %}'
-#       data_template:
-#         entity_id: media_player.google_home
-#         message: >
-#           '{% if states.sensor.facebox_detection.state != "unknown" %}  {{ states<"sensor.facebox_detection"> }} is at the door {% else %} {% endif %}'
-    
-#     # - service: media_player.volume_set
-#     #   data:
-#     #     entity_id: media_player.google_home
-#     #     volume_level: 0.9
 
 automation:
 - id: facebox_announcement
@@ -105,11 +79,11 @@ automation:
   - service_template: '{% if states.sensor.facebox_detection.state != "Unknown" %} tts.google_say {% endif %}'
     data_template:
       entity_id: media_player.google_home
-      message: '{% if states.sensor.facebox_detection.state != "Unknown" %}    {% for face in states.image_processing.facebox.attributes.faces  %} {{face.name }} ,{%endfor %}  is at the door {% else %} Someone is at the door. {% endif %}'
+      message: '{% if states.sensor.facebox_detection.state != "Clear" %}    {{  states.sensor.facebox_detection.state }} is at the door {% else %} Someone is at the door. {% endif %}' 
   - service: notify.slack
     data:
       title: Doorbell notification
-      message:  '{% if states.sensor.facebox_detection.state != "Unknown" %}    {% for face in states.image_processing.facebox.attributes.faces  %} {{face.name }} ,{%endfor %}  is at the door {% else %} Someone is at the door. {% endif %}' 
+      message:  '{% if states.sensor.facebox_detection.state != "Clear" %}    {{  states.sensor.facebox_detection.state }} is at the door {% else %} Someone is at the door. {% endif %}' 
       data:
         file:
           path: /config/www/doorbell.jpg

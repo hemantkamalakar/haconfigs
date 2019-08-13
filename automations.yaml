@@ -35,10 +35,7 @@
     entity_id: sensor.time
   condition:
     condition: template
-    value_template: '{{ (now() - states.sensor.living_room_ruuvi_battery.last_changed).total_seconds()
-      > 60*30 }}
-
-      '
+    value_template: '{{ (now() - states.sensor.living_room_ruuvi_battery.last_changed).total_seconds() > 60*30 }}'
   action:
     service: notify.slack
     data_template:

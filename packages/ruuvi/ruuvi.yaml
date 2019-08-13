@@ -43,6 +43,14 @@ group:
       - sensor.bed_room_ruuvi_battery
 
 
+# sensor:
+#   - platform: ruuvitag
+#     beacons:
+#       living_room:
+#         mac: "F3:4B:FB:D9:F9:45"
+#       bed_room:
+#         mac: "F6:96:33:93:F5:CB"
+
 
 sensor:
   - platform: mqtt

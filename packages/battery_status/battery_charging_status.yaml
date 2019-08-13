@@ -26,25 +26,27 @@ automation:
   - id: '1234567890123'
     alias: Hemant mobile battery full notification
     trigger:
-      platform: template
-      value_template: "{% if is_state('sensor.batterycharging_hemant_android', 'Charging') %}true{% endif %}"
+      platform: numeric_state
+      entity_id: sensor.hemant_battery
+      above: 98
     condition:
       condition: template
-      value_template: "{{ (state_attr('device_tracker.google_maps_115135655450274737088', 'battery_level')|int) > 98 }}"
+      value_template: "{% if is_state('sensor.batterycharging_hemant_android', 'Charging') %}true{% endif %}"
     action:
       service: notify.slack
       data_template:
-        message: Hemant's mobile battery is almost full. Plaese unplug the charger to save energy.
+        message: Hemant's mobile battery is {{ state_attr('sensor.hemant_battery', 'battery_level') }} % (almost full). Please unplug the charger to save energy.
 
   - id: '981234764134'
     alias: Kavita mobile battery full notification
     trigger:
-      platform: template
-      value_template: "{% if is_state('sensor.batterycharging_kavita_android', 'Charging') %}true{% endif %}"
+      platform: numeric_state
+      entity_id: sensor.kavita_battery
+      above: 98
     condition:
       condition: template
-      value_template: "{{ (state_attr('device_tracker.google_maps_103126718451005809779', 'battery_level')|int) > 98 }}"
+      value_template: "{% if is_state('sensor.batterycharging_kavita_android', 'Charging') %}true{% endif %}"
     action:
       service: notify.slack
       data_template:
-        message: Kavita's mobile battery is almost full. Plaese unplug the charger to save energy.        
+        message: Kavita's mobile battery is {{ state_attr('sensor.kavita_battery', 'battery_level') }} % (almost full). Please unplug the charger to save energy.

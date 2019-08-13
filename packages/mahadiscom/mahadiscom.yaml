@@ -58,8 +58,47 @@ homeassistant:
       friendly_name: Bill date
       icon: mdi:calendar   
 
-sensor:
+automation:
+  - alias: Electricity bill generated for Ambegaon
+    id: '94123674892123'
+    trigger:
+      platform: state
+      entity_id: sensor.mahadiscom_170020034907_billmonth
+    condition:
+      condition: template
+      value_template: "{{ states.sensor.mahadiscom_170020034907_billmonth.state != 'unknown' }}"
+    action:
+    - service: notify.slack
+      data:
+        title: Electricity bill generated for Ambegaon home
+        message: 'Electricity bill generated for Ambegaon - Bill month :  {{  states("sensor.mahadiscom_170020034907_billmonth") }}
+                  Bill date:  {{  states("sensor.mahadiscom_170020034907_billdate")}} 
+                  Consumption :  {{ states("sensor.mahadiscom_170020034907_consumptionunits")}} 
+                  Bill amount:  {{  states("sensor.mahadiscom_170020034907_billamount") }}
+                  Due date:  {{  states("sensor.mahadiscom_170020034907_duedate") }}
+                  Due date:  {{  states("sensor.mahadiscom_170020034907_promptpaymentdate") }}'
 
+  - alias: Electricity bill generated for Bhadole
+    id: '21321394123674892123123213'
+    trigger:
+      platform: state
+      entity_id: sensor.mahadiscom_250410062255_billmonth
+    condition:
+      condition: template
+      value_template: "{{ states.sensor.mahadiscom_250410062255_billmonth.state != 'unknown' }}"
+    action:
+    - service: notify.slack
+      data:
+        title: Electricity bill generated for Bhadole home
+        message: 'Electricity bill generated for Bhadole home - Bill month :  {{  states("sensor.mahadiscom_250410062255_billmonth") }}
+                  Bill date:  {{  states("sensor.mahadiscom_250410062255_billdate")}} 
+                  Consumption :  {{ states("sensor.mahadiscom_250410062255_consumptionunits")}} 
+                  Bill amount:  {{  states("sensor.mahadiscom_250410062255_billamount") }}
+                  Due date:  {{  states("sensor.mahadiscom_250410062255_duedate") }}
+                  Due date:  {{  states("sensor.mahadiscom_250410062255_promptpaymentdate") }}'
+
+
+sensor:
   - platform: mahadiscom
     ConsumerNo: 170020034907 # Ambegaon
     BuNumber: 4637
