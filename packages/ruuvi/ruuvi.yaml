@@ -50,6 +50,10 @@ group:
 #         mac: "F3:4B:FB:D9:F9:45"
 #       bed_room:
 #         mac: "F6:96:33:93:F5:CB"
+<<<<<<< HEAD
+=======
+
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
 
 
 # sensor:

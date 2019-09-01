@@ -2,6 +2,50 @@
   purge_interval: 1
   purge_keep_days: 60
   db_url: !secret db_url
+<<<<<<< HEAD
+=======
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+      - group
+      - light
+      - script
+      - switch
+      - zone
+      - weather
+    entities:
+      - sun.sun
+      - sensor.date
+      - input_boolean.vacation
+      - sensor.ha_installed_version
+      - sensor.ha_current_version 
+      - sensor.processor_use 
+      - sensor.memory_free 
+      - sensor.disk_free
+      - sensor.disk_use 
+      - sensor.disk_use_percent 
+      - sensor.ipv4_address_wlan0 
+      - sensor.load_1m 
+      - sensor.load_5m 
+      - sensor.load_15m 
+      - sensor.lets_encrypt_expiration
+      - sensor.custom_card_tracker
+      - sensor.custom_component_tracker
+      - sensor.hemant_birthday_days2go
+      - sensor.kavita_birthday_days2go
+      - sensor.hemant_birthday
+      - sensor.kavita_birthday
+      - sensor.parth_birthday
+      - sensor.parth_birthday_days2go
+      - sensor.pranav_birthday
+      - sensor.pranav_birthday_days2go
+      - camera.cctv
+      - sensor.time
+      - sensor.date
+      - sensor.mngl_duedate
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
   include:
     entities:
       - sensor.living_room_temperature
@@ -42,7 +86,10 @@
       - sensor.hemant_sleep
       - sensor.hemant_sleep_bedtime
       - sensor.hemant_sleep_wake_up_time
+<<<<<<< HEAD
 
+=======
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
       - sensor.kavita_steps
       - sensor.kavita_distance
       - sensor.kavita_move_time
@@ -51,4 +98,14 @@
       - sensor.kavita_height
       - sensor.kavita_sleep
       - sensor.kavita_sleep_bedtime
+<<<<<<< HEAD
       - sensor.kavita_sleep_wake_up_time
+=======
+      - sensor.kavita_sleep_deep_sleep
+      - sensor.kavita_sleep_light_sleep
+      - sensor.kavita_sleep_wake_up_time
+      - sensor.hemant_battery
+      - sensor.kavita_battery
+    domains:
+      - sensor
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca

@@ -2,10 +2,17 @@ homeassistant:
   customize:
     device_tracker.google_maps_103126718451005809779:
       friendly_name: Kavita
+<<<<<<< HEAD
       entity_picture: !secret kavita_picture
     device_tracker.google_maps_115135655450274737088:
       friendly_name: Hemant
       entity_picture:  !secret hemant_picture
+=======
+      entity_picture: https://lh6.googleusercontent.com/-w2o91xokRMY/AAAAAAAAAAI/AAAAAAAAALc/CzfY60zSY1g/photo.jpg
+    device_tracker.google_maps_115135655450274737088:
+      friendly_name: Hemant
+      entity_picture: https://lh4.googleusercontent.com/-4RPqLKZcZoM/AAAAAAAAAAI/AAAAAAAAGG0/SwTihr6JHtw/photo.jpg
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
 
 group:
   family:
@@ -18,6 +25,7 @@ group:
 device_tracker:
   - platform: google_maps
     username: !secret device_tracker_google_account
+<<<<<<< HEAD
     scan_interval: 60
 
 
@@ -38,6 +46,8 @@ sensor:
     start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
     end: '{{ now() }}'
 
+=======
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
 
 
 automation:

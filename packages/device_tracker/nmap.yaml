@@ -1,0 +1,13 @@
+# homeassistant:
+#   customize:
+#     device_tracker.74_23_44_35_ba_7d:
+#       friendly_name: Kavita
+#     device_tracker.d4_63_c6_75_d8_9b:
+#       friendly_name: Hemant
+
+
+# device_tracker:
+#   - platform: nmap_tracker
+#     hosts:
+#       - 192.168.1.102
+#       - 192.168.1.120

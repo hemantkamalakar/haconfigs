@@ -148,7 +148,11 @@ automation:
   - alias: Motivate to walk afternoon
     trigger:
       platform: time
+<<<<<<< HEAD
       at: '13:00:00'
+=======
+      at: '14:00:00'
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
     condition:
       condition: numeric_state
       entity_id: sensor.hemant_steps

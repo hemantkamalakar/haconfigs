@@ -21,6 +21,7 @@ sensor:
           {% else %}
             Not Charging
           {% endif %}    
+<<<<<<< HEAD
 
 
   - platform: template
@@ -52,6 +53,24 @@ automation:
       data_template:
         message: Hemant's mobile battery is {{ states('sensor.hemant_battery') }} % (almost full). Please unplug the charger to save energy.
 
+=======
+      
+automation:
+  - id: '1234567890123'
+    alias: Hemant mobile battery full notification
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.hemant_battery
+      above: 98
+    condition:
+      condition: template
+      value_template: "{% if is_state('sensor.batterycharging_hemant_android', 'Charging') %}true{% endif %}"
+    action:
+      service: notify.slack
+      data_template:
+        message: Hemant's mobile battery is {{ state_attr('sensor.hemant_battery', 'battery_level') }} % (almost full). Please unplug the charger to save energy.
+
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
   - id: '981234764134'
     alias: Kavita mobile battery full notification
     trigger:
@@ -64,4 +83,8 @@ automation:
     action:
       service: notify.slack
       data_template:
+<<<<<<< HEAD
         message: Kavita's mobile battery is {{ states('sensor.kavita_battery') }} % (almost full). Please unplug the charger to save energy.
+=======
+        message: Kavita's mobile battery is {{ state_attr('sensor.kavita_battery', 'battery_level') }} % (almost full). Please unplug the charger to save energy.
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca

@@ -66,6 +66,7 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 notify: !include notification.yaml
 zone: !include zones.yaml
+<<<<<<< HEAD
 lovelace:
   mode: yaml
 
@@ -75,3 +76,10 @@ lovelace:
 #   sidepanel_icon: True
 #   python_script: True
 #   theme: True
+=======
+
+   
+
+
+
+>>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
