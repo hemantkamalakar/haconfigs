@@ -1,0 +1,33 @@
+title: Master bedroom
+icon: mdi:hotel
+path: masterbed
+cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.master_bed_room_temperature
+        name: Temperature
+        line_color: '#2980b9'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.master_bed_room_humidity
+        name: Humidity
+        line_color: '#b58e31'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.master_bed_room_pressure
+        name: Air pressure
+        line_color: '#b93829'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.master_bed_room_battery
+        name: Battery
+        line_color: '#b93829'
+        line_width: 6  
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.bed_lights
+            name: Bed Lights

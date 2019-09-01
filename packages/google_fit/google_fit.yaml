@@ -52,6 +52,8 @@ homeassistant:
       icon: mdi:white-balance-sunny
     sensor.kavita_steps:
       friendly_name: Steps    
+    sensor.hemant_heartrate:
+      friendly_name: Heart rate     
 
 sensor:  
   - platform: google_fit
@@ -91,22 +93,80 @@ sensor:
 
   - platform: template
     sensors:
-      hemant_sleep_deep_sleep:
+      kavita_sleep_bedtime:
         value_template: >-
-            {%- if states.sensor.hemant_sleep.attributes.deep_sleep %}
-                {{ states.sensor.hemant_sleep.attributes.deep_sleep }}
+            {%- if states.sensor.kavita_sleep.attributes.bed_time %}
+                {{ states.sensor.kavita_sleep.attributes.bed_time }}
             {% else %}
-                {{ states.sensor.hemant_sleep.attributes.deep_sleep }}
-            {%- endif %}                       
+                {{ states.sensor.kavita_sleep.attributes.bed_time }}
+            {%- endif %}
+
 
   - platform: template
     sensors:
-      hemant_sleep_light_sleep:
+      kavita_sleep_wake_up_time:
         value_template: >-
-            {%- if states.sensor.hemant_sleep.attributes.light_sleep %}
-                {{ states.sensor.hemant_sleep.attributes.light_sleep }}
+            {%- if states.sensor.kavita_sleep.attributes.wake_up_time %}
+                {{ states.sensor.kavita_sleep.attributes.wake_up_time }}
             {% else %}
-                {{ states.sensor.hemant_sleep.attributes.light_sleep }}
-            {%- endif %}                   
+                {{ states.sensor.kavita_sleep.attributes.wake_up_time }}
+            {%- endif %}           
+
+  # - platform: template
+  #   sensors:
+  #     hemant_sleep_deep_sleep:
+  #       value_template: >-
+  #           {%- if states.sensor.hemant_sleep.attributes.deep_sleep %}
+  #               {{ states.sensor.hemant_sleep.attributes.deep_sleep }}
+  #           {% else %}
+  #               {{ states.sensor.hemant_sleep.attributes.deep_sleep }}
+  #           {%- endif %}                       
+
+  # - platform: template
+  #   sensors:
+  #     hemant_sleep_light_sleep:
+  #       value_template: >-
+  #           {%- if states.sensor.hemant_sleep.attributes.light_sleep %}
+  #               {{ states.sensor.hemant_sleep.attributes.light_sleep }}
+  #           {% else %}
+  #               {{ states.sensor.hemant_sleep.attributes.light_sleep }}
+  #           {%- endif %}                   
 
 
+# automation:
+
+# - alias: Notify sleep data
+#   trigger:
+#     platform: state
+#     entity_id: sensor.hemant_sleep
+#   action:
+#   - service: notify.slack
+#     data_template:
+#       message: 'Slept :  {{ states.sensor.hemant_sleep.state }} '
+
+automation:
+  - alias: Motivate to walk afternoon
+    trigger:
+      platform: time
+      at: '13:00:00'
+    condition:
+      condition: numeric_state
+      entity_id: sensor.hemant_steps
+      below: 7500 
+    action:
+      service: notify.slack
+      data_template:
+        message: You have only walked {{ states.sensor.hemant_steps.state }} steps today. You should start walking now to achive your steps goal.
+
+  - alias: Motivate to walk during evening
+    trigger:
+      platform: time
+      at: '16:00:00'
+    condition:
+      condition: numeric_state
+      entity_id: sensor.hemant_steps
+      below: 10000 
+    action:
+      service: notify.slack
+      data_template:
+        message: Hey! You have only walked {{ states.sensor.hemant_steps.state }} steps today. You should start walking now to achive your steps goal. Only few hours left!!!       

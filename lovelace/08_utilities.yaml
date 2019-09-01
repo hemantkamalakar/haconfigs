@@ -1,0 +1,48 @@
+title: Utilities
+path: utilities
+icon: 'mdi:settings'
+cards:
+    
+    - entities:
+        - entity: sensor.mahadiscom_170020034907_billmonth
+        - entity: sensor.mahadiscom_170020034907_consumptionunits
+        - entity: sensor.mahadiscom_170020034907_billamount
+        - entity: sensor.mahadiscom_170020034907_duedate
+        - entity: sensor.mahadiscom_170020034907_promptpaymentdate
+        - entity: sensor.mahadiscom_170020034907_billdate
+      show_header_toggle: false
+      title: MAHADISCOM (Ambegaon)
+      type: entities
+
+    - entities:
+        - entity: sensor.mahadiscom_170850116400_billmonth
+        - entity: sensor.mahadiscom_170850116400_consumptionunits
+        - entity: sensor.mahadiscom_170850116400_billamount
+        - entity: sensor.mahadiscom_170850116400_duedate
+        - entity: sensor.mahadiscom_170850116400_promptpaymentdate
+        - entity: sensor.mahadiscom_170850116400_billdate
+      show_header_toggle: false
+      title: MAHADISCOM (Nanded city)
+      type: entities
+
+    - entities:
+        - entity: sensor.mahadiscom_250410062255_billmonth
+        - entity: sensor.mahadiscom_250410062255_consumptionunits
+        - entity: sensor.mahadiscom_250410062255_billamount
+        - entity: sensor.mahadiscom_250410062255_duedate
+        - entity: sensor.mahadiscom_250410062255_promptpaymentdate
+        - entity: sensor.mahadiscom_250410062255_billdate
+      show_header_toggle: false
+      title: MAHADISCOM (Bhadole)
+      type: entities
+
+
+    - entities:
+        - entity: sensor.mngl_billno
+        - entity: sensor.mngl_amount
+        - entity: sensor.mngl_billdate
+        - entity: sensor.mngl_billduedate
+      show_header_toggle: false
+      title: MNGL bill
+      type: entities
+

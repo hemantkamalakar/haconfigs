@@ -1,0 +1,21 @@
+
+- cal_id: family17012443743999257539@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: true
+
+- cal_id: hemant.kamalakar@gmail.com
+  entities:
+  - device_id: hemant_kamalakar_gmail_com
+    ignore_availability: true
+    name: Hemant
+    track: true
+
+- cal_id: en.indian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_india
+    ignore_availability: true
+    name: Holidays in India
+    track: true

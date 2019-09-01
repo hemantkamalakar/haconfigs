@@ -1,0 +1,30 @@
+title: Kitchen
+icon: mdi:silverware-variant
+path: kitchen
+cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.kitchen_temperature
+        name: Temperature
+        line_color: '#2980b9'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.kitchen_humidity
+        name: Humidity
+        line_color: '#b58e31'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.kitchen_pressure
+        name: Air pressure
+        line_color: '#b93829'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.kitchen_gas_sensor
+        name: Gas
+        line_color: '#b93829'
+        line_width: 6  
+
+

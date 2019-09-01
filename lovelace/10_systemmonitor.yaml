@@ -1,0 +1,135 @@
+title: System monitor
+path: systemmonitor
+icon: 'mdi:home-assistant'
+cards:
+    
+    - entities:
+        - entity: sensor.ha_installed_version
+        - entity: sensor.ha_current_version
+        - entity: sensor.ha_last_restart
+        - entity: sensor.last_boot
+        - entity: sensor.external_ip
+        - entity: sensor.cpu_temperature
+        - entity: sensor.processor_use
+        - entity: sensor.memory_use_percent
+        - entity: sensor.memory_free
+        - entity: sensor.disk_use
+        - entity: sensor.disk_use_percent
+        - entity: sensor.disk_free
+        - entity: sensor.load_1m
+      show_header_toggle: false
+      title: System Monitor
+      type: entities
+
+    - type: vertical-stack
+      title: System
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: custom:mini-graph-card
+              entities:
+                - sensor.processor_use
+              name: CPU
+              line_color: '#2980b9'
+              line_width: 2
+              hours_to_show: 1
+        - type: vertical-stack
+          cards:
+            - type: custom:bar-card
+              entity: sensor.disk_use_percent
+              title: HDD
+              title_position: inside
+              align: split
+              show_icon: true
+              color: '#00ba6a'
+            - type: custom:bar-card
+              entity: sensor.memory_use_percent
+              title: RAM
+              title_position: inside
+              align: split
+              show_icon: true
+
+
+    # - entities:
+    #     - entity: sensor.speedtest_download
+    #     - entity: sensor.speedtest_upload
+    #     - entity: sensor.speedtest_ping
+    #   show_header_toggle: false
+    #   title: Internet status
+    #   type: glance
+
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.speedtest_download
+      name: Download
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:download-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.speedtest_upload
+      name: Upload
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:upload-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.speedtest_ping
+      name: Ping
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:server-network
+
+    - entities:
+        - entity: sensor.pi_hole_ads_blocked_today
+        - entity: sensor.pi_hole_ads_percentage_blocked_today
+        - entity: sensor.pi_hole_dns_queries_today
+        - entity: sensor.pi_hole_domains_blocked
+        - entity: sensor.pi_hole_dns_queries_cached
+        - entity: sensor.pi_hole_dns_queries_forwarded
+        - entity: sensor.pi_hole_dns_unique_clients
+        - entity: sensor.pi_hole_dns_unique_domains
+      show_header_toggle: false
+      title: Pi hole
+      type: entities
+
+    - type: vertical-stack
+      title: Pi-Hole
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: custom:mini-graph-card
+              entities:
+                - sensor.pi_hole_ads_blocked_today
+              name: Ads Blocked Today
+              line_color: '#2980b9'
+              line_width: 4
+              hours_to_show: 24
+            - type: custom:mini-graph-card
+              entities:
+                - sensor.pi_hole_ads_percentage_blocked_today
+              name: Percentage Blocked
+              line_color: '#2980b9'
+              line_width: 4
+              hours_to_show: 24
+        - type: vertical-stack
+          cards:
+            - type: custom:bar-card
+              entity: sensor.pi_hole_dns_queries_today
+              title: DNS Queries Today
+              title_position: inside
+              align: split
+              show_icon: true
+              color: '#00ba6a'
+              max: '30000'
+            - type: custom:bar-card
+              entity: sensor.pi_hole_domains_blocked
+              title: Domains Blocked
+              title_position: inside
+              align: split
+              show_icon: true
+              max: '2000000'
+              icon: mdi:cancel      

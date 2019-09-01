@@ -5,21 +5,23 @@ group:
     name: TV
     view: yes
     entities:
-      - switch.tv
-      - sensor.current
-      - sensor.energy
-      - sensor.power_factor
-      - sensor.power
+      - switch.flour_mill
       - sensor.voltage
+      - sensor.current
+      - sensor.power
+      - sensor.apparent_power
+      - sensor.reactive_power
+      - sensor.power_factor
+      - sensor.energy
       - sensor.yesterday
       - sensor.total
 
 
 switch:
   - platform: mqtt
-    name: "TV"
-    state_topic: "stat/sonoff-pow-tv/POWER"
-    command_topic: "cmnd/sonoff-pow-tv/POWER"
+    name: "Flour mill"
+    state_topic: "stat/sonoff-pow/POWER"
+    command_topic: "cmnd/sonoff-pow/POWER"
     payload_on: "ON"
     payload_off: "OFF"
     state_on: "ON"
@@ -31,43 +33,56 @@ switch:
 
 sensor:
   - platform: mqtt
+    name: "Voltage"
+    state_topic: "tele/sonoff-pow/SENSOR"
+    value_template: "{{ value_json.ENERGY.Voltage }}"
+    unit_of_measurement: "V"
+
+  - platform: mqtt
     name: "Current"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    state_topic: "tele/sonoff-pow/SENSOR"
     value_template: "{{ value_json.ENERGY.Current }}"
     unit_of_measurement: "A"
-    
-  - platform: mqtt
-    name: "Energy"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
-    value_template: "{{ value_json.ENERGY.Today }}"
-    unit_of_measurement: "kWh"
-    
-  - platform: mqtt
-    name: "Power_Factor"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
-    value_template: "{{ value_json.ENERGY.Factor }}"
 
   - platform: mqtt
     name: "Power"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    state_topic: "tele/sonoff-pow/SENSOR"
     value_template: "{{ value_json.ENERGY.Power }}"
     unit_of_measurement: "W"
 
   - platform: mqtt
-    name: "Voltage"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
-    value_template: "{{ value_json.ENERGY.Voltage }}"
-    unit_of_measurement: "V"
+    name: "Apparent Power"
+    state_topic: "tele/sonoff-pow/SENSOR"
+    value_template: "{{ value_json.ENERGY.ApparentPower }}"
+    unit_of_measurement: "VA"
+  
+  - platform: mqtt
+    name: "Reactive Power"
+    state_topic: "tele/sonoff-pow/SENSOR"
+    value_template: "{{ value_json.ENERGY.ReactivePower }}"
+    unit_of_measurement: "VAr"
+
+  - platform: mqtt
+    name: "Power_Factor"
+    state_topic: "tele/sonoff-pow/SENSOR"
+    value_template: "{{ value_json.ENERGY.Factor }}"
+
+  - platform: mqtt
+    name: "Energy"
+    state_topic: "tele/sonoff-pow/SENSOR"
+    value_template: "{{ value_json.ENERGY.Today }}"
+    unit_of_measurement: "kWh"
     
+   
   - platform: mqtt
     name: "Yesterday"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    state_topic: "tele/sonoff-pow/SENSOR"
     value_template: "{{ value_json.ENERGY.Yesterday }}"
     unit_of_measurement: "kWh"
     
   - platform: mqtt
     name: "Total"
-    state_topic: "tele/sonoff-pow-tv/SENSOR"
+    state_topic: "tele/sonoff-pow/SENSOR"
     value_template: "{{ value_json.ENERGY.Total }}"
     unit_of_measurement: "kWh"
 

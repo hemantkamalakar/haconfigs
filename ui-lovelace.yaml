@@ -1,0 +1,35 @@
+resources:
+  - url: /local/atomic_calendar.js
+    type: module
+  - url: /local/mini-graph-card-bundle.js?v=0.5.0
+    type: module
+  - url: /local/mini-media-player-bundle.js?v=1.2.2
+    type: module
+  - url: /local/bar-card.js?v=1.0.0
+    type: js  
+  - url: /local/battery-entity.js?v=0.1
+    type: module  
+  - url: /local/monster-card.js
+    type: module     
+  - url: /local/vertical-stack-in-card.js?v=0.1.3
+    type: js 
+   
+title: Home Assistant
+views:
+  - !include lovelace/00_home_view.yaml
+  - !include lovelace/01_living_room.yaml
+  - !include lovelace/02_kitchen.yaml
+  - !include lovelace/03_master_bedroom.yaml
+  - !include lovelace/03a_child_bedroom.yaml
+  - !include lovelace/04_livetracking.yaml
+  - !include lovelace/05_weather.yaml
+  - !include lovelace/06_doorbell.yaml
+  - !include lovelace/07_calendar.yaml
+  - !include lovelace/08_utilities.yaml
+  - !include lovelace/09_fitness.yaml
+  - !include lovelace/10_systemmonitor.yaml
+  - !include lovelace/11_batteries.yaml
+  - !include lovelace/12_switches.yaml
+  - !include lovelace/13_automations.yaml
+  
+

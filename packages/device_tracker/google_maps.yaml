@@ -2,12 +2,10 @@ homeassistant:
   customize:
     device_tracker.google_maps_103126718451005809779:
       friendly_name: Kavita
+      entity_picture: !secret kavita_picture
     device_tracker.google_maps_115135655450274737088:
       friendly_name: Hemant
-    sensor.hemant_status:
-      entity_picture: https://lh4.googleusercontent.com/-4RPqLKZcZoM/AAAAAAAAAAI/AAAAAAAAGG0/SwTihr6JHtw/photo.jpg
-    sensor.kavita_status:
-      entity_picture: https://lh6.googleusercontent.com/-w2o91xokRMY/AAAAAAAAAAI/AAAAAAAAALc/CzfY60zSY1g/photo.jpg
+      entity_picture:  !secret hemant_picture
 
 group:
   family:
@@ -16,183 +14,60 @@ group:
     entities:
       - device_tracker.google_maps_103126718451005809779
       - device_tracker.google_maps_115135655450274737088
-  people_status:
-    name: People Status
-    entities:
-      - sensor.hemant_status
-      - sensor.kavita_status
 
 device_tracker:
   - platform: google_maps
     username: !secret device_tracker_google_account
-    password: !secret device_tracker_google_account_password
-    interval_seconds: 60
-    consider_home: 60
+    scan_interval: 60
+
 
 sensor:
-  - platform: template
-    sensors:
-      hemant_status:
-        value_template: '{{ states.input_select.hemant_status_dropdown.state }}'
-        friendly_name: 'Hemant'
-      kavita_status:
-        value_template: '{{ states.input_select.kavita_status_dropdown.state }}'
-        friendly_name: 'Kavita'
+  - platform: history_stats
+    name: Time spent at Home
+    entity_id: device_tracker.google_maps_115135655450274737088
+    state: 'home'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+ 
+  - platform: history_stats
+    name: Time spent away from home
+    entity_id: device_tracker.google_maps_115135655450274737088
+    state: 'not_home'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
 
-input_select:
-  hemant_status_dropdown:
-    name: Hemant
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-    initial: Home
 
-  kavita_status_dropdown:
-    name: Kavita
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-    initial: Home  
 
 automation:
-  - alias: Mark person as just arrived
-    trigger:
-      - platform: state
-        entity_id: device_tracker.google_maps_115135655450274737088
-        from: 'not_home'
-        to: 'home'
-      - platform: state
-        entity_id: device_tracker.google_maps_103126718451005809779
-        from: 'not_home'
-        to: 'home'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'device_tracker.google_maps_115135655450274737088' %}
-              input_select.hemant_status_dropdown
-            {% else %}
-              input_select.kavita_status_dropdown
-            {% endif %}
-          option: Just Arrived
-      - service: notify.slack
-        data_template:
-          message: >
-             {% if trigger.entity_id == 'device_tracker.google_maps_115135655450274737088' %}
-              Hemant just arrived at home.
-             {% else %}
-              Kavita just arrived at home.
-             {% endif %}
-      - service: tts.google_say
-        data_template: 
-          message: >
-             {% if trigger.entity_id == 'device_tracker.google_maps_115135655450274737088' %}
-              Hemant just arrived at home.
-             {% else %}
-              Kavita just arrived at home.
-             {% endif %}
+- alias: Announce Hemant's arrival
+  trigger:
+    platform: state
+    entity_id: person.hemant
+    to: 'home'
+    for:
+      seconds: 30
+  action:
+    - service: notify.slack
+      data:
+        message: Hemant just arrived at home.
+    - service: tts.google_say
+      data: 
+        message: Hemant just arrived at home.
 
 
-  - alias: Mark person as home
-    trigger:
-      - platform: state
-        entity_id: input_select.hemant_status_dropdown
-        to: 'Just Arrived'
-        for:
-          minutes: 10
-      - platform: state
-        entity_id: input_select.kavita_status_dropdown
-        to: 'Just Arrived'
-        for:
-          minutes: 10
-      - platform: state
-        entity_id: input_select.hemant_status_dropdown
-        from: 'Just Left'
-        to: 'Just Arrived'
-      - platform: state
-        entity_id: input_select.kavita_status_dropdown
-        from: 'Just Left'
-        to: 'Just Arrived'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'input_select.hemant_status_dropdown' %}
-              input_select.hemant_status_dropdown
-            {% else %}
-              input_select.kavita_status_dropdown
-            {% endif %}
-          option: Home
-
-  - alias: Mark person as just left
-    trigger:
-      - platform: state
-        entity_id: device_tracker.google_maps_115135655450274737088
-        from: 'home'
-        to: 'not_home'
-      - platform: state
-        entity_id: device_tracker.google_maps_103126718451005809779
-        from: 'home'
-        to: 'not_home'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'device_tracker.google_maps_115135655450274737088' %}
-              input_select.hemant_status_dropdown
-            {% else %}
-              input_select.kavita_status_dropdown
-            {% endif %}
-          option: Just Left
-
-  - alias: Mark person as away
-    trigger:
-      - platform: state
-        entity_id: input_select.hemant_status_dropdown
-        to: 'Just Left'
-        for:
-          minutes: 10
-      - platform: state
-        entity_id: input_select.kavita_status_dropdown
-        to: 'Just Left'
-        for:
-          minutes: 10
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'input_select.hemant_status_dropdown' %}
-              input_select.hemant_status_dropdown
-            {% else %}
-              input_select.kavita_status_dropdown
-            {% endif %}
-          option: Away
-
-  - alias: Mark person as extended away
-    trigger:
-      - platform: state
-        entity_id: input_select.hemant_status_dropdown
-        to: 'Away'
-        for:
-          hours: 24
-      - platform: state
-        entity_id: input_select.kavita_status_dropdown
-        to: 'Away'
-        for:
-          hours: 24
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'input_select.hemant_status_dropdown' %}
-              input_select.hemant_status_dropdown
-            {% else %}
-              input_select.kavita_status_dropdown
-            {% endif %}
-          option: Extended Away            
+- alias: Announce Kavita's arrival
+  trigger:
+    platform: state
+    entity_id: person.kavita
+    to: 'home'
+    for:
+      seconds: 30
+  action:
+    - service: notify.slack
+      data:
+        message: Kavita just arrived at home.
+    - service: tts.google_say
+      data: 
+        message: Kavita just arrived at home.        

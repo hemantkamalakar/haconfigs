@@ -1,0 +1,32 @@
+title: Living room
+icon: mdi:sofa
+path: living_room
+cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.living_room_temperature
+        name: Temperature
+        line_color: '#2980b9'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.living_room_humidity
+        name: Humidity
+        line_color: '#b58e31'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.living_room_pressure
+        name: Air pressure
+        line_color: '#b93829'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.living_room_battery
+        name: Battery
+        line_color: '#b93829'
+        line_width: 6  
+
+      - type: custom:mini-media-player
+        entity: media_player.google_home
+

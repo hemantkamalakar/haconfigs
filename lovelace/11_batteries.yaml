@@ -1,0 +1,25 @@
+title: Batteries
+path: batteries
+icon: 'mdi:battery'
+cards:
+    - entities:
+        # - entity: sensor.hemant_battery
+        # - entity: sensor.kavita_battery
+        # - entity: sensor.living_room_ruuvi_battery
+        # - entity: sensor.bed_room_ruuvi_battery
+        - entity: sensor.batterycharging_hemant_android
+        - entity: sensor.batterycharging_kavita_android
+      show_header_toggle: false
+      title: Batteries
+      type: glance
+
+
+    - type: custom:battery-entity
+      entity: sensor.hemant_battery
+    - type: custom:battery-entity
+      entity: sensor.kavita_battery
+    - type: custom:battery-entity
+      entity: sensor.living_room_battery
+    - type: custom:battery-entity
+      entity: sensor.master_bed_room_battery
+    #     - entity: sensor.batterycharging_kavita_android

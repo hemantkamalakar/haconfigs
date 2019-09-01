@@ -1,0 +1,92 @@
+homeassistant:
+
+camera:
+  - platform: generic
+    name: doorcamera
+    still_image_url: http://192.168.1.115:8765/picture/1/current/
+
+  - platform: local_file
+    name: local_file
+    file_path: /config/www/doorbell.jpg   
+
+image_processing:
+  - platform: facebox
+    ip_address: 192.168.1.200
+    port: 8080
+    source:
+      - entity_id: camera.local_file
+        name: facebox
+
+sensor:
+  - platform: template
+    sensors:
+      facebox_detection:
+        friendly_name: 'Facebox Detection'
+        value_template: >-
+          {% set faces = state_attr('image_processing.facebox', 'matched_faces') %}
+          {% if None != faces %}
+            {% if faces | list | count == 0 %}
+              Clear
+             {% else %}
+            {%- for face in faces | list %}{%- if loop.first %}{% elif loop.last %} and {% else %}, {% endif -%}{{ face }}{%- endfor %}
+            {% endif %}
+          {% endif %}
+
+
+binary_sensor:
+  - platform: mqtt
+    name: "Doorbell button"
+    state_topic: "smarthome/input/doorbell"
+    payload_on: "ON"
+    payload_off: "OFF"
+    availability_topic: "smarthome/status"
+    payload_available: "running"
+    payload_not_available: "stopped"
+    qos: 0
+    device_class: light
+    value_template: '{{ value }}'
+
+
+automation:
+- id: facebox_announcement
+  alias: 'Doorbell Announcement'
+  initial_state: on
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.doorbell_button
+    to: 'on'
+  action:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.google_home
+      volume_level: 0.9   
+  - service: media_player.play_media 
+    data_template:                 
+      entity_id: media_player.google_home            
+      media_content_id: http://192.168.1.200/local/dingdong.mp3
+      media_content_type: 'audio/mp3'   
+  - delay: 00:00:02
+  - service: camera.snapshot
+    data:
+      entity_id: camera.doorcamera
+      filename: '/config/www/doorbell.jpg'
+  - delay: 00:00:01
+  - service: image_processing.scan
+    data: 
+      entity_id: image_processing.facebox
+  - delay: 00:00:02
+
+  - service_template: '{% if states.sensor.facebox_detection.state != "Unknown" %} tts.google_say {% endif %}'
+    data_template:
+      entity_id: media_player.google_home
+      message: '{% if states.sensor.facebox_detection.state != "Clear" %}    {{  states.sensor.facebox_detection.state }} is at the door {% else %} Someone is at the door. {% endif %}' 
+  - service: notify.slack
+    data:
+      title: Doorbell notification
+      message:  '{% if states.sensor.facebox_detection.state != "Clear" %}    {{  states.sensor.facebox_detection.state }} is at the door {% else %} Someone is at the door. {% endif %}' 
+      data:
+        file:
+          path: /config/www/doorbell.jpg
+
+
+

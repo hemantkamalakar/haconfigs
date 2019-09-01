@@ -1,0 +1,12 @@
+title: Weather
+icon: mdi:weather-sunny
+path: weather
+cards:
+    - entity: weather.dark_sky
+      name: Outside weather
+      type: weather-forecast
+    - entities:
+        - entity: sensor.waqi_katraj_pune_pune_india
+      show_header_toggle: false
+      title: Air quality index
+      type: entities  

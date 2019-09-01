@@ -1,0 +1,90 @@
+title: Switches
+path: switches
+icon: 'mdi:flash'
+cards:
+    - entities:
+        - entity: switch.flour_mill
+        - entity: switch.kitchen
+        - entity: switch.livingroom
+        - entity: switch.masterbedroom
+        - entity: switch.washroom
+      show_header_toggle: false
+      title: Switches
+      type: entities
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.voltage
+      name: Voltage
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:download-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.current
+      name: Current
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:upload-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.power
+      name: Power
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:server-network
+
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.apparent_power
+      name: Apparent power
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:download-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.reactive_power
+      name: Reactive power
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:upload-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.power_factor
+      name: Power factor
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:server-network
+
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.energy
+      name: Energy
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:download-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.yesterday
+      name: Yesterday
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:upload-network
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.total
+      name: Total
+      line_color: '#2980b9'
+      line_width: 6
+      hours_to_show: 24
+      icon: mdi:server-network
+
+
+   

@@ -1,0 +1,34 @@
+title: Child bedroom
+icon: mdi:face
+path: childbedroom
+cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.sonoff_sc_temperature
+        name: Temperature
+        line_color: '#2980b9'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.sonoff_sc_humidity
+        name: Humidity
+        line_color: '#b58e31'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.sonoff_sc_air_quality
+        name: Air quality
+        line_color: '#b93829'
+        line_width: 6
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.sonoff_sc_light
+        name: Light
+        line_color: '#b93829'
+        line_width: 6  
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.sonoff_sc_noise
+        name: Noise
+        line_color: '#b93829'
+        line_width: 6     

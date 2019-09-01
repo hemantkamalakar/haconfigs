@@ -1,0 +1,332 @@
+title: Home
+icon: mdi:home-automation
+path: default_view
+cards:
+#  Weather 
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: vertical-stack
+            cards: 
+                  - entities:
+                      - entity: sun.sun
+                      - entity: sensor.sunrise_time
+                      - entity: sensor.sunset_time
+                      - entity: sensor.date
+                      - entity: sensor.time
+                    show_header_toggle: false
+                    type: entities
+                  - entity: weather.dark_sky
+                    name: Outside weather
+                    type: weather-forecast
+                  - entities:
+                      - entity: sensor.waqi_katraj_pune_pune_india
+                    show_header_toggle: false
+                    title: Air quality index
+                    type: entities  
+#  Weather 
+
+# Family
+
+      - type: custom:vertical-stack-in-card
+        title: Family
+        cards:
+          - type: vertical-stack
+            cards: 
+                  - entities:
+                      - entity: device_tracker.google_maps_103126718451005809779
+                      - entity: device_tracker.google_maps_115135655450274737088
+                    type: map
+                  - type: custom:monster-card
+                    card:
+                      type: glance
+                    filter:
+                      include:
+                        - domain: device_tracker
+                          options:
+                            secondary_info: last-changed
+      
+                  - entities:
+                      - entity: input_text.hemant_birthday_days2go
+                      - entity: input_text.kavita_birthday_days2go
+                      - entity: input_text.pranav_birthday_days2go
+                      - entity: input_text.parth_birthday_days2go
+                    show_icon: true
+                    show_name: true
+                    show_state: true
+                    title: Birthdays
+                    type: glance
+# Family
+
+# Google fit
+      - type: custom:vertical-stack-in-card
+        title: Google fit
+        cards:
+              - entities:
+                  - entity: sensor.hemant_steps
+                  - entity: sensor.hemant_distance
+                  - entity: sensor.hemant_calories
+                  - entity: sensor.hemant_move_time
+                  - entity: sensor.hemant_weight
+                  - entity: sensor.hemant_height
+                  - entity: sensor.hemant_sleep_bedtime
+                  - entity: sensor.hemant_sleep_wake_up_time
+                  - entity: sensor.hemant_sleep
+                  - entity: sensor.hemant_heartrate
+                type: entities  
+                title: Hemant
+                show_header_toggle: false
+              - entities:
+                  - entity: sensor.kavita_steps
+                  - entity: sensor.kavita_move_time
+                  - entity: sensor.kavita_distance
+                  - entity: sensor.kavita_calories
+                  - entity: sensor.kavita_height
+                  - entity: sensor.kavita_weight
+                  - entity: sensor.kavita_sleep
+                  - entity: sensor.kavita_sleep_bedtime
+                  - entity: sensor.kavita_sleep_wake_up_time
+                type: entities  
+                title: Kavita
+                show_header_toggle: false
+# Google fit
+
+# Flour mill
+      - type: custom:vertical-stack-in-card
+        title: Flour mill
+        cards:
+          - type: entity-button
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+            show_icon: true
+            show_name: true
+            entity: switch.flour_mill
+            icon: 'mdi:image-filter-vintage'
+          - type: vertical-stack
+            cards: 
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.voltage
+                    name: Voltage
+                    line_color: '#2980b9'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.current
+                    name: Current
+                    line_color: '#b58e31'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.power
+                    name: Power
+                    line_color: '#b93829'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.apparent_power
+                    name: Apparent power
+                    line_color: '#b93829'
+                    line_width: 6 
+
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.reactive_power
+                    name: Reactive power
+                    line_color: '#2980b9'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.power_factor
+                    name: Power factor
+                    line_color: '#b58e31'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.energy
+                    name: Energy
+                    line_color: '#b93829'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.yesterday
+                    name: Yesterday
+                    line_color: '#b93829'
+                    line_width: 6   
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.total
+                    name: Total
+                    show:
+                      graph: bar
+                    # line_color: '#b93829'
+                    # line_width: 6      
+# Flour mill
+
+# Living room
+      - type: custom:vertical-stack-in-card
+        title: Living room
+        cards:
+          - type: vertical-stack
+            cards: 
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.living_room_temperature
+                    name: Temperature
+                    line_color: '#2980b9'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.living_room_humidity
+                    name: Humidity
+                    line_color: '#b58e31'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.living_room_pressure
+                    name: Air pressure
+                    line_color: '#b93829'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.living_room_battery
+                    name: Battery
+                    line_color: '#b93829'
+                    line_width: 6  
+# Living room
+
+# Master bed room
+      - type: custom:vertical-stack-in-card
+        title: Master bed room
+        cards:
+          - type: vertical-stack
+            cards: 
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.master_bed_room_temperature
+                    name: Temperature
+                    line_color: '#2980b9'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.master_bed_room_humidity
+                    name: Humidity
+                    line_color: '#b58e31'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.master_bed_room_pressure
+                    name: Air pressure
+                    line_color: '#b93829'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.master_bed_room_battery
+                    name: Battery
+                    line_color: '#b93829'
+                    line_width: 6  
+                  - type: horizontal-stack
+                    cards:
+                      - type: light
+                        entity: light.bed_lights
+                        name: Bed Lights
+# Master bed room
+
+# Kitchen
+      - type: custom:vertical-stack-in-card
+        title: Kitchen
+        cards:
+          - type: vertical-stack
+            cards: 
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.kitchen_gas_sensor
+                    name: Gas
+                    line_color: '#b93829'
+                    line_width: 6  
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.kitchen_temperature
+                    name: Temperature
+                    line_color: '#2980b9'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.kitchen_humidity
+                    name: Humidity
+                    line_color: '#b58e31'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.kitchen_pressure
+                    name: Air pressure
+                    line_color: '#b93829'
+                    line_width: 6
+# Kitchen
+
+# Bed room
+      - type: custom:vertical-stack-in-card
+        title: Bed room
+        cards:
+          - type: vertical-stack
+            cards: 
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.sonoff_sc_temperature
+                    name: Temperature
+                    line_color: '#2980b9'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.sonoff_sc_humidity
+                    name: Humidity
+                    line_color: '#b58e31'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.sonoff_sc_air_quality
+                    name: Air quality
+                    line_color: '#b93829'
+                    line_width: 6
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.sonoff_sc_light
+                    name: Light
+                    line_color: '#b93829'
+                    line_width: 6  
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.sonoff_sc_noise
+                    name: Noise
+                    line_color: '#b93829'
+                    line_width: 6     
+# Bed room
+
+# Low Battery Devices
+      - type: custom:monster-card
+        show_empty: false
+        card:
+          type: glance
+          title: Low Battery Devices
+        filter:
+          include:
+            - entity_id: "*battery_level*"
+              state: '< 20'
+            - attributes:
+                battery: '< 20'
+            - attributes:
+                battery_level: '< 20'  
+# Low Battery Devices
+
+# Lights On
+      - type: custom:monster-card
+        show_empty: false
+        card:
+          type: entities
+          title: Lights On
+        filter:
+          include:
+            - domain: light
+              state: 'on'        
+# Lights On                

@@ -12,7 +12,6 @@ homeassistant:
   elevation: 560
   unit_system: metric
   time_zone: !secret time_zone
-  customize: !include customize.yaml
   whitelist_external_dirs:
     - /config
 
@@ -21,6 +20,10 @@ homeassistant:
 http:
   server_host: 192.168.1.200
   server_port: 80
+
+# duckdns:
+#   domain: !secret duckdns_domain
+#   access_token: !secret duckdns_access_token
 
 default_config:
 
@@ -53,27 +56,6 @@ cast:
   media_player:
     - host: 192.168.1.101
 
-mqtt:
-  broker: 192.168.1.200
-  port: 1883
-  username: !secret mqtt_user
-  password: !secret mqtt_password
-  client_id: smarthome
-  keepalive: 60
-  protocol: 3.1
-  birth_message:
-    topic: "tele/smarthome/LWT"
-    payload: "Online"
-    qos: 1
-    retain: true
-  will_message:
-    topic: "tele/smarthome/LWT"
-    payload: "Offline"
-    qos: 1
-    retain: true
-  discovery: true
-  discovery_prefix: homeassistant
-
 tts:
   - platform: google_translate
     service_name: google_say
@@ -84,15 +66,12 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 notify: !include notification.yaml
 zone: !include zones.yaml
+lovelace:
+  mode: yaml
 
-camera:
-  - platform: generic
-    name: doorcamera
-    still_image_url: http://192.168.1.115:8765/picture/1/current/
-
-weather:
-  - platform: darksky
-    api_key: !secret darksky
-    latitude: !secret latitude
-    longitude: !secret longitude
-    mode: hourly
+# hacs:
+#   token: 6005f207ea5a4c11b9d81e12aae9c14dd27b9785 
+#   sidepanel_title: True
+#   sidepanel_icon: True
+#   python_script: True
+#   theme: True

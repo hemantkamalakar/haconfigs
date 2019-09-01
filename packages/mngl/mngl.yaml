@@ -17,3 +17,21 @@ sensor:
   - platform: mngl
     mngl_dp_id: 50095766
     scan_interval: 86400
+
+automation:
+  - alias: MNGL bill generated 
+    id: '129412367489212312123213'
+    trigger:
+      platform: state
+      entity_id: sensor.mngl_billno
+    condition:
+      condition: template
+      value_template: "{{ states.sensor.mngl_billno.state != 'unknown' }}"
+    action:
+    - service: notify.slack
+      data:
+        title: MNGL bill generated
+        message: 'MNGL bill generated - Bill no :  {{  states("sensor.mngl_billno") }}
+                  Bill date:  {{  states("sensor.mngl_billdate")}} 
+                  Bill amount:  {{  states("sensor.mngl_amount") }}
+                  Bill Due date:  {{  states("sensor.mngl_billduedate") }}'    

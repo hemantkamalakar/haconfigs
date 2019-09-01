@@ -1,0 +1,44 @@
+title: Calendar
+path: calendar
+icon: 'mdi:calendar'
+cards:
+    - type: "custom:atomic-calendar"
+      title: "Calendar"
+      entities:
+      - entity: calendar.hemant_kamalakar_gmail_com
+      fullDayEventText: 'All day'
+      untilText: 'Until'
+      showColors: true
+      maxDaysToShow: 7
+      showLocation: true
+      showMonth: false
+      showCurrentEventLine: false
+      dateColor: black
+      dateSize: 90
+      timeColor: blue
+      timeSize: 90
+      titleColor: black
+      titleSize: 100
+      locationIconColor: 'rgb(230, 124, 115)'
+      locationLinkColor: black
+      locationTextSize: 90
+      dimFinishedEvents: true
+      finishedEventOpacity: 0.6
+      finishedEventFilter: 'grayscale(100%)'
+      dayWrapperLineColor: black
+      eventBarColor: blue
+      showProgressBar: true
+      progressBarColor: blue
+
+    - type: "custom:atomic-calendar"
+      title: "Calendar"
+      enableModeChange: true
+      defaultMode: 2
+      CalEventIcon1Filter: birthday
+      entities:
+      - entity: calendar.hemant_kamalakar_gmail_com
+        type: icon2
+      # - calendar.atomic7777
+      #   type: icon1,icon2
+      - entity: calendar.holidays_in_india
+        type: holiday     

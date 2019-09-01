@@ -1,0 +1,14 @@
+title: Deeobell
+icon: 'mdi:bell'
+path: doorbell
+cards:
+    - entity: camera.local_file
+      type: picture-entity
+    - entity: camera.doorcamera
+      type: picture-entity
+    - entities:
+        - entity: image_processing.facebox
+        - entity: binary_sensor.doorbell_button
+        - entity: sensor.facebox_detection
+        - entity: automation.doorbell_announcement
+      type: entities

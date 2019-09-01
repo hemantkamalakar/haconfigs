@@ -1,0 +1,35 @@
+title: Fitness
+path: fitness
+icon: 'mdi:walk'
+cards:
+    
+    - entities:
+        - entity: sensor.hemant_steps
+        - entity: sensor.hemant_distance
+        - entity: sensor.hemant_calories
+        - entity: sensor.hemant_move_time
+        - entity: sensor.hemant_weight
+        - entity: sensor.hemant_height
+        - entity: sensor.hemant_sleep_bedtime
+        - entity: sensor.hemant_sleep_wake_up_time
+        - entity: sensor.hemant_sleep
+        - entity: sensor.hemant_heartrate
+      show_header_toggle: false
+      title: Google fit (Hemant)
+      type: entities
+
+    - entities:
+          - entity: sensor.kavita_steps
+          - entity: sensor.kavita_move_time
+          - entity: sensor.kavita_distance
+          - entity: sensor.kavita_calories
+          - entity: sensor.kavita_height
+          - entity: sensor.kavita_weight
+          - entity: sensor.kavita_sleep
+          - entity: sensor.kavita_sleep_bedtime
+          - entity: sensor.kavita_sleep_wake_up_time
+      show_header_toggle: false
+      title: Google fit (Kavita)
+      type: entities
+
+    

@@ -1,0 +1,52 @@
+homeassistant:
+
+group:
+  Kitchen_sensors:
+    name: Kitchen sensors
+    view: yes
+    entities:
+      - sensor.kitchen_gas_sensor
+      - sensor.kitchen_temperature
+      - sensor.kitchen_humidity
+      - sensor.kitchen_pressure
+
+# automation:
+#   - id: '1029837465103928476'
+#     alias: Gas leakage in Kitchen
+#     trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.kitchen_gas_sensor
+#       above: 200
+#     action:
+#     - service: notify.slack
+#       data_template:
+#         message: Looks like gas is leaking in Kitchen, Please check.
+#     - service:
+#       data_template:
+#         entity_id: media_player.google_home
+#         message: Looks like gas is leaking in Kitchen, Please check.     
+
+sensor:
+  - platform: mqtt
+    name: "kitchen_gas_sensor"
+    state_topic: "tele/kitchen-sensor/SENSOR"
+    value_template: "{{ value_json.ANALOG.A0 }}"
+    unit_of_measurement: "ppm"      
+
+  - platform: mqtt
+    name: "kitchen_temperature"
+    state_topic: "tele/kitchen-sensor/SENSOR"
+    value_template: "{{ value_json.BME280.Temperature }}"
+    unit_of_measurement: "C"     
+
+  - platform: mqtt
+    name: "kitchen_humidity"
+    state_topic: "tele/kitchen-sensor/SENSOR"
+    value_template: "{{ value_json.BME280.Humidity }}"
+    unit_of_measurement: "%"         
+
+  - platform: mqtt
+    name: "kitchen_pressure"
+    state_topic: "tele/kitchen-sensor/SENSOR"
+    value_template: "{{ value_json.BME280.Pressure }}"
+    unit_of_measurement: "hPa"             

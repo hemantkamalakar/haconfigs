@@ -1,0 +1,22 @@
+homeassistant:
+
+group:
+  Weather:
+    name: Weather
+    view: yes
+    entities:
+      - weather.darksky
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky
+    latitude: !secret latitude
+    longitude: !secret longitude
+    mode: hourly
+
+
+sensor:
+  - platform: waqi
+    token: !secret aqicn_token
+    locations:
+      - Katraj, Pune, Pune, India  

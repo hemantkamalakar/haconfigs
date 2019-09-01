@@ -6,7 +6,6 @@ home-assistant.log
 certs/
 data/
 deps/
-mosquitto/
 tts/
 .env
 .google_maps_location_sharing.cookies.hk_smarthome_2019_gmail_com
@@ -16,4 +15,7 @@ tts/
 .uuid
 .google_fit.token
 known_devices.yaml
-ruuvi/config.yaml
+www/2019-08-17T13_55_04Z.machinebox.facebox
+www/2019-07-31T10_49_27Z.machinebox.facebox
+www/doorbell.jpg
+www/dingdong.mp3

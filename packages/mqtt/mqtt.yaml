@@ -1,0 +1,22 @@
+homeassistant:
+
+mqtt:
+  broker: 192.168.1.200
+  port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  client_id: smarthome
+  keepalive: 60
+  protocol: 3.1
+  birth_message:
+    topic: "tele/smarthome/LWT"
+    payload: "Online"
+    qos: 1
+    retain: true
+  will_message:
+    topic: "tele/smarthome/LWT"
+    payload: "Offline"
+    qos: 1
+    retain: true
+  discovery: true
+  discovery_prefix: homeassistant

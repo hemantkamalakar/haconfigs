@@ -1,0 +1,23 @@
+title: Who's where
+icon: mdi:pin
+path: location_tracking
+cards:
+    - entities:
+        - entity: device_tracker.google_maps_103126718451005809779
+        - entity: device_tracker.google_maps_115135655450274737088
+      title: Who's where
+      type: map
+    - entities:
+        - device_tracker.google_maps_103126718451005809779
+        - device_tracker.google_maps_115135655450274737088
+      type: history-graph
+    - entities:
+        - entity: device_tracker.google_maps_115135655450274737088
+        - entity: device_tracker.google_maps_103126718451005809779
+      type: glance
+    - entities:
+        # - entity: sensor.time_at_work_this_week_only
+        - entity: sensor.time_spent_at_home
+        - entity: sensor.time_spent_away_from_home
+      show_header_toggle: false
+      type: entities
