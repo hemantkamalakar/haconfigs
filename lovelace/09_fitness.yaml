@@ -2,7 +2,6 @@ title: Fitness
 path: fitness
 icon: 'mdi:walk'
 cards:
-    
     - entities:
         - entity: sensor.hemant_steps
         - entity: sensor.hemant_distance
@@ -31,5 +30,17 @@ cards:
       show_header_toggle: false
       title: Google fit (Kavita)
       type: entities
+    - type: sensor
+      entity: sensor.hemant_steps
+      graph: line
+      detail: 2
+      name: Hemant steps
+      hours_to_show: 12
 
+    - type: sensor
+      entity: sensor.hemant_heartrate
+      graph: line
+      detail: 2
+      name: Hemant heartrate
+      hours_to_show: 12      
     

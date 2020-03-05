@@ -55,6 +55,7 @@
       - sensor.hemant_sleep
       - sensor.hemant_sleep_bedtime
       - sensor.hemant_sleep_wake_up_time
+      - sensor.hemant_heartrate
 
       - sensor.kavita_steps
       - sensor.kavita_distance
