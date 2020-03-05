@@ -13,13 +13,13 @@ cards:
       title: Batteries
       type: glance
 
+    - type: custom:vertical-stack-in-card
+      cards:
+        - type: vertical-stack
+          cards: 
+            - type: custom:battery-entity
+              entity: sensor.hemant_battery
+            - type: custom:battery-entity
+              entity: sensor.kavita_battery
 
-    - type: custom:battery-entity
-      entity: sensor.hemant_battery
-    - type: custom:battery-entity
-      entity: sensor.kavita_battery
-    - type: custom:battery-entity
-      entity: sensor.living_room_battery
-    - type: custom:battery-entity
-      entity: sensor.master_bed_room_battery
-    #     - entity: sensor.batterycharging_kavita_android
+        #     - entity: sensor.batterycharging_kavita_android

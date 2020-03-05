@@ -1,46 +1,13 @@
-<<<<<<< HEAD
-=======
-- alias: Notify Of New External IP
-  id: '1545644322222'
+- id: '1572851158261'
+  alias: Sleep data
+  description: ''
   trigger:
-    platform: state
-    entity_id: sensor.external_ip
-  action:
-  - service: notify.slack
-    data_template:
-      message: 'Your External IP :  {{ states.sensor.external_ip.state }} '
-- alias: Update notifications
-  id: '918273645'
-  trigger:
-    platform: state
-    entity_id: updater.updater
-  action:
-  - service: notify.slack
-    data_template:
-      title: New Home Assistant Release
-      message: Home Assistant  {{ states.updater.updater.state }}  is now available.
-- id: '1545644325295'
-  alias: Home Assistant startup notification
-  trigger:
-  - event: start
-    platform: homeassistant
-  action:
-  - service: notify.slack
-    data_template:
-      message: Home assistant restarted successfully!
-      title: Hass restart notification
-- alias: Ruuvi sensors status check
-  trigger:
-  - platform: state
-    entity_id: sensor.living_room_ruuvi_battery
-  - platform: state
-    entity_id: sensor.time
+  - at: 09:00:00
+    platform: time
   condition:
-    condition: template
-    value_template: '{{ (now() - states.sensor.living_room_ruuvi_battery.last_changed).total_seconds() > 60*30 }}'
+  - condition: template
+    value_template: '{{ state_attr("sensor.hemant_sleep", "sleep") == None }}'
   action:
+  - data:
+      message: Sleep data not yet synced with Google fit. Please open Mi Fit app and sync sleep data to Google Fit.
     service: notify.slack
-    data_template:
-      message: "Looks like RuuviTag sensors are offline. Please restart Ruuvi docker."
-  id: 880b46ef5d7b4133823829f7856ed77e
->>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca

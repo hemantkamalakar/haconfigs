@@ -12,7 +12,6 @@ weather:
     api_key: !secret darksky
     latitude: !secret latitude
     longitude: !secret longitude
-<<<<<<< HEAD
     mode: hourly
 
 
@@ -21,6 +20,3 @@ sensor:
     token: !secret aqicn_token
     locations:
       - Katraj, Pune, Pune, India  
-=======
-    mode: hourly
->>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca

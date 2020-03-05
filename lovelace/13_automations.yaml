@@ -1,14 +1,13 @@
 title: Automations
 path: Automations
 icon: 'mdi:creation'
+type: custom:vertical-stack-in-card
 cards:
-    - type: custom:monster-card
-      card:
-        type: entities
-        title: Automations
-        show_header_toggle: false
-      filter:
-        include:
-          - domain: automation
+      - type: custom:auto-entities
+        card:
+          type: entities
+        filter:
+          include:
+            - domain: automation
 
    

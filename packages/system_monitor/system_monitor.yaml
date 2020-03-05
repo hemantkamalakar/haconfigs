@@ -91,7 +91,6 @@ sensor:
 
 
 
-<<<<<<< HEAD
 automation:
   - alias: Notify Of New External IP
     id: '1545644322222'
@@ -123,6 +122,3 @@ automation:
       data_template:
         message: Home assistant restarted successfully!
         title: Hass restart notification
-=======
- 
->>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca

@@ -12,5 +12,5 @@ group:
 light:
   - platform: flux_led
     devices:
-      192.168.1.110:
+      192.168.1.100:
         name: Bed_lights

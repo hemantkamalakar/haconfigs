@@ -1,5 +1,5 @@
-homeassistant:
+# homeassistant:
 
-google:
-  client_id: !secret google_client_id
-  client_secret: !secret google_client_secret
+# google:
+#   client_id: !secret google_client_id
+#   client_secret: !secret google_client_secret

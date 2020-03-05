@@ -3,11 +3,7 @@ homeassistant:
 camera:
   - platform: generic
     name: doorcamera
-<<<<<<< HEAD
     still_image_url: http://192.168.1.115:8765/picture/1/current/
-=======
-    still_image_url: http://192.168.1.115/picture/1/current/
->>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca
 
   - platform: local_file
     name: local_file
@@ -94,7 +90,3 @@ automation:
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> aa66de496979c34a4a8d0561b9a83805219edfca

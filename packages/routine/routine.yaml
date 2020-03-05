@@ -1,0 +1,11 @@
+homeassistant:
+
+automation:
+  - alias: Time for bed
+    trigger:
+      platform: time
+      at: '21:30:00'
+    action:
+      service: notify.slack
+      data_template:
+        message: Time for bed.
