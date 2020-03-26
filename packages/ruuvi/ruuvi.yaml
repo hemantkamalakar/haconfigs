@@ -27,7 +27,6 @@ homeassistant:
 group:
   living_room:
     name: Living room
-    view: yes
     entities:
       - sensor.living_room_temperature
       - sensor.living_room_humidity
@@ -35,7 +34,6 @@ group:
       - sensor.living_room_battery
   bed_room:
     name: Bed room
-    view: yes
     entities:
       - sensor.master_bed_room_temperature
       - sensor.master_bed_room_humidity

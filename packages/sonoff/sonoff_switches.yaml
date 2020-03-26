@@ -3,7 +3,6 @@ homeassistant:
 group:
   Switches:
     name: Switches
-    view: yes
     entities:
       - switch.tv
       - switch.livingRoom    

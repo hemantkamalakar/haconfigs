@@ -3,6 +3,10 @@ This is my personal Home Assistant configuration, running my home automations.
 
 ## Screenshots
 
+Covid-19 India tracker
+
+<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/covid.png" alt="screenshot">
+
 Default view
 
 <img src="https://github.com/hemantkamalakar/haconfigs/blob/master/home.png" alt="screenshot">
@@ -13,7 +17,7 @@ Living room
 
 Master bed room
 
-<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/masterbed.png" alt="screenshot">
+<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/master-bed.png" alt="screenshot">
 
 Bed room
 
@@ -27,9 +31,17 @@ Google fit
 
 <img src="https://github.com/hemantkamalakar/haconfigs/blob/master/google-fit.png" alt="screenshot">
 
+Device tracker
+
+<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/device-tracker.png" alt="screenshot">
+
+Battery status
+
+<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/battery.png" alt="screenshot">
+
 System monitor
 
-<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/systemmonitor.png" alt="screenshot">
+<img src="https://github.com/hemantkamalakar/haconfigs/blob/master/system.png" alt="screenshot">
 
 ---
 

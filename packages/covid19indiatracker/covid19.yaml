@@ -1,0 +1,105 @@
+homeassistant:
+  customize:
+    sensor.covid19indiaconfirmed:
+      friendly_name: India confirmed cases
+      icon: mdi:emoticon-devil
+    sensor.covid19maharashtraconfirmed:
+      friendly_name: Maharashtra confirmed cases
+      icon: mdi:emoticon-devil
+    sensor.covid19totaldeaths:
+      friendly_name: India total deaths
+      icon: mdi:emoticon-devil  
+    sensor.covid19indiatodaysconfirmed:
+      friendly_name: India today's confirmed
+      icon: mdi:emoticon-devil  
+    sensor.covid19indiatodaysdeaths:
+      friendly_name: India today's deaths
+      icon: mdi:emoticon-devil  
+
+
+sensor:
+  - platform: covid19indiatracker
+    unit_of_measurement: 'cases'
+
+
+  - platform: template
+    sensors:
+      covid19indiaconfirmed:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.India %}
+                {{ states.sensor.india_covid_19_tracker.attributes.India | int  }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.India }}
+            {%- endif %}
+
+  - platform: template
+    sensors:
+      covid19maharashtraconfirmed:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.Maharashtra %}
+                {{ states.sensor.india_covid_19_tracker.attributes.Maharashtra | int  }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.Maharashtra }}
+            {%- endif %}
+
+  - platform: template
+    sensors:
+      covid19totaldeaths:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.Total_Deaths %}
+                {{ states.sensor.india_covid_19_tracker.attributes.Total_Deaths | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.Total_Deaths }}
+            {%- endif %}  
+
+  - platform: template
+    sensors:
+      covid19indiatodaysconfirmed:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.India_delta %}
+                {{ states.sensor.india_covid_19_tracker.attributes.India_delta | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.India_delta }}
+            {%- endif %}  
+
+  - platform: template
+    sensors:
+      covid19indiatodaysdeaths:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.total_deaths_delta %}
+                {{ states.sensor.india_covid_19_tracker.attributes.total_deaths_delta | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.total_deaths_delta }}
+            {%- endif %}  
+
+automation:
+  # - alias: Covid-19 India status every hour
+  #   trigger:
+  #     platform: time_pattern
+  #     minutes: /60
+  #   action:
+  #     - service: notify.slack
+  #       data_template:
+  #         message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
+  #     - service: tts.google_say
+  #       entity_id: media_player.google_home
+  #       data_template: 
+  #         message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
+
+  - alias: Covid-19 India status
+    trigger:
+      platform: state
+      entity_id: sensor.india_covid_19_tracker
+    action:
+      - service: notify.slack
+        data_template:
+          message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
+      - service: tts.google_say
+        entity_id: media_player.google_home
+        data_template: 
+          message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.

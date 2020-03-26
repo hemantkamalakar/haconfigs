@@ -2,6 +2,33 @@ title: Home
 icon: mdi:home-automation
 path: default_view
 cards:
+# Covid-19
+      - type: custom:vertical-stack-in-card
+        title: Covid-19 India tracker
+        cards:
+              - type: sensor
+                entity: sensor.covid19indiaconfirmed
+                graph: line
+                detail: 2
+                name: India confirmed covid-19 cases
+                hours_to_show: 24
+
+              - type: sensor
+                entity: sensor.covid19maharashtraconfirmed
+                graph: line
+                detail: 2
+                name: Maharashtra confirmed covid-19 cases
+                hours_to_show: 24
+
+              - entities:
+                  - entity: sensor.covid19indiaconfirmed
+                  - entity: sensor.covid19maharashtraconfirmed
+                  - entity: sensor.covid19totaldeaths
+                  - entity: sensor.covid19indiatodaysconfirmed
+                  - entity: sensor.covid19indiatodaysdeaths
+                type: entities  
+                show_header_toggle: false
+
 #  Weather 
       - type: custom:vertical-stack-in-card
         cards:

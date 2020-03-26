@@ -3,7 +3,6 @@ homeassistant:
 group:
   TV:
     name: TV
-    view: yes
     entities:
       - switch.flour_mill
       - sensor.voltage

@@ -3,7 +3,6 @@ homeassistant:
 group:
   Kitchen_sensors:
     name: Kitchen sensors
-    view: yes
     entities:
       - sensor.kitchen_gas_sensor
       - sensor.kitchen_temperature

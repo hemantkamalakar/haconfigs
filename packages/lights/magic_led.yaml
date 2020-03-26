@@ -5,7 +5,6 @@ homeassistant:
 group:
   lights:
     name: Lights
-    view: yes
     entities:
         - light.Bed_lights
 

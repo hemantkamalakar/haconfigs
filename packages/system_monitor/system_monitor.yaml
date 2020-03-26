@@ -4,7 +4,6 @@ homeassistant:
 group:
   System_monitor:
     name: System monitor
-    view: yes
     entities:
       - sensor.ha_installed_version
       - sensor.ha_current_version
@@ -23,7 +22,6 @@ group:
 
   Internet_status:
     name: Internet status
-    view: yes
     entities:
       - sensor.speedtest_ping
       - sensor.speedtest_upload

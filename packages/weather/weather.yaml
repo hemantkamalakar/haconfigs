@@ -3,7 +3,6 @@ homeassistant:
 group:
   Weather:
     name: Weather
-    view: yes
     entities:
       - weather.darksky
 

@@ -18,7 +18,6 @@ homeassistant:
 group:
   Air_quality:
     name: Air quality sensors
-    view: yes
     entities:
       - sensor.Sonoff_sc_Temperature
       - sensor.Sonoff_sc_Humidity

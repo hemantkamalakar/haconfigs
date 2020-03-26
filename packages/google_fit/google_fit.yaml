@@ -145,20 +145,6 @@ sensor:
 #       message: 'Slept :  {{ states.sensor.hemant_sleep.state }} '
 
 automation:
-  # - alias: Remind to sync sleep data
-  #   trigger:
-  #     platform: time
-  #     at: '09:00:00'
-  #   condition:
-  #     condition: template
-  #     value_template: '{{ state_attr('sensor.hemant_sleep', 'last_updated') = None }}'
-
-
-  #   action:
-  #     service: notify.slack
-  #     data_template:
-  #       message: Sleep data not yet synced with Google fit. Please open Mi Fit app and sync sleep data to Gogle Fit.
-
   - alias: Motivate to walk morning
     trigger:
       platform: time

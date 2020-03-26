@@ -11,7 +11,6 @@ sun:
 group:
   Sun:
     name: Sun
-    view: no
     entities:
       - sun.sun
       - sensor.sunrise_time
