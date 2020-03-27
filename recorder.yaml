@@ -4,9 +4,17 @@
   db_url: !secret db_url
   include:
     entities:
-      - sensor.covid19indiaconfirmed
-      - sensor.covid19maharashtraconfirmed
-      - sensor.covid19totaldeaths
+      - sensor.covid19_india_confirmed
+      - sensor.covid19_india_total_deaths
+      - sensor.covid19_india_total_recovered
+      - sensor.covid19_india_todays_confirmed
+      - sensor.covid19_india_todays_deaths
+
+      - sensor.covid19_maharashtra_confirmed
+      - sensor.covid19_maharashtra_total_deaths
+      - sensor.covid19_maharashtra_total_recovered
+      - sensor.covid19_maharashtra_todays_confirmed
+      - sensor.covid19_maharashtra_todays_deaths
 
       - sensor.living_room_temperature
       - sensor.living_room_humidity

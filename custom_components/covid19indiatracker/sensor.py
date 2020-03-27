@@ -26,9 +26,16 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 class Covid19IndiaTrackerSensor(Entity):
     def __init__(self, webclient):
         self._state = None
-        self._confirmed = None
+        self._india_confirmed = None
+        self._india_total_deaths = None
+        self._india_total_recovered = None
+        self._india_today_confirmed = None
+        self._india_today_deaths = None
         self._maharashtra_confirmed = None
-        self._totaldeaths = None
+        self._maharashtra_total_deaths = None
+        self._maharashtra_total_recovered = None
+        self._maharashtra_today_confirmed = None
+        self._maharashtra_today_deaths = None
         self._last_updated = None
         self.webclient = webclient
 
@@ -37,14 +44,23 @@ class Covid19IndiaTrackerSensor(Entity):
             URL, {"Accept": "application/json"}
         )
         rbd = Covid19IndiaTracker
-        print(rbd['statewise'][0])
-        self._state = rbd['statewise'][0]['confirmed']
-        self._confirmed = rbd['statewise'][0]['confirmed']
-        self._maharashtra_confirmed = rbd['statewise'][1]['confirmed']
-        self._totaldeaths = rbd['statewise'][0]['deaths']
-        self._delta_confirmed = rbd['statewise'][0]['delta']['confirmed']
-        self._delta_deaths = rbd['statewise'][0]['delta']['deaths']
-        self._last_updated = rbd['statewise'][0]['lastupdatedtime']
+        for state in rbd['statewise']:
+            if (state['state'] == 'Total'):
+                self._state = state['confirmed']
+                self._india_confirmed = state['confirmed']
+                self._india_total_deaths = state['deaths']
+                self._india_total_recovered = state['recovered']
+                self._india_today_confirmed = state['delta']['confirmed']
+                self._india_today_deaths = state['delta']['deaths']
+                self._last_updated = state['lastupdatedtime']
+                print(state)
+            elif (state['state'] == 'Maharashtra'):
+                self._maharashtra_confirmed = state['confirmed']
+                self._maharashtra_total_deaths = state['deaths']
+                self._maharashtra_total_recovered = state['recovered']
+                self._maharashtra_today_confirmed = state['delta']['confirmed']
+                self._maharashtra_today_deaths = state['delta']['deaths']
+                print(state)
 
     @property
     def name(self):
@@ -59,7 +75,7 @@ class Covid19IndiaTrackerSensor(Entity):
     @property
     def unit_of_measurement(self):
         """Returns the unit of measurement."""
-        return 'int'
+        return 'cases'
 
     @property
     def state(self):
@@ -71,5 +87,17 @@ class Covid19IndiaTrackerSensor(Entity):
 
     @property
     def device_state_attributes(self):
-        return {"India": self._confirmed, "India_delta": self._delta_confirmed, "Maharashtra": self._maharashtra_confirmed, "Total_Deaths": self._totaldeaths, "total_deaths_delta": self._delta_deaths, "Last updated": self.last_updated}
+        return {
+            "india_confirmed": self._india_confirmed, 
+            "india_total_deaths": self._india_total_deaths, 
+            "india_total_recovered": self._india_total_recovered,
+            "india_today_confirmed": self._india_today_confirmed,
+            "india_today_deaths": self._india_today_deaths,
+            "maharashtra_confirmed": self._maharashtra_confirmed,
+            "maharashtra_total_deaths": self._maharashtra_total_deaths,
+            "maharashtra_total_recovered": self._maharashtra_total_recovered,
+            "maharashtra_today_confirmed": self._maharashtra_today_confirmed,
+            "maharashtra_today_deaths": self._maharashtra_today_deaths,
+            "lastupdated": self.last_updated
+            }
         

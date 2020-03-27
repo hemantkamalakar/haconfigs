@@ -7,25 +7,30 @@ cards:
         title: Covid-19 India tracker
         cards:
               - type: sensor
-                entity: sensor.covid19indiaconfirmed
+                entity: sensor.covid19_india_confirmed
                 graph: line
                 detail: 2
                 name: India confirmed covid-19 cases
                 hours_to_show: 24
 
               - type: sensor
-                entity: sensor.covid19maharashtraconfirmed
+                entity: sensor.covid19_maharashtra_confirmed
                 graph: line
                 detail: 2
                 name: Maharashtra confirmed covid-19 cases
                 hours_to_show: 24
 
               - entities:
-                  - entity: sensor.covid19indiaconfirmed
-                  - entity: sensor.covid19maharashtraconfirmed
-                  - entity: sensor.covid19totaldeaths
-                  - entity: sensor.covid19indiatodaysconfirmed
-                  - entity: sensor.covid19indiatodaysdeaths
+                  - entity: sensor.covid19_india_confirmed
+                  - entity: sensor.covid19_india_total_deaths
+                  - entity: sensor.covid19_india_total_recovered
+                  - entity: sensor.covid19_india_todays_confirmed
+                  - entity: sensor.covid19_india_todays_deaths
+                  - entity: sensor.covid19_maharashtra_confirmed
+                  - entity: sensor.covid19_maharashtra_total_deaths
+                  - entity: sensor.covid19_maharashtra_total_recovered
+                  - entity: sensor.covid19_maharashtra_todays_confirmed
+                  - entity: sensor.covid19_maharashtra_todays_deaths
                 type: entities  
                 show_header_toggle: false
 

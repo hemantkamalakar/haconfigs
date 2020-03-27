@@ -1,19 +1,35 @@
 homeassistant:
   customize:
-    sensor.covid19indiaconfirmed:
+    sensor.covid19_india_confirmed:
       friendly_name: India confirmed cases
       icon: mdi:emoticon-devil
-    sensor.covid19maharashtraconfirmed:
-      friendly_name: Maharashtra confirmed cases
-      icon: mdi:emoticon-devil
-    sensor.covid19totaldeaths:
+    sensor.covid19_india_total_deaths:
       friendly_name: India total deaths
+      icon: mdi:emoticon-devil   
+    sensor.covid19_india_total_recovered:
+      friendly_name: India total recovered
       icon: mdi:emoticon-devil  
-    sensor.covid19indiatodaysconfirmed:
+    sensor.covid19_india_todays_confirmed:
       friendly_name: India today's confirmed
       icon: mdi:emoticon-devil  
-    sensor.covid19indiatodaysdeaths:
+    sensor.covid19_india_todays_deaths:
       friendly_name: India today's deaths
+      icon: mdi:emoticon-devil  
+
+    sensor.covid19_maharashtra_confirmed:
+      friendly_name: Maharashtra confirmed cases
+      icon: mdi:emoticon-devil
+    sensor.covid19_maharashtra_total_deaths:
+      friendly_name: Maharashtra total deaths
+      icon: mdi:emoticon-devil   
+    sensor.covid19_maharashtra_total_recovered:
+      friendly_name: Maharashtra total recovered
+      icon: mdi:emoticon-devil  
+    sensor.covid19_maharashtra_todays_confirmed:
+      friendly_name: Maharashtra today's confirmed
+      icon: mdi:emoticon-devil  
+    sensor.covid19_maharashtra_todays_deaths:
+      friendly_name: Maharashtra today's deaths
       icon: mdi:emoticon-devil  
 
 
@@ -24,73 +40,123 @@ sensor:
 
   - platform: template
     sensors:
-      covid19indiaconfirmed:
+      covid19_india_confirmed:
         unit_of_measurement: 'cases'
         value_template: >-
-            {%- if states.sensor.india_covid_19_tracker.attributes.India %}
-                {{ states.sensor.india_covid_19_tracker.attributes.India | int  }}
+            {%- if states.sensor.india_covid_19_tracker.attributes.india_confirmed %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_confirmed | int  }}
             {% else %}
-                {{ states.sensor.india_covid_19_tracker.attributes.India }}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_confirmed }}
             {%- endif %}
 
   - platform: template
     sensors:
-      covid19maharashtraconfirmed:
+      covid19_india_total_deaths:
         unit_of_measurement: 'cases'
         value_template: >-
-            {%- if states.sensor.india_covid_19_tracker.attributes.Maharashtra %}
-                {{ states.sensor.india_covid_19_tracker.attributes.Maharashtra | int  }}
+            {%- if states.sensor.india_covid_19_tracker.attributes.india_total_deaths %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_total_deaths | int }}
             {% else %}
-                {{ states.sensor.india_covid_19_tracker.attributes.Maharashtra }}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_total_deaths }}
+            {%- endif %}  
+
+  - platform: template
+    sensors:
+      covid19_india_total_recovered:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.india_total_recovered %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_total_recovered | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_total_recovered }}
+            {%- endif %}  
+
+  - platform: template
+    sensors:
+      covid19_india_todays_confirmed:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.india_today_confirmed %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_today_confirmed | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_today_confirmed }}
+            {%- endif %}  
+
+  - platform: template
+    sensors:
+      covid19_india_todays_deaths:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.india_today_deaths %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_today_deaths | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.india_today_deaths }}
+            {%- endif %}  
+
+
+#####
+  - platform: template
+    sensors:
+      covid19_maharashtra_confirmed:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.maharashtra_confirmed %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_confirmed | int  }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_confirmed }}
             {%- endif %}
 
   - platform: template
     sensors:
-      covid19totaldeaths:
+      covid19_maharashtra_total_deaths:
         unit_of_measurement: 'cases'
         value_template: >-
-            {%- if states.sensor.india_covid_19_tracker.attributes.Total_Deaths %}
-                {{ states.sensor.india_covid_19_tracker.attributes.Total_Deaths | int }}
+            {%- if states.sensor.india_covid_19_tracker.attributes.maharashtra_total_deaths %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_total_deaths | int }}
             {% else %}
-                {{ states.sensor.india_covid_19_tracker.attributes.Total_Deaths }}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_total_deaths }}
             {%- endif %}  
 
   - platform: template
     sensors:
-      covid19indiatodaysconfirmed:
+      covid19_maharashtra_total_recovered:
         unit_of_measurement: 'cases'
         value_template: >-
-            {%- if states.sensor.india_covid_19_tracker.attributes.India_delta %}
-                {{ states.sensor.india_covid_19_tracker.attributes.India_delta | int }}
+            {%- if states.sensor.india_covid_19_tracker.attributes.maharashtra_total_recovered %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_total_recovered | int }}
             {% else %}
-                {{ states.sensor.india_covid_19_tracker.attributes.India_delta }}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_total_recovered }}
             {%- endif %}  
 
   - platform: template
     sensors:
-      covid19indiatodaysdeaths:
+      covid19_maharashtra_todays_confirmed:
         unit_of_measurement: 'cases'
         value_template: >-
-            {%- if states.sensor.india_covid_19_tracker.attributes.total_deaths_delta %}
-                {{ states.sensor.india_covid_19_tracker.attributes.total_deaths_delta | int }}
+            {%- if states.sensor.india_covid_19_tracker.attributes.maharashtra_today_confirmed %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_today_confirmed | int }}
             {% else %}
-                {{ states.sensor.india_covid_19_tracker.attributes.total_deaths_delta }}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_today_confirmed }}
             {%- endif %}  
+
+  - platform: template
+    sensors:
+      covid19_maharashtra_todays_deaths:
+        unit_of_measurement: 'cases'
+        value_template: >-
+            {%- if states.sensor.india_covid_19_tracker.attributes.maharashtra_today_deaths %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_today_deaths | int }}
+            {% else %}
+                {{ states.sensor.india_covid_19_tracker.attributes.maharashtra_today_deaths }}
+            {%- endif %}  
+            
+
+
+
+
+
 
 automation:
-  # - alias: Covid-19 India status every hour
-  #   trigger:
-  #     platform: time_pattern
-  #     minutes: /60
-  #   action:
-  #     - service: notify.slack
-  #       data_template:
-  #         message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
-  #     - service: tts.google_say
-  #       entity_id: media_player.google_home
-  #       data_template: 
-  #         message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
-
   - alias: Covid-19 India status
     trigger:
       platform: state
@@ -98,8 +164,8 @@ automation:
     action:
       - service: notify.slack
         data_template:
-          message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
+          message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.covid19_india_confirmed.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19_maharashtra_confirmed.state }}. Take care and stay at home.
       - service: tts.google_say
         entity_id: media_player.google_home
         data_template: 
-          message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.india_covid_19_tracker.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19maharashtraconfirmed.state }}. Take care and stay at home.
+          message: Attention!!! Corona virus update. Total covid-19 confirmed cases in India are {{ states.sensor.covid19_india_confirmed.state }}. While Maharashtra confirmed cases are {{ states.sensor.covid19_maharashtra_confirmed.state }}. Take care and stay at home.
