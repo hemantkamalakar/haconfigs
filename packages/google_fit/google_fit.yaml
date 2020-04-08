@@ -56,17 +56,17 @@ homeassistant:
       friendly_name: Heart rate     
 
 sensor:  
-  - platform: google_fit
+  - platform: google_fit_hass
     name: hemant
     client_id: !secret google_client_id
     client_secret: !secret google_client_secret
-    scan_interval: 300
+    scan_interval: 30
 
-  - platform: google_fit
+  - platform: google_fit_hass
     name: kavita
     client_id: !secret kavita_google_client_id
     client_secret: !secret kavita_google_client_secret
-    scan_interval: 300
+    scan_interval: 30
 
 
   - platform: template

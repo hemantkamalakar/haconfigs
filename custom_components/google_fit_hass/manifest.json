@@ -1,0 +1,10 @@
+{
+    "domain": "google_fit_hass",
+    "name": "Google fit hass",
+    "documentation": "https://github.com/custom-components/google_fit_hass",
+    "dependencies": [],
+    "codeowners": ["@hemantkamalakar"],
+    "requirements": [
+      "integrationhelper==0.1.0"
+    ]
+  }

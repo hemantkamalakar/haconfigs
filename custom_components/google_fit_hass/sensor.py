@@ -389,7 +389,7 @@ class GoogleFitWeightSensor(GoogleFitSensor):
 
             self._last_updated = round(last_time_update / 1000)
             self._state = last_weight
-            #print(self.name,  last_weight)
+            print(self.name,  last_weight)
             self._attributes = {}
 
 
@@ -537,7 +537,7 @@ class GoogleFitStepsSensor(GoogleFitSensor):
 
         self._last_updated = time.time()
         self._state = sum(values)
-        #print(self.name, sum(values))
+        print(self.name, sum(values))
         self._attributes = {}
 
 
@@ -690,7 +690,7 @@ class GoogleFitSleepSensor(GoogleFitSensor):
             total_deep_sleep = sum(deep_sleep,timedelta())
             total_light_sleep = sum(light_sleep, timedelta())
             state_dict = dict({'bed_time': str(bed_time), 'wake_up_time': str(wake_up_time), 'sleep': str(total_sleep), 'deep_sleep': str(total_deep_sleep), 'light_sleep': str(total_light_sleep)})
-            #print(state_dict)
+            print(state_dict)
             self._state = str(total_sleep)
             self._attributes = state_dict
             self._last_updated = time.time()

@@ -50,16 +50,20 @@ class Covid19IndiaTrackerSensor(Entity):
                 self._india_confirmed = state['confirmed']
                 self._india_total_deaths = state['deaths']
                 self._india_total_recovered = state['recovered']
-                self._india_today_confirmed = state['delta']['confirmed']
-                self._india_today_deaths = state['delta']['deaths']
+                # self._india_today_confirmed = state['delta']['confirmed']
+                # self._india_today_deaths = state['delta']['deaths']
+                self._india_today_confirmed = state['deltaconfirmed']
+                self._india_today_deaths = state['deltadeaths']
                 self._last_updated = state['lastupdatedtime']
                 print(state)
             elif (state['state'] == 'Maharashtra'):
                 self._maharashtra_confirmed = state['confirmed']
                 self._maharashtra_total_deaths = state['deaths']
                 self._maharashtra_total_recovered = state['recovered']
-                self._maharashtra_today_confirmed = state['delta']['confirmed']
-                self._maharashtra_today_deaths = state['delta']['deaths']
+                # self._maharashtra_today_confirmed = state['delta']['confirmed']
+                # self._maharashtra_today_deaths = state['delta']['deaths']
+                self._maharashtra_today_confirmed = state['deltaconfirmed']
+                self._maharashtra_today_deaths = state['deltadeaths']
                 print(state)
 
     @property
