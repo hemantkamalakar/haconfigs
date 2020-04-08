@@ -1,6 +1,14 @@
 ## About
 This is my personal Home Assistant configuration, running my home automations.
 
+## Custom components
+
+[Covid-19 India tracker](<https://github.com/hemantkamalakar/Covid19IndiaTracker>)
+ - A Home assistant custom component to get information about Covid-19 status in India.
+
+[Google Fit](<https://github.com/hemantkamalakar/google_fit_hass>)
+ - A Home assistant custom component to get your fitness information using Google Fitness API.
+
 ## Screenshots
 
 Covid-19 India tracker
